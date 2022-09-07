@@ -1,0 +1,24 @@
+.footer_container {
+    height: 347px;
+    background-color: #232323;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 320px;
+    .footer_logo {
+        color: #999;
+        margin-top: 45px;
+    }
+    .footer_paragraph {
+        color: #999;
+        margin-top: 45px;
+        text-align: right;
+        .copyright {
+            display: flex;
+            gap: 25px;
+            margin-top: 115px;
+        }
+    }
+}
