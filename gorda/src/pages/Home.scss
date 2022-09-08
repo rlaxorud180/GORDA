@@ -11,7 +11,7 @@
         top: 0;
         height: 100%;
         width: 100%;
-        background-color: #3f4759;
+        background-color: #000;
         opacity: 30%;
         z-index: -1;
     }
@@ -42,6 +42,23 @@
             border: none;
             cursor: pointer;
         }
+        .next_btn {
+            background-color: transparent;
+            border-radius: 50px;
+            width: 4rem;
+            height: 4rem;
+            border: 1px solid #fff;
+            color: #fff;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 100px;
+            position: absolute;
+            top: 70%;
+            cursor: pointer;
+            text-decoration: none;
+        }
     }
 }
 #donation {
@@ -65,11 +82,28 @@
         min-height: 100vh;
         width: 100%;
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
         max-width: 1920px;
         margin: 0 auto;
         padding: 0 320px;
+        .next_btn_2 {
+            background-color: transparent;
+            border-radius: 50px;
+            width: 4rem;
+            height: 4rem;
+            border: 1px solid #fff;
+            color: #fff;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 100px;
+            position: absolute;
+            top: 70%;
+            cursor: pointer;
+            text-decoration: none;
+        }
         .donation_paragraph {
             color: #fff;
             h1 {
@@ -77,17 +111,18 @@
             }
             p {
                 margin-top: 50px;
-                padding-right: 400px;
                 font-size: 20px;
             }
             .more_btn {
                 padding: 10px 30px;
-                font-size: 18px;
+                font-size: 20px;
+                font-weight: bold;
                 margin-top: 100px;
                 border-radius: 5px;
                 border: none;
                 cursor: pointer;
             }
+           
         }
     }
 }
@@ -109,15 +144,36 @@
         opacity: 20%;
         z-index: -1;
     }
+   
     .poll_container {
         min-height: 100vh;
         width: 100%;
         display: flex;
-        justify-content: flex-start;
-        align-items: center;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
         max-width: 1920px;
         margin: 0 auto;
         padding: 0 320px;
+        .next_btn_3 {
+            background-color: transparent;
+            border-radius: 50px;
+            width: 4rem;
+            height: 4rem;
+            border: 1px solid #fff;
+            color: #fff;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 100px;
+            position: absolute;
+            top: 70%;
+            left: 48%;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
         .poll_paragraph {
             h1 {
                 color: #fff;
@@ -135,11 +191,12 @@
                 color: #fff;
                 padding: 10px 42px;
                 background-color: #00aeef;
-                font-size: 18px;
+                font-size: 20px;
                 border: none;
                 border-radius: 5px;
                 cursor: pointer;
             }
+            
         }
     }
 }
@@ -157,7 +214,7 @@
         top: 0;
         height: 100%;
         width: 100%;
-        background-color: #00aeef;
+        background-color: #000;
         opacity: 10%;
         z-index: -1;
     }
@@ -179,6 +236,25 @@
             border-radius: 5px;
             font-weight: bold;
             color: #fff;
+            font-size: 20px;
+        }
+        .next_btn_4 {
+            text-decoration: none;
+            background-color: transparent;
+            border-radius: 50px;
+            width: 4rem;
+            height: 4rem;
+            border: 1px solid #fff;
+            color: #fff;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 100px;
+            position: absolute;
+            top: 70%;
+            left: 48%;
+            cursor: pointer;
         }
         .market_paragraph {
             h1 {
@@ -199,3 +275,4 @@
         }
     }
 }
+
