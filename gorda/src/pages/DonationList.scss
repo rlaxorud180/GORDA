@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -13,73 +13,53 @@ html {
     max-width: 1920px;
     margin: 0 auto;
     padding: 0 320px;
-.donationCount {
-    margin-top: 140px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-    i{
-        color: red;
-        font-size: 60px;
-    }
-    .countbox {
-        font-size: 24px;
-        padding: 12px 48px;
-        border: 1px solid #000;
-        border-radius: 50px;
-        margin-left: 10px;
-    }
-}
-  
-.header_p{
-    margin-top: 100px;
-    font-size: 30px;
-    font-weight: bold;
-    span{
-        color: red;
-    }
-}
-    
-    }
-.page_card {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 110px;
-    .listcard{
-        width: 730px;
-        height: 272px;
-        background-color: #fff;
-        border-radius: 20px;
-        box-shadow: 7px 14px 30px -3px rgba(0, 0, 0, 0.1);
+    .page_header {
         display: flex;
-        .cardImg{
-            .img {
-                width: 283px;
-                height: 272px;
-                background-color: gray;
-                border-radius: 20px 0px 0px 20px;
-            }
+        justify-content: space-between;
+        align-items: center;
+    }
+    .donationCount {
+        margin-top: 140px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+        i {
+            color: red;
+            font-size: 60px;
         }
-        .cardP{
-            padding: 24px 30px;
-            .hashtag {
-                color: #747474;
-                font-size: 16px;   
-            }
-            .title {
-                color: #000;
-                font-size: 18px;
-                margin-right: 80px;
-                margin-top : 26px;
-            }
-            .paragraph {
-                margin-top: 25px;
-                color: #747474;
-                font-size: 14px;
-            }
+        .countbox {
+            font-size: 24px;
+            padding: 12px 48px;
+            border: 1px solid #000;
+            border-radius: 50px;
+            margin-left: 10px;
+        }
+    }
+
+    .header_p {
+        margin-top: 100px;
+        font-size: 30px;
+        font-weight: bold;
+        span {
+            color: red;
         }
     }
 }
-.bannerCard {
-    margin-top: 110px;
+.test {
+    display: flex;
+    gap: 150px;
+    .banner_card {
+        margin-top: 110px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+    .page_card {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        justify-content: space-between;
+        margin-top: 110px;
+        margin-bottom: 400px;
+    }
 }
