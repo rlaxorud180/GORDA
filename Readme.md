@@ -70,4 +70,4 @@
 
 
 ## ERD
-![image](/uploads/393c099a11e85750b4da0be126cfa6a3/image.png)
+![image](/uploads/1b65d08836ca9c912962cdf7eec903c4/image.png)
