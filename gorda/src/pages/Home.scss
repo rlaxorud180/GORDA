@@ -1,0 +1,278 @@
+#home {
+    background-image: url(/images/home_bg.png);
+    background-size: cover;
+    background-position: top center;
+    position: relative;
+    z-index: 1;
+    ::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #000;
+        opacity: 30%;
+        z-index: -1;
+    }
+    .home_container {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 1920px;
+        margin: 0 auto;
+        padding: 0 320px;
+        .home_paragraph {
+            color: #fff;
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        .login_btn {
+            margin-top: 60px;
+            padding: 17px 68px;
+            color: #fff;
+            background-color: #00aeef;
+            font-size: 28px;
+            font-weight: bold;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .next_btn {
+            background-color: transparent;
+            border-radius: 50px;
+            width: 4rem;
+            height: 4rem;
+            border: 1px solid #fff;
+            color: #fff;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 100px;
+            position: absolute;
+            top: 70%;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    }
+}
+#donation {
+    background-image: url(/images/baby.png);
+    background-size: cover;
+    background-position: top center;
+    position: relative;
+    z-index: 1;
+    ::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #000000;
+        opacity: 20%;
+        z-index: -1;
+    }
+    .donation_container {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 1920px;
+        margin: 0 auto;
+        padding: 0 320px;
+        .next_btn_2 {
+            background-color: transparent;
+            border-radius: 50px;
+            width: 4rem;
+            height: 4rem;
+            border: 1px solid #fff;
+            color: #fff;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 100px;
+            position: absolute;
+            top: 70%;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .donation_paragraph {
+            color: #fff;
+            h1 {
+                font-size: 36px;
+            }
+            p {
+                margin-top: 50px;
+                font-size: 20px;
+            }
+            .more_btn {
+                padding: 10px 30px;
+                font-size: 20px;
+                font-weight: bold;
+                margin-top: 100px;
+                border-radius: 5px;
+                border: none;
+                cursor: pointer;
+            }
+           
+        }
+    }
+}
+
+#poll {
+    background-image: url(/images/poll_bg.png);
+    background-size: cover;
+    background-position: top center;
+    position: relative;
+    z-index: 1;
+    ::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #000000;
+        opacity: 20%;
+        z-index: -1;
+    }
+   
+    .poll_container {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        max-width: 1920px;
+        margin: 0 auto;
+        padding: 0 320px;
+        .next_btn_3 {
+            background-color: transparent;
+            border-radius: 50px;
+            width: 4rem;
+            height: 4rem;
+            border: 1px solid #fff;
+            color: #fff;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 100px;
+            position: absolute;
+            top: 70%;
+            left: 48%;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .poll_paragraph {
+            h1 {
+                color: #fff;
+                font-size: 44px;
+                font-weight: bold;
+                margin-bottom: 50px;
+            }
+            p {
+                color: #fff;
+                font-size: 28px;
+                font-weight: 500;
+            }
+            .go_btn {
+                margin-top: 60px;
+                color: #fff;
+                padding: 10px 42px;
+                background-color: #00aeef;
+                font-size: 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            
+        }
+    }
+}
+
+#market {
+    background-image: url(/images/market_bg.png);
+    background-size: cover;
+    background-position: top center;
+    position: relative;
+    z-index: 1;
+    ::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #000;
+        opacity: 10%;
+        z-index: -1;
+    }
+    .market_container {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        max-width: 1920px;
+        margin: 0 auto;
+        padding: 0 320px;
+        .market_btn {
+            padding: 10px 41px;
+            margin-top: 50px;
+            background-color: #00aeef;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #fff;
+            font-size: 20px;
+        }
+        .next_btn_4 {
+            text-decoration: none;
+            background-color: transparent;
+            border-radius: 50px;
+            width: 4rem;
+            height: 4rem;
+            border: 1px solid #fff;
+            color: #fff;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 100px;
+            position: absolute;
+            top: 70%;
+            left: 48%;
+            cursor: pointer;
+        }
+        .market_paragraph {
+            h1 {
+                text-align: center;
+                color: #fff;
+                font-size: 44px;
+                font-weight: bold;
+
+                margin-bottom: 50px;
+            }
+            p {
+                text-align: center;
+                color: #fff;
+                font-size: 28px;
+                font-weight: 500;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
+

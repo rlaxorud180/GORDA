@@ -1,0 +1,16 @@
+.shop_container {
+    width: 400px;
+    height: 195px;
+    border-radius: 20px;
+    background-color: #f5d15f;
+    padding: 30px 40px;
+    box-shadow: 7px 14px 30px -3px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    .shop_header {
+        font-weight: bold;
+        font-size: 22px;
+    }
+    .shop_tag {
+        margin-top: 15px;
+    }
+}

@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #f7f7f7;
+}
+
+.donationlist_container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 320px;
+    .page_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .donationCount {
+        margin-top: 140px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+        i {
+            color: red;
+            font-size: 60px;
+        }
+        .countbox {
+            font-size: 24px;
+            padding: 12px 48px;
+            border: 1px solid #000;
+            border-radius: 50px;
+            margin-left: 10px;
+        }
+    }
+
+    .header_p {
+        margin-top: 100px;
+        font-size: 30px;
+        font-weight: bold;
+        span {
+            color: red;
+        }
+    }
+}
+.test {
+    display: flex;
+    gap: 150px;
+    .banner_card {
+        margin-top: 110px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+    .page_card {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        justify-content: space-between;
+        margin-top: 110px;
+        margin-bottom: 400px;
+    }
+}
