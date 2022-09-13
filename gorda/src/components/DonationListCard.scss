@@ -1,0 +1,42 @@
+.listcard {
+    width: 730px;
+    height: 272px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 7px 14px 30px -3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    .cardImg {
+        .img {
+            width: 283px;
+            height: 272px;
+            background-color: gray;
+            border-radius: 20px 0px 0px 20px;
+        }
+    }
+    .cardP {
+        padding: 24px 30px;
+        .hashtag {
+            color: #747474;
+            font-size: 16px;
+        }
+        .title {
+            color: #000;
+            font-size: 18px;
+            margin-right: 80px;
+            margin-top: 26px;
+        }
+        .paragraph {
+            margin-top: 15px;
+            color: #747474;
+            font-size: 14px;
+        }
+        .fund {
+            margin-top: 15px;
+            color: #fff;
+            width: 150px;
+            background-color: #3f3f3f;
+            padding: 3px 20px;
+            font-size: 14px;
+        }
+    }
+}
