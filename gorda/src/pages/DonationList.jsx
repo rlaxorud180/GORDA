@@ -45,7 +45,7 @@ function DonationList() {
                     </div>
                 </div>
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 }
