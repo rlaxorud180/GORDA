@@ -5,6 +5,7 @@ import DonationList from "./pages/DonationList";
 import Home from "./pages/Home";
 import MyPage from "./pages/MyPage";
 import MyPageDonation from "./pages/MyPageDonation";
+import Vote from "./pages/Vote";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     <Route path="/dnlist" element={<DonationList />} />
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/mypage/donation" element={<MyPageDonation />} />
+                    <Route path="/vote" element={<Vote />} />
                 </Routes>
             </BrowserRouter>
             <Footer />
