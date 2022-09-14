@@ -1,0 +1,28 @@
+.item_date {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.item_title {
+    font-size: 24px;
+    color: #999;
+    margin-bottom: 5px;
+}
+.block {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 63px;
+    gap: 5px;
+    .item_eth {
+        font-size: 42px;
+        letter-spacing: -0.08em;
+    }
+    .item_donation {
+        font-size: 28px;
+        color: #999;
+        line-height: 53px;
+    }
+}
+hr {
+    margin-bottom: 63px;
+    border: 1px dashed #999;
+}
