@@ -74,7 +74,11 @@
 👉 BE - CODE CONVENTION
 
 </aside>
-
+<br><br><br><br>
 
 ## ERD
 ![image](/uploads/cac72ed844e83f5e6d39cbfb9910f744/image.png)
+<br><br><br><br>
+## 🛠 Architecture & 기술스택/배포
+![image](/uploads/96c7e9d4bc905d96cc21fc5ff8a421bb/image.png)
+<br><br><br><br>
