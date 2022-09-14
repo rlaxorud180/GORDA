@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./DonationDetail.scss";
 
 function DonationDetail() {
@@ -26,7 +27,9 @@ function DonationDetail() {
                         </div>
                     </div>
                 </div>
-                <div className="donation_list">기부내역</div>
+                <Link to="/mypage/donation" className="donation_list">
+                    기부내역
+                </Link>
             </div>
         </>
     );

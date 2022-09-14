@@ -19,7 +19,7 @@ function MyPage() {
                 <MypageComment />
                 <MypageStamp />
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 }
