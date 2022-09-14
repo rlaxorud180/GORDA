@@ -56,7 +56,7 @@
 
 <div id="3"> </div>
 
-## 🛠 Architecture & 기술스택/배포
+## 🛠 Architecture
 ![image](/uploads/130e82d3f709b13d07521d1df2f362a2/image.png)
 <br><br><br><br>
 
