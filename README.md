@@ -77,4 +77,4 @@
 
 
 ## ERD
-![image](/uploads/1b65d08836ca9c912962cdf7eec903c4/image.png)
+![image](/uploads/cac72ed844e83f5e6d39cbfb9910f744/image.png)
