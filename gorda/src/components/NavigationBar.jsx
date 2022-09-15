@@ -11,7 +11,7 @@ function NavigationBar() {
                     <div className="nav-list">
                         <ul>
                             <li>
-                                <Link to="/">홈</Link>
+                                <Link to="">홈</Link>
                                 <Link to="/dnlist">기부</Link>
                                 <Link to="/vote">투표</Link>
                                 <button className="login_btn">로그인</button>
