@@ -1,10 +1,8 @@
 package com.ssafy.gorda.service;
 
 
-import com.ssafy.gorda.domain.Donation;
 import com.ssafy.gorda.domain.DonationComment;
 import com.ssafy.gorda.repository.DonationCommentRepository;
-import com.ssafy.gorda.repository.DonationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,7 +1,6 @@
 package com.ssafy.gorda.service;
 
 
-import com.ssafy.gorda.domain.DonationComment;
 import com.ssafy.gorda.domain.MyDonation;
 import com.ssafy.gorda.repository.MyDonationRepository;
 import lombok.RequiredArgsConstructor;
