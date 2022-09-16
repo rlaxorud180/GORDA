@@ -50,6 +50,10 @@ public class User {
     @JsonIgnore
     private List<MyDonation> myDonations = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<MyBadge> myBadges = new ArrayList<>();
+
 
     @Builder
     public User (String userAccount,

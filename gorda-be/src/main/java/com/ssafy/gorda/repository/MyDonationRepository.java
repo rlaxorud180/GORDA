@@ -29,6 +29,7 @@ public class MyDonationRepository {
     public MyDonation findByIdx (String Idx) {
 
         return em.find(MyDonation.class,Idx);
+
     }
 
     // 나의 기부 삭제
