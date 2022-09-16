@@ -1,12 +1,11 @@
 package com.ssafy.gorda.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.ssafy.gorda.util.SHA256;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 
 @Entity
@@ -35,5 +34,26 @@ public class MyBadge {
 
     @Column(name = "my_badge_date")
     private LocalDateTime myBadgeDate;
+
+    @Builder
+    public MyBadge (Badge badge,
+                  User user,
+                  LocalDateTime myBadgeDate
+    )
+    {
+
+        SHA256 sha256 = new SHA256();
+
+        try {
+            this.myBadgeIdx = sha256.encrypt(LocalDateTime.now().toString());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        this.badge = badge;
+        this.user = user;
+        this.myBadgeDate = myBadgeDate;
+
+    }
 
 }
