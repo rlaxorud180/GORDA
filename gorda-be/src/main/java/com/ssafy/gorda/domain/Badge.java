@@ -1,16 +1,16 @@
 package com.ssafy.gorda.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.ssafy.gorda.util.SHA256;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,5 +35,24 @@ public class Badge {
     @OneToMany(mappedBy = "badge")
     @JsonIgnore
     private List<MyBadge> myBadges = new ArrayList<>();
+
+    @Builder
+    public Badge (String badgeTitle,
+                  String badgeContent
+    )
+    {
+
+        SHA256 sha256 = new SHA256();
+
+        try {
+            this.badgeIdx = sha256.encrypt(LocalDateTime.now().toString());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        this.badgeTitle = badgeTitle;
+        this.badgeContent = badgeContent;
+
+    }
 
 }
