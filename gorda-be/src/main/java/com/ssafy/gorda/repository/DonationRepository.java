@@ -33,7 +33,7 @@ public class DonationRepository {
 
     public List<Donation> findByFoundationIdx(String foundationIdx) {
 
-        List<Donation> donations = em.createQuery("SELECT d FROM Donation d WHERE d.foundation.foundation_idx = :foundation_idx",Donation.class)
+        List<Donation> donations = em.createQuery("SELECT d FROM Donation d WHERE d.foundation.foundationIdx = :foundation_idx",Donation.class)
                 .setParameter("foundation_idx",foundationIdx)
                 .getResultList();
 
