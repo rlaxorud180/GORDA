@@ -10,6 +10,7 @@ import "./DonationList.scss";
 function DonationList() {
     const [count, setCount] = useState(47398495);
     const pointCount = count.toLocaleString('ko-KR')
+ 
     return (
         <>
             <NavigationBar />
