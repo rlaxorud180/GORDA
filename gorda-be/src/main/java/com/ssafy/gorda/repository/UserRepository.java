@@ -33,7 +33,7 @@ public class UserRepository {
 
     public User findByAccount(String account) {
 
-        List<User> user = em.createQuery("SELECT u FROM User u WHERE u.user_account = :user_account",User.class)
+        List<User> user = em.createQuery("SELECT u FROM User u WHERE u.userAccount = :user_account",User.class)
                 .setParameter("user_account",account).getResultList();
 
 
