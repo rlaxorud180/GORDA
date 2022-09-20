@@ -1,0 +1,9 @@
+# 작성된 컨트랙트 deploy
+npx hardhat run scripts/deploy.js --network ropsten
+
+# 작성된 컨트랙트 확인
+npx hardhat check --network ropsten
+
+# hardhat 설치
+npm install -D hardhat
+npm install --save-dev @nomiclabs/hardhat-waffle @nomiclabs/hardhat-ethers
