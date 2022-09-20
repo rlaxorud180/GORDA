@@ -1,116 +1,103 @@
-import HomeNav from "../components/HomeNav";
+import HomeNav from "../components/HomePage/HomeNav";
 import Footer from "../components/Footer";
 import "./Home.scss";
 import { useEffect, useState } from "react";
 import Web3 from "web3";
 import { signIn } from "../api/Users";
 
-
-
 function Home() {
     const [isConnected, setIsConnected] = useState(false);
     const [userInfo, setUserInfo] = useState({});
 
     useEffect(() => {
-    function checkConnectedWallet() {
-      const userData = JSON.parse(localStorage.getItem("userAccount"));
-      if (userData != null) {
+        function checkConnectedWallet() {
+            const userData = JSON.parse(localStorage.getItem("userAccount"));
+            if (userData != null) {
+                setUserInfo(userData);
+                setIsConnected(true);
+            }
+        }
+        checkConnectedWallet();
+    }, []);
+
+    const detectCurrentProvider = () => {
+        let provider;
+        if (window.ethereum) {
+            provider = window.ethereum;
+        } else if (window.web3) {
+            // eslint-disable-next-line
+            provider = window.web3.currentProvider;
+        } else {
+            console.log("Non-Ethereum browser detected. You should consider trying MetaMask!");
+        }
+        return provider;
+    };
+
+    const onConnect = async () => {
+        try {
+            const currentProvider = detectCurrentProvider();
+            if (currentProvider) {
+                if (currentProvider !== window.ethereum) {
+                    console.log("Non-Ethereum browser detected. You should consider trying MetaMask!");
+                }
+
+                // 메타마스크 연결
+                await currentProvider.request({ method: "eth_requestAccounts" });
+
+                const web3 = new Web3(currentProvider);
+                const userAccount = await web3.eth.getAccounts();
+                const chainId = await web3.eth.getChainId();
+                const account = userAccount[0];
+                let ethBalance = await web3.eth.getBalance(account); // Get wallet balance
+                ethBalance = web3.utils.fromWei(ethBalance, "ether"); //Convert balance to wei
+                saveUserInfo(ethBalance, account, chainId);
+                if (userAccount.length === 0) {
+                    console.log("Please connect to meta mask");
+                } else {
+                    console.log("난 여기");
+                    console.log(userAccount);
+                    await signIn(
+                        { userAccount },
+                        (response) => {
+                            console.log("리스폰스", response);
+                            localStorage.setItem("NickName", response.data);
+                        },
+                        (err) => {
+                            console.log("에러", err);
+                            console.log("로그인 실패");
+                        }
+                    );
+                }
+            }
+        } catch (err) {
+            console.log("There was an error fetching your accounts. Make sure your Ethereum client is configured correctly.");
+        }
+    };
+
+    const onDisconnect = () => {
+        localStorage.clear();
+        setUserInfo({});
+        setIsConnected(false);
+    };
+
+    const getSignature = async () => {
+        try {
+        } catch (err) {
+            console.log("There was an error fetching your accounts. Make sure your Ethereum client is configured correctly.");
+        }
+    };
+
+    const saveUserInfo = (ethBalance, account, chainId) => {
+        const userAccount = {
+            account: account,
+            balance: ethBalance,
+            connectionid: chainId,
+        };
+        window.localStorage.setItem("userAccount", JSON.stringify(userAccount)); //user persisted data
+        const userData = JSON.parse(localStorage.getItem("userAccount"));
         setUserInfo(userData);
         setIsConnected(true);
-      }
-    }
-    checkConnectedWallet();
-  }, []);
-
-  const detectCurrentProvider = () => {
-    let provider;
-    if (window.ethereum) {
-      provider = window.ethereum;
-    } else if (window.web3) {
-      // eslint-disable-next-line
-      provider = window.web3.currentProvider;
-    } else {
-      console.log(
-        "Non-Ethereum browser detected. You should consider trying MetaMask!"
-      );
-    }
-    return provider;
-  };
-
-  const onConnect = async () => {
-    try {
-      const currentProvider = detectCurrentProvider();
-      if (currentProvider) {
-        if (currentProvider !== window.ethereum) {
-          console.log(
-            "Non-Ethereum browser detected. You should consider trying MetaMask!"
-          );
-        }
-
-        // 메타마스크 연결
-        await currentProvider.request({ method: "eth_requestAccounts" });
-
-        const web3 = new Web3(currentProvider);
-        const userAccount = await web3.eth.getAccounts();
-        const chainId = await web3.eth.getChainId();
-        const account = userAccount[0];
-        let ethBalance = await web3.eth.getBalance(account); // Get wallet balance
-        ethBalance = web3.utils.fromWei(ethBalance, "ether"); //Convert balance to wei
-        saveUserInfo(ethBalance, account, chainId);
-        if (userAccount.length === 0) {
-          console.log("Please connect to meta mask");
-        }
-        else {
-            console.log("난 여기");
-            console.log(userAccount)
-            await signIn(
-                {userAccount},
-                (response) => {
-                    console.log("리스폰스", response)
-                    localStorage.setItem("NickName", response.data);
-                },
-                (err) => {
-                    console.log("에러", err)
-                    console.log("로그인 실패");
-                }
-            )
-        }
-      }
-    } catch (err) {
-      console.log(
-        "There was an error fetching your accounts. Make sure your Ethereum client is configured correctly."
-      );
-    }
-    
-  };
-
-  const onDisconnect = () => {
-    localStorage.clear();
-    setUserInfo({});
-    setIsConnected(false);
-  };
-
-  const getSignature = async () => {
-    try {
-    } catch (err) {
-      console.log(
-        "There was an error fetching your accounts. Make sure your Ethereum client is configured correctly."
-      );
-    }
-  };
-
-  const saveUserInfo = (ethBalance, account, chainId) => {
-    const userAccount = {
-      account: account,
-      balance: ethBalance,
-      connectionid: chainId,
     };
-    window.localStorage.setItem("userAccount", JSON.stringify(userAccount)); //user persisted data
-    const userData = JSON.parse(localStorage.getItem("userAccount"));
-    setUserInfo(userData);
-    setIsConnected(true);
-  };
-
 
     return (
         <>
@@ -121,37 +108,45 @@ function Home() {
                     <div className="home_paragraph">당신은 별 하나 묻힌 아무 벌써 한 위에도 이네들은 있습니다.</div>
                     <div className="home_paragraph">프랑시스 별 그리고 까닭입니다.</div>
                     {console.log("이즈커넥티드 : ", isConnected)}
-                    {!isConnected && (<button className="login_btn" onClick={onConnect}>계좌 연결하기</button>)}
-                    {isConnected && (<button className="login_btn" onClick={onDisconnect}>계좌 연결해제</button>)}
+                    {!isConnected && (
+                        <button className="login_btn" onClick={onConnect}>
+                            계좌 연결하기
+                        </button>
+                    )}
+                    {isConnected && (
+                        <button className="login_btn" onClick={onDisconnect}>
+                            계좌 연결해제
+                        </button>
+                    )}
                     <a href="#donation" className="next_btn">
                         <i className="bx bx-down-arrow-alt"></i>
                     </a>
                 </div>
             </section>
             {isConnected && (
-        <div className="app-wrapper">
-          <div className="app-details">
-            <h2>✅ You are connected to metamask.</h2>
-            <div className="app-account">
-              <span>Account number:</span>
-              {userInfo.account}
-            </div>
-            <div className="app-balance">
-              <span>Balance:</span>
-              {userInfo.balance}
-            </div>
-            <div className="app-connectionid">
-              <span>Connection ID:</span>
-              {userInfo.connectionid}
-            </div>
-          </div>
-          <div>
-            <button className="app-buttons__logout" onClick={onDisconnect}>
-              Disconnect
-            </button>
-          </div>
-        </div>
-      )}
+                <div className="app-wrapper">
+                    <div className="app-details">
+                        <h2>✅ You are connected to metamask.</h2>
+                        <div className="app-account">
+                            <span>Account number:</span>
+                            {userInfo.account}
+                        </div>
+                        <div className="app-balance">
+                            <span>Balance:</span>
+                            {userInfo.balance}
+                        </div>
+                        <div className="app-connectionid">
+                            <span>Connection ID:</span>
+                            {userInfo.connectionid}
+                        </div>
+                    </div>
+                    <div>
+                        <button className="app-buttons__logout" onClick={onDisconnect}>
+                            Disconnect
+                        </button>
+                    </div>
+                </div>
+            )}
 
             {/* End Home Section */}
 

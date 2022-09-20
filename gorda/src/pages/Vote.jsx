@@ -6,10 +6,10 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import VoteListItem from "../components/VoteListItem";
+import VoteListItem from "../components/Vote/VoteListItem";
 
 function Vote() {
-    let datemonth = new Date().getMonth() +1;
+    let datemonth = new Date().getMonth() + 1;
 
     const [open, setOpen] = useState(false);
 
@@ -82,20 +82,25 @@ function Vote() {
                             <VoteListItem />
                             <VoteListItem />
                         </>
-                    ) : ''}
+                    ) : (
+                        ""
+                    )}
                     {month === 2 ? (
                         <>
                             <VoteListItem />
                             <VoteListItem />
                             <VoteListItem />
                         </>
-                    ) : ''}
+                    ) : (
+                        ""
+                    )}
                     {month === 3 ? (
                         <>
                             <VoteListItem />
-                           
                         </>
-                    ) : ''}
+                    ) : (
+                        ""
+                    )}
                     {month === 4 ? (
                         <>
                             <VoteListItem />
@@ -105,7 +110,9 @@ function Vote() {
                             <VoteListItem />
                             <VoteListItem />
                         </>
-                    ) : ''}
+                    ) : (
+                        ""
+                    )}
                     {month === 5 ? (
                         <>
                             <VoteListItem />
@@ -115,14 +122,17 @@ function Vote() {
                             <VoteListItem />
                             <VoteListItem />
                         </>
-                    ) : ''}
+                    ) : (
+                        ""
+                    )}
                     {month === 6 ? (
                         <>
                             <VoteListItem />
                             <VoteListItem />
-                            
                         </>
-                    ) : ''}
+                    ) : (
+                        ""
+                    )}
                     {month === 7 ? (
                         <>
                             <VoteListItem />
@@ -134,14 +144,18 @@ function Vote() {
                             <VoteListItem />
                             <VoteListItem />
                         </>
-                    ) : ''}
+                    ) : (
+                        ""
+                    )}
                     {month === 8 ? (
                         <>
                             <VoteListItem />
                             <VoteListItem />
                             <VoteListItem />
                         </>
-                    ) : ''}
+                    ) : (
+                        ""
+                    )}
                     {month === 9 ? (
                         <>
                             <VoteListItem />
@@ -149,26 +163,27 @@ function Vote() {
                             <VoteListItem />
                             <VoteListItem />
                         </>
-                    ) : ''}
-                    {month === 10 ? (
-                        <>
-                     
-                        </>
-                    ) : ''}
+                    ) : (
+                        ""
+                    )}
+                    {month === 10 ? <></> : ""}
                     {month === 11 ? (
                         <>
                             <VoteListItem />
                             <VoteListItem />
-                          
                         </>
-                    ) : ''}
+                    ) : (
+                        ""
+                    )}
                     {month === 12 ? (
                         <>
                             <VoteListItem />
                             <VoteListItem />
                             <VoteListItem />
                         </>
-                    ) : ''}
+                    ) : (
+                        ""
+                    )}
                 </div>
             </div>
         </>

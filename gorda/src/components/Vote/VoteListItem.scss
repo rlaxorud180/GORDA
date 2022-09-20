@@ -50,7 +50,7 @@
             .vote_btn {
                 padding: 4px 50px;
                 border: none;
-                background-color: #00AEEF;
+                background-color: #00aeef;
                 color: #fff;
                 border-radius: 5px;
                 font-size: 18px;
@@ -58,4 +58,9 @@
             }
         }
     }
+}
+.vote_item_card:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+    background-color: rgba(0, 175, 239, 0.125);
 }
