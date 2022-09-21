@@ -9,7 +9,7 @@ require("@nomiclabs/hardhat-waffle");
 // ABI는 단순히 컨트랙에 대한 JSON 설명
 task("check", "Check contract amounts", async () => {
   const [deployer] = await ethers.getSigners();
-  const contract = "0x29Cd9d39a5a64848494A0558F7bCB53b25621DfF";
+  const contract = "0x03338B463598613d79Dde706F6b1A37ef9E28896"; // 배포된 컨트랙 주소
   const abi = [
     {
       inputs: [
@@ -115,6 +115,7 @@ task("check", "Check contract amounts", async () => {
   // 컨트랙트 주소, ABI, 상호작용하는 계좌를 보내기. 컨트랙에 있는 메소드 호출 가능해짐
   const fundraising = new ethers.Contract(contract, abi, deployer);
   console.log(
+    "하이",
     await fundraising.targetAmount(),
     await fundraising.raisedAmount()
   );
