@@ -18,7 +18,10 @@
         "sass": "^1.54.8",
         "styled-components": "^5.3.5",
         "web-vitals": "^2.1.4",
-        "web3": "^1.8.0"
+        "web3": "^1.8.0",
+        "solc": "^0.4.17",
+        "truffle-hdwallet-provider": "^1.0.17",
+        "use-wallet": "^0.8.1"
     },
     "scripts": {
         "start": "react-scripts start",
