@@ -12,6 +12,7 @@ html {
 }
 
 body {
+    padding-right: 0 !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

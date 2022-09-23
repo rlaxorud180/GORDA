@@ -1,14 +1,14 @@
 .listcard {
-    width: 730px;
-    height: 272px;
+    width: 810px;
+    height: 300px;
     background-color: #fff;
     border-radius: 20px;
     box-shadow: 7px 14px 30px -3px rgba(0, 0, 0, 0.1);
     display: flex;
     .cardImg {
         .img {
-            width: 283px;
-            height: 272px;
+            width: 290px;
+            height: 300px;
             background-color: gray;
             border-radius: 20px 0px 0px 20px;
         }
@@ -31,12 +31,17 @@
             font-size: 14px;
         }
         .fund {
-            margin-top: 15px;
+            margin-top: 50px;
             color: #fff;
             width: 150px;
             background-color: #3f3f3f;
-            padding: 3px 20px;
+            padding: 5px 20px;
             font-size: 14px;
         }
     }
+}
+
+.listcard:hover {
+    transform: scale(1.04);
+    transition: 0.2s;
 }

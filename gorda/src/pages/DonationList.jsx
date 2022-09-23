@@ -1,14 +1,16 @@
 import { useState } from "react";
-import DonationListCard from "../components/DonationListCard";
-import DonatorRanking from "../components/DonatorRanking";
+import DonationListCard from "../components/Donation/DonationListCard";
+import DonatorRanking from "../components/Donation/DonatorRanking";
 import Footer from "../components/Footer";
 import NavigationBar from "../components/NavigationBar";
-import ShopBanner from "../components/ShopBanner";
-import UnicefBanner from "../components/UnicefBanner";
+import ShopBanner from "../components/Donation/ShopBanner";
+import UnicefBanner from "../components/Donation/UnicefBanner";
 import "./DonationList.scss";
 
 function DonationList() {
-    const [count, setCount] = useState("47,398,495");
+    const [count, setCount] = useState(47398495);
+    const pointCount = count.toLocaleString("ko-KR");
+
     return (
         <>
             <NavigationBar />
@@ -25,7 +27,7 @@ function DonationList() {
                     </div>
                     <div className="donationCount">
                         <i className="bx bxs-heart-circle"></i>
-                        <div className="countbox">기부 {count}건</div>
+                        <div className="countbox">기부 {pointCount}건</div>
                     </div>
                 </div>
                 <div className="test">
