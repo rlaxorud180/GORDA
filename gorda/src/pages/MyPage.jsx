@@ -1,10 +1,10 @@
 import "./MyPage.scss";
 
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
 import NavigationBar from "../components/NavigationBar";
-import DonationDetail from "../components/DonationDetail";
-import MypageComment from "../components/MypageComment";
-import MypageStamp from "../components/MypageStamp";
+import DonationDetail from "../components/Mypage/DonationDetail";
+import MypageComment from "../components/Mypage/MypageComment";
+import MypageStamp from "../components/Mypage/MypageStamp";
 
 function MyPage() {
     return (

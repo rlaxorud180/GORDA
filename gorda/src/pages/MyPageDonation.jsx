@@ -1,4 +1,4 @@
-import MyPageDonationList from "../components/MyPageDonationList";
+import MyPageDonationList from "../components/Mypage/MyPageDonationList";
 import NavigationBar from "../components/NavigationBar";
 import "./MyPageDonation.scss";
 
