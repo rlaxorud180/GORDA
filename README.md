@@ -1,3 +1,7 @@
+pull 이후 npm 인스톨
+npm i --save --legacy-peer-deps
+
+
 <div align="center">
 <h1> 고르다(Gorda)에 오신걸 환영합니다.</h1>
 </div>
