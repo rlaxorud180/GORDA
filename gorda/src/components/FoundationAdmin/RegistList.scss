@@ -1,0 +1,14 @@
+.regist_list {
+    display: flex;
+    gap: 10px;
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 5px;
+    .regist_tag {
+        color: #999;
+    }
+}
+
+.regist_progress {
+    margin-bottom: 30px;
+}
