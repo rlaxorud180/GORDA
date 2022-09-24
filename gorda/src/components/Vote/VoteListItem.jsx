@@ -1,7 +1,7 @@
 import "./VoteListItem.scss";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function VoteListItem() {
     const name = "이몽룡 재단";
