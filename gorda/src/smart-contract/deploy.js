@@ -1,11 +1,14 @@
-const HDWalletProvider = require("truffle-hdwallet-provider");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 const Web3 = require("web3");
 const compiledFactory = require("./build/CampaignFactory.json");
 
 require("dotenv").config();
 
-const provider = new HDWalletProvider(process.env.mnemonic, process.env.link);
+const provider = new HDWalletProvider(
+  "lawn myself please horse best tree school pink tower parent cruise uphold",
+  "https://ropsten.infura.io/v3/1f2be1d46c0a4d7187aeb24a9ac59c36"
+);
 
 const web3 = new Web3(provider);
 const deploy = async () => {
