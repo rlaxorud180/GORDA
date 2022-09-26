@@ -31,40 +31,39 @@ function AdminForm() {
                         <input type="text" placeholder="목표 기부금 : eth" />
                     </div>
                     <div className="editor">에디터 쓸 예정</div>
-                </form>
-                <div className="button_container">
-                    <a href="#DonationManage">
-                        <button type="submit" className="submit_Btn">
-                            다음
-                        </button>
-                    </a>
-                </div>
-            </div>
-            <section id="DonationManage">
-                <div className="manage_container">
-                    <div className="manage_title">관리 기관명</div>
-                    <div className="selection">운반/운송/식품 업체 선택</div>
-                    <hr className="hr" />
-                    <div className="manage_list">
-                        <FactoryList />
-                        <FactoryList />
-                        <FactoryList />
-                        <FactoryList />
-                        <FactoryList />
-                        <FactoryList />
-                        <FactoryList />
-                        <FactoryList />
-                        <FactoryList />
+                    <input type="text" />
+                    <div className="button_container">
+                            <a href="#DonationManage" type="submit" className="submit_Btn">
+                                다음
+                            </a>
                     </div>
-                </div>
-                <div className="button_container">
-                    <a href="#pageCost">
-                        <button type="submit" className="submit_Btn">
-                            다음
-                        </button>
-                    </a>
-                </div>
-            </section>
+                    <section id="DonationManage">
+                        <div className="manage_container">
+                            <div className="manage_title">관리 기관명</div>
+                            <div className="selection">운반/운송/식품 업체 선택</div>
+                            <hr className="hr" />
+                            <div className="manage_list">
+                                <FactoryList />
+                                <FactoryList />
+                                <FactoryList />
+                                <FactoryList />
+                                <FactoryList />
+                                <FactoryList />
+                                <FactoryList />
+                                <FactoryList />
+                                <FactoryList />
+                            </div>
+                        </div>
+                    </section>
+                </form>
+                        <div className="button_container">
+                            <a href="#pageCost" type="submit" className="submit_Btn">
+                                다음
+                            </a>
+                        </div>
+                
+            </div>
+           
             <section id="pageCost">
                 <div className="pageCost_container">
                     <div className="cost_title">기부 관리</div>
