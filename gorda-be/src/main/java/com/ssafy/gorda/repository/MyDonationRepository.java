@@ -1,11 +1,13 @@
 package com.ssafy.gorda.repository;
 
+import com.ssafy.gorda.domain.MyBadge;
 import com.ssafy.gorda.domain.MyDonation;
 import com.ssafy.gorda.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -29,6 +31,15 @@ public class MyDonationRepository {
     public MyDonation findByIdx (String Idx) {
 
         return em.find(MyDonation.class,Idx);
+
+    }
+
+    public List<MyDonation> findByUserIdx(String userIdx) {
+
+        List<MyDonation> myDonationList = em.createQuery("SELECT m FROM MyBadge m WHERE m.userIdx = :user_idx",MyDonation.class)
+                .setParameter("user_idx",userIdx).getResultList();
+
+        return myDonationList;
 
     }
 
