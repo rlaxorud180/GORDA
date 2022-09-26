@@ -1,11 +1,13 @@
 package com.ssafy.gorda.repository;
 
 import com.ssafy.gorda.domain.Foundation;
+import com.ssafy.gorda.domain.MyBadge;
 import com.ssafy.gorda.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -28,6 +30,14 @@ public class FoundationRepository {
     public Foundation findByIdx (String Idx) {
 
         return em.find(Foundation.class,Idx);
+    }
+
+    public List<Foundation> findByDonationIdx(String donationIdx) {
+
+        List<Foundation> foundationList = em.createQuery("SELECT f FROM Foundation f WHERE f.donationIdx = :donation_idx",Foundation.class)
+                .setParameter("donation_idx",donationIdx).getResultList();
+
+        return foundationList;
     }
 
     //기관 삭제
