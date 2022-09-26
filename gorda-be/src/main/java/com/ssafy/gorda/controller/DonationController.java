@@ -1,19 +1,24 @@
 package com.ssafy.gorda.controller;
 
 import com.ssafy.gorda.domain.Donation;
+import com.ssafy.gorda.domain.Foundation;
 import com.ssafy.gorda.dto.MessageResponseDto;
+import com.ssafy.gorda.dto.ResultDto;
 import com.ssafy.gorda.dto.controllerdto.request.RegistDonationRequestDto;
+import com.ssafy.gorda.dto.controllerdto.response.ReadBadgeResponseDto;
+import com.ssafy.gorda.dto.controllerdto.response.ReadDonationResponseDto;
+import com.ssafy.gorda.dto.controllerdto.response.ReadFoundationResponseDto;
 import com.ssafy.gorda.service.DonationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,10 +47,27 @@ public class DonationController {
 
     }
 
-    //도네이션 수정
 
-    //도네이션 정보 가져오기
+    //해당 도네이션 정보 가져오기
+    @GetMapping("{DonationIdx}")
+    public ResultDto readDonationByIdx(@PathVariable("donationIdx") String donationIdx){
 
-    //도네이션 삭제
+        Donation tempDonation = donationService.findByIdx(donationIdx);
+
+        return new ResultDto(new ReadDonationResponseDto(tempDonation));
+    }
+
+    //전체 도네이션 정보 가져오기
+    @GetMapping("/readall")
+    public ResultDto readAllDonation() {
+
+        List<ReadDonationResponseDto> donationList = new ArrayList<>();
+
+        donationList = donationService.findAll().stream().map(donation -> new ReadDonationResponseDto(donation)).collect(Collectors.toList());
+
+        return new ResultDto(donationList);
+
+    }
+
 
 }
