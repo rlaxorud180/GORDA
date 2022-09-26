@@ -1,11 +1,15 @@
 package com.ssafy.gorda.service;
 
 
+import com.ssafy.gorda.domain.Donation;
 import com.ssafy.gorda.domain.DonationComment;
+import com.ssafy.gorda.domain.MyDonation;
 import com.ssafy.gorda.repository.DonationCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +36,20 @@ public class DonationCommentService {
 
         return donationCommentRepository.findByIdx(Idx);
 
+    }
+
+    public List<DonationComment> findByUserIdx (String userIdx){
+
+        List<DonationComment> donationCommentList = donationCommentRepository.findByUserIdx(userIdx);
+
+        return donationCommentList;
+    }
+
+    //삭제
+    @Transactional
+    public void delete(DonationComment donationComment) {
+
+        donationCommentRepository.delete(donationComment);
     }
 
 }

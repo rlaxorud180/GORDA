@@ -3,18 +3,21 @@ package com.ssafy.gorda.controller;
 import com.ssafy.gorda.domain.Foundation;
 import com.ssafy.gorda.domain.MyBadge;
 import com.ssafy.gorda.dto.MessageResponseDto;
+import com.ssafy.gorda.dto.ResultDto;
 import com.ssafy.gorda.dto.controllerdto.request.RegistFoundationRequestDto;
 import com.ssafy.gorda.dto.controllerdto.request.RegistMyBadgeRequestDto;
+import com.ssafy.gorda.dto.controllerdto.response.ReadFoundationResponseDto;
+import com.ssafy.gorda.dto.controllerdto.response.ReadMyBadgeResponseDto;
 import com.ssafy.gorda.service.FoundationService;
 import com.ssafy.gorda.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -40,6 +43,26 @@ public class FoundationController {
 
     }
 
+    // 기부한 기관 불러오기 기능
+    @GetMapping ("/donationIdx")
+    public ResultDto readFoundationByDonation (@PathVariable ("donationIdx") String donationIdx) {
 
+        List<ReadFoundationResponseDto> foundationList = new ArrayList<>();
+
+        foundationList = foundationService.findByDonationIdx(donationIdx).stream().map(foundation -> new ReadFoundationResponseDto(foundation)).collect(Collectors.toList());
+
+        return new ResultDto(foundationList);
+
+    }
+
+    // 해당 기관 정보 불러오기 기능
+    @GetMapping("{FoundationIdx}")
+    public ResultDto readFoundationByIdx(@PathVariable("FoundationIdx") String foundationIdx){
+
+        Foundation tempFoundation = foundationService.findByIdx(foundationIdx);
+
+        return new ResultDto(new ReadFoundationResponseDto(tempFoundation));
+
+    }
 
 }
