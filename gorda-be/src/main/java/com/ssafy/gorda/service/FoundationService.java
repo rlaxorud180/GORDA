@@ -2,10 +2,13 @@ package com.ssafy.gorda.service;
 
 
 import com.ssafy.gorda.domain.Foundation;
+import com.ssafy.gorda.domain.MyBadge;
 import com.ssafy.gorda.repository.FoundationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +34,14 @@ public class FoundationService {
     public Foundation findByIdx (String Idx) {
 
         return foundationRepository.findByIdx(Idx);
+
+    }
+
+    public List<Foundation> findByDonationIdx(String DonationIdx){
+
+        List<Foundation> foundationList = foundationRepository.findByDonationIdx(DonationIdx);
+
+        return foundationList;
 
     }
 
