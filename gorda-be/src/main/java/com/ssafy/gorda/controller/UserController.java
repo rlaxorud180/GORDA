@@ -23,10 +23,7 @@ public class UserController {
     @PostMapping("/login")
     public String login(String userAccount) {
 
-
         User user = userService.findByAccount(userAccount);
-
-        Map map = new HashMap();
 
         if (user==null) {             //미등록 유저일 때
 
@@ -37,9 +34,7 @@ public class UserController {
 
             userService.regist (newUser);
 
-
             return newUser.getUserNickname();
-
         }
 
         return user.getUserNickname();
