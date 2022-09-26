@@ -15,4 +15,6 @@ public class BadgeController {
 
     private final BadgeService badgeService;
 
+    //뱃지 정보 불러오기
+
 }
