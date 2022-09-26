@@ -7,6 +7,7 @@ import com.ssafy.gorda.service.DonationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,9 +25,8 @@ public class DonationController {
     private final DonationService donationService;
 
     //도네이션 등록
-
     @PostMapping("/regist")
-    public MessageResponseDto regist(RegistDonationRequestDto request) {
+    public MessageResponseDto regist(@RequestBody RegistDonationRequestDto request) {
 
         Donation tempDonation = Donation.builder()
                 .foundation(request.getFoundation())

@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -32,6 +35,15 @@ public class MyDonationService {
 
         return myDonationRepository.findByIdx(Idx);
 
+    }
+
+    //유저 별 찾기
+
+    public List<MyDonation> findByUserIdx (String userIdx){
+
+        List<MyDonation> myDonationList = myDonationRepository.findByUserIdx(userIdx);
+
+        return myDonationList;
     }
 
 }
