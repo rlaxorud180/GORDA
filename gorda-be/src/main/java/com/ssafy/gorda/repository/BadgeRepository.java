@@ -32,7 +32,7 @@ public class BadgeRepository {
 
     public List<Badge> findAll () {
 
-        List<Badge> badgeList = em.createQuery("SELECT * FROM Badge",Badge.class).getResultList();
+        List<Badge> badgeList = em.createQuery("SELECT b FROM Badge b",Badge.class).getResultList();
 
         return badgeList;
     }
