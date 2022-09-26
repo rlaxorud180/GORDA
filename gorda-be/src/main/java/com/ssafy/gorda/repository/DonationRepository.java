@@ -33,7 +33,7 @@ public class DonationRepository {
 
     public List<Donation> findAll () {
 
-        List<Donation> donationList = em.createQuery("SELECT * FROM Donation",Donation.class).getResultList();
+        List<Donation> donationList = em.createQuery("SELECT d FROM Donation d",Donation.class).getResultList();
 
         return donationList;
     }
