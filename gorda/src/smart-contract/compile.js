@@ -1,19 +1,41 @@
 const path = require("path");
-const solc = require("solc");
 const fs = require("fs-extra");
+const solc = require("solc");
 
 const buildPath = path.resolve(__dirname, "build");
-fs.removeSync(buildPath); // deleting the folder and all the content inside it
+fs.removeSync(buildPath);
 
-const campaignPath = path.resolve(__dirname, "Contracts", "Campaigns.sol");
-const source = fs.readFileSync(campaignPath, "utf8");
-const output = solc.compile(source, 1).contracts;
+const contractPath = path.resolve(__dirname, "contracts");
+const fileNames = fs.readdirSync(contractPath);
+// const fileName = "Campaigns.sol";
 
-fs.ensureDirSync(buildPath); // create a build folder if that folder doesn't exists
+const compilerInput = {
+  language: "Solidity",
+  sources: fileNames.reduce((input, fileName) => {
+    const filePath = path.resolve(contractPath, fileName);
+    const source = fs.readFileSync(filePath, "utf8");
+    return { ...input, [fileName]: { content: source } };
+  }, {}),
+  settings: {
+    outputSelection: {
+      "*": {
+        "*": ["abi", "evm.bytecode.object"],
+      },
+    },
+  },
+};
 
-for (let contract in output) {
-  fs.outputJSONSync(
-    path.resolve(buildPath, contract.replace(":", "").concat(".json")),
-    output[contract]
-  );
-}
+// Compile All contracts
+const compiled = JSON.parse(solc.compile(JSON.stringify(compilerInput)));
+
+fs.ensureDirSync(buildPath);
+
+fileNames.map((fileName) => {
+  const contracts = Object.keys(compiled.contracts[fileName]);
+  contracts.map((contract) => {
+    fs.outputJsonSync(
+      path.resolve(buildPath, contract + ".json"),
+      compiled.contracts[fileName][contract]
+    );
+  });
+});
