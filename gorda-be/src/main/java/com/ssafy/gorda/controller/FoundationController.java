@@ -9,6 +9,8 @@ import com.ssafy.gorda.service.FoundationService;
 import com.ssafy.gorda.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +25,8 @@ public class FoundationController {
     private final FoundationService foundationService;
 
     // 기관 등록하기
-    public MessageResponseDto regist(RegistFoundationRequestDto request) {
+    @PostMapping("/regist")
+    public MessageResponseDto regist(@RequestBody RegistFoundationRequestDto request) {
 
          Foundation tempFoundation = Foundation.builder()
                  .foundationAccount(request.getFoundationAccount())

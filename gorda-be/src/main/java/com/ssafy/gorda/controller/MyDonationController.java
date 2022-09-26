@@ -4,15 +4,20 @@ import com.ssafy.gorda.domain.Donation;
 import com.ssafy.gorda.domain.MyDonation;
 import com.ssafy.gorda.domain.User;
 import com.ssafy.gorda.dto.MessageResponseDto;
+import com.ssafy.gorda.dto.ResultDto;
 import com.ssafy.gorda.dto.controllerdto.request.RegistDonationRequestDto;
 import com.ssafy.gorda.dto.controllerdto.request.RegistMyDonationRequestDto;
+import com.ssafy.gorda.dto.controllerdto.response.ReadMyBadgeResponseDto;
+import com.ssafy.gorda.dto.controllerdto.response.ReadMyDonationResponseDto;
 import com.ssafy.gorda.service.MyDonationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,7 +29,8 @@ public class MyDonationController {
     private final MyDonationService myDonationService;
 
     // 개인별 기부 항목 만들기
-    public MessageResponseDto regist(RegistMyDonationRequestDto request) {
+    @PostMapping("/regist")
+    public MessageResponseDto regist(@RequestBody RegistMyDonationRequestDto request) {
 
         MyDonation tempMyDonation = MyDonation.builder()
                 .user(request.getUser())
@@ -37,6 +43,17 @@ public class MyDonationController {
 
         return new MessageResponseDto("개인별 기부 항목 작성 완료");
 
+    }
+
+    //개인별 기부 항목 불러오기
+    @GetMapping("/{userIdx}")
+    public ResultDto readMyDonation(@PathVariable ("userIdx") String userIdx) {
+
+        List<ReadMyDonationResponseDto> myDonationList = new ArrayList<>();
+
+        myDonationList = myDonationService.findByUserIdx(userIdx).stream().map(myDonation -> new ReadMyDonationResponseDto(myDonation)).collect(Collectors.toList());
+
+        return new ResultDto(myDonationList);
     }
 
 }
