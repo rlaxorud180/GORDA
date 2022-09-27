@@ -19,35 +19,56 @@ html {
         font-size: 42px;
         font-weight: bold;
         margin-top: 150px;
-        margin-bottom: 175px;
+        margin-bottom: 145px;
     }
     form {
         .titleinput {
             width: 100%;
             padding: 15px 30px;
             font-size: 22px;
-            border-radius: 20px;
+            border-radius: 15px;
             border: 1px solid #999;
             background-color: transparent;
             margin-bottom: 40px;
         }
         .datecontainer {
-            display: flex;
-            justify-content: space-between;
             margin-bottom: 40px;
             .dateinput {
-                width: 48%;
+                width: 100%;
                 padding: 15px 30px;
                 font-size: 22px;
-                border-radius: 20px;
+                border-radius: 15px;
                 border: 1px solid #999;
                 background-color: transparent;
+            }
+        }
+        .textareainput {
+            width: 100%;
+            height: 754px;
+            background-color: transparent;
+            border-radius: 15px;
+            font-size: 22px;
+            padding: 15px 30px;
+            border: 1px solid #999;
+        }
+        .btnContainer {
+            margin-top: 100px;
+            display: flex;
+            justify-content: center;
+            .nextBtn {
+                font-size: 24px;
+                padding: 10px 100px;
+                background-color: #00aeef;
+                border: none;
+                border-radius: 5px;
+                color: #fff;
+                margin-bottom: 200px;
             }
         }
         #categories {
             width: 100%;
             padding: 15px 30px;
-            border-radius: 20px;
+            border-radius: 15px;
             font-size: 22px;
             margin-bottom: 40px;
             background-color: transparent;
@@ -61,7 +82,7 @@ html {
             input {
                 font-size: 22px;
                 padding: 15px 30px;
-                border-radius: 20px;
+                border-radius: 15px;
                 background-color: transparent;
                 border: 1px solid #999;
             }
@@ -81,12 +102,11 @@ html {
         border: none;
         border-radius: 5px;
         color: #fff;
-        margin-bottom: 200px;
+        margin-bottom: 100px;
     }
 }
 
 #DonationManage {
-   
     .manage_title {
         margin-top: 126px;
         text-align: center;
@@ -112,10 +132,6 @@ html {
 }
 
 #pageCost {
-    width: 100%;
-    max-width: 1920px;
-    margin: 0 auto;
-    padding: 0 320px;
     .cost_title {
         margin-top: 126px;
         text-align: center;
@@ -133,5 +149,25 @@ html {
         margin-bottom: 35px;
     }
     .cost_list {
+    }
+}
+input:focus {
+    outline: 3px solid #00afef88;
+}
+
+textarea:focus {
+    outline: 3px solid #00afef88;
+}
+.createBtn {
+    display: flex;
+    justify-content: center;
+    .createBtn {
+        font-size: 24px;
+        padding: 10px 100px;
+        background-color: #00aeef;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        margin-bottom: 100px;
     }
 }
