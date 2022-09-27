@@ -12,6 +12,7 @@ import com.ssafy.gorda.dto.controllerdto.response.ReadDonationCommentResponseDto
 import com.ssafy.gorda.dto.controllerdto.response.ReadFoundationResponseDto;
 import com.ssafy.gorda.service.BadgeService;
 import com.ssafy.gorda.service.DonationCommentService;
+import com.ssafy.gorda.service.DonationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,7 @@ import java.util.stream.Collectors;
 public class DonationCommentController {
 
     private final DonationCommentService donationCommentService;
+    private final DonationService donationService;
 
     // 기부 댓글 등록하기
     @PostMapping("/regist")
@@ -39,7 +41,7 @@ public class DonationCommentController {
 
         DonationComment tempDonationComment = DonationComment.builder()
                 .user(request.getUser())
-                .donation(request.getDonation())
+                .donation(donationService.findByIdx(request.getDonationIdx()))
                 .donationCommentContent(request.getDonationCommentContent())
                 .donationCommentDate(LocalDateTime.now())
                 .build();
