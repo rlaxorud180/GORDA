@@ -11,6 +11,7 @@ import com.ssafy.gorda.dto.controllerdto.response.ReadBadgeResponseDto;
 import com.ssafy.gorda.dto.controllerdto.response.ReadMyBadgeResponseDto;
 import com.ssafy.gorda.service.BadgeService;
 import com.ssafy.gorda.service.MyBadgeService;
+import com.ssafy.gorda.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -28,14 +29,17 @@ import java.util.stream.Collectors;
 public class MyBadgeController {
 
     private final MyBadgeService myBadgeService;
+    private final BadgeService badgeService;
+    private final UserService userService;
+
 
     // 개인별 획득 뱃지 만들기
     @PostMapping("/regist")
     public MessageResponseDto regist(@RequestBody RegistMyBadgeRequestDto request) {
 
         MyBadge tempMyBadge = MyBadge.builder()
-                .badge(request.getBadge())
-                .user(request.getUser())
+                .badge(badgeService.findByIdx(request.getBadgeIdx()))
+                .user(userService.findByIdx(request.getUserIdx()))
                 .myBadgeDate(LocalDateTime.now())
                 .build();
 

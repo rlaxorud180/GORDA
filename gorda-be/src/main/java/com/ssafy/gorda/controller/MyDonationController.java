@@ -9,7 +9,9 @@ import com.ssafy.gorda.dto.controllerdto.request.RegistDonationRequestDto;
 import com.ssafy.gorda.dto.controllerdto.request.RegistMyDonationRequestDto;
 import com.ssafy.gorda.dto.controllerdto.response.ReadMyBadgeResponseDto;
 import com.ssafy.gorda.dto.controllerdto.response.ReadMyDonationResponseDto;
+import com.ssafy.gorda.service.DonationService;
 import com.ssafy.gorda.service.MyDonationService;
+import com.ssafy.gorda.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -27,14 +29,16 @@ import java.util.stream.Collectors;
 public class MyDonationController {
 
     private final MyDonationService myDonationService;
+    private final UserService userService;
+    private final DonationService donationService;
 
     // 개인별 기부 항목 만들기
     @PostMapping("/regist")
     public MessageResponseDto regist(@RequestBody RegistMyDonationRequestDto request) {
 
         MyDonation tempMyDonation = MyDonation.builder()
-                .user(request.getUser())
-                .donation(request.getDonation())
+                .user(userService.findByIdx(request.getUserIdx()))
+                .donation(donationService.findByIdx(request.getDonationIdx()))
                 .myDonationContent(request.getMyDonationContent())
                 .myDonationDate(LocalDateTime.now())
                 .build();

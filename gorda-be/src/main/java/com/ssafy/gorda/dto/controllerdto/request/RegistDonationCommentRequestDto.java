@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class RegistDonationCommentRequestDto {
 
     private User user;
-    private Donation donation;
+    private String donationIdx;
     private String donationCommentContent;
 
 }
