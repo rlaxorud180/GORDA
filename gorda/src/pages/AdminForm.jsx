@@ -15,7 +15,6 @@ function AdminForm() {
   const [error, setError] = useState("");
   const [targetInUSD, setTargetInUSD] = useState();
   const [minContriInUSD, setMinContriInUSD] = useState();
-
   const [ETHPrice, setETHPrice] = useState(0);
 
   const {
@@ -41,7 +40,6 @@ function AdminForm() {
     );
     try {
       const accounts = await web3.eth.getAccounts();
-      console.log("----", accounts);
       await factory.methods
         .createCampaign(
           [data.destination1, data.destination2],
@@ -50,7 +48,7 @@ function AdminForm() {
           accounts[0],
           data.campaignName,
           data.category,
-          data.date,
+          20220303,
           data.description,
           data.imageUrl,
           web3.utils.toWei(data.target, "ether")
@@ -58,7 +56,6 @@ function AdminForm() {
         .send({
           from: accounts[0],
         });
-      console.log("11111111111111111111111111111111111");
     } catch (err) {
       setError(err.message);
       console.log(err);
@@ -82,6 +79,12 @@ function AdminForm() {
             isDisabled={isSubmitting}
           />
           <input
+            type="number"
+            placeholder="받는 사람들 얼마 주니?"
+            {...register("amounts", { required: true })}
+            isDisabled={isSubmitting}
+          />
+          <input
             placeholder="받는 사람들"
             {...register("destination2", { required: true })}
             isDisabled={isSubmitting}
@@ -92,6 +95,9 @@ function AdminForm() {
             {...register("amounts", { required: true })}
             isDisabled={isSubmitting}
           />
+          <button>
+            <h3>추가</h3>
+          </button>
           <input
             placeholder="미니멈컨트리뷰션"
             type="number"
@@ -102,16 +108,34 @@ function AdminForm() {
               setMinContriInUSD(Math.abs(e.target.value));
             }}
           />
-          <input
+          <select
+            id="categories"
+            {...register("category", { required: true })}
+            isDisabled={isSubmitting}
+          >
+            <option value="">카테고리 선택</option>
+            <option value="hunger">기아</option>
+            <option value="environment">환경</option>
+            <option value="poor">빈곤</option>
+            <option value="aged">노인</option>
+          </select>
+          {/* <input
             placeholder="카테고리"
             {...register("category", { required: true })}
             isDisabled={isSubmitting}
-          />
-          <input
-            placeholder="날짜"
-            {...register("date", { required: true })}
-            isDisabled={isSubmitting}
-          />
+          /> */}
+          {/* <div className="datecontainer">
+            <input className="dateinput" id="currentDate" type="date" />
+            <input className="dateinput" type="date" />
+          </div> */}
+          <div className="datecontainer">
+            <input
+              placeholder="날짜"
+              type="date"
+              {...register("date", { required: true })}
+              isDisabled={isSubmitting}
+            />
+          </div>
           <input
             placeholder="제목"
             {...register("campaignName", { required: true })}

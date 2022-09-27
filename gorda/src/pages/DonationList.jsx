@@ -14,14 +14,16 @@ import { useEffect } from "react";
 function DonationList() {
   const [count, setCount] = useState(47398495);
   const [campaigns, setCampaigns] = useState([]);
+  const [infos, setInfos] = useState([]);
+
   const pointCount = count.toLocaleString("ko-KR");
 
   useEffect(() => {
     async function testlist() {
       if (campaigns[0] != undefined) {
         console.log("111111111111111111111", campaigns[0]);
-        const hello = await Campaign(campaigns[0]).methods.getSummary().call();
-        console.log("!!!!!!!!!!!!!!", hello);
+        const tmp = await Campaign(campaigns[0]).methods.getSummary().call();
+        setInfos(tmp);
       }
     }
 
@@ -32,9 +34,6 @@ function DonationList() {
     async function dnlist() {
       const tmp = await factory.methods.getDeployedCampaigns().call();
       setCampaigns(tmp);
-
-      const hello = Campaign(campaigns[0]).methods;
-      console.log("!!!!!!!!!!!!!!", hello);
     }
     dnlist();
   }, []);
@@ -61,7 +60,12 @@ function DonationList() {
         </div>
         <div className="test">
           <div className="page_card">
-            <DonationListCard />
+            <DonationListCard
+              imgURL={infos[10]}
+              title={infos[5]}
+              description={infos[9]}
+              target={infos[11]}
+            />
             <DonationListCard />
             <DonationListCard />
             <DonationListCard />
