@@ -9,6 +9,7 @@ import com.ssafy.gorda.dto.controllerdto.response.ReadBadgeResponseDto;
 import com.ssafy.gorda.dto.controllerdto.response.ReadDonationResponseDto;
 import com.ssafy.gorda.dto.controllerdto.response.ReadFoundationResponseDto;
 import com.ssafy.gorda.service.DonationService;
+import com.ssafy.gorda.service.FoundationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -28,13 +29,14 @@ import java.util.stream.Collectors;
 public class DonationController {
 
     private final DonationService donationService;
+    private final FoundationService foundationService;
 
     //도네이션 등록
     @PostMapping("/regist")
     public MessageResponseDto regist(@RequestBody RegistDonationRequestDto request) {
 
         Donation tempDonation = Donation.builder()
-                .foundation(request.getFoundation())
+                .foundation(foundationService.findByIdx(request.getFoundationIdx()))
                 .donationContent(request.getDonationSubject())
                 .donationContent(request.getDonationContent())
                 .donationStartDate(request.getDonationStartDate())
