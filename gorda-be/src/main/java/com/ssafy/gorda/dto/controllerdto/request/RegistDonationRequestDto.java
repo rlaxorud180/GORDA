@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 public class RegistDonationRequestDto {
 
-    private Foundation foundation;
+    private String foundationIdx;
     private String donationSubject;
     private String donationContent;
     private LocalDateTime donationStartDate;

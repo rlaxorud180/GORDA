@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class RegistMyBadgeRequestDto {
 
-    private Badge badge;
-    private User user;
+    private String badgeIdx;
+    private String userIdx;
 
 }
