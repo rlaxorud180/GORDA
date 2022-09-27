@@ -7,7 +7,9 @@ function FactoryList() {
             <div className="factory_card">
                 <div className="factoryImg"></div>
                 <div className="factoryName">{factoryName}</div>
-                <input type="text" />
+                <div className="amount">
+                    <input type="text" className="amountInput" />
+                </div>
                 <div className="card_btn">
                     <button className="selectBtn">선택하기</button>
                 </div>
