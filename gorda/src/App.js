@@ -10,6 +10,7 @@ import InstitutionDetail from "./pages/InstitutionDetail";
 import MyPage from "./pages/MyPage";
 import MyPageDonation from "./pages/MyPageDonation";
 import Vote from "./pages/Vote";
+import VoteCreation from "./pages/VoteCreation"
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/mypage/donation" element={<MyPageDonation />} />
                     <Route path="/vote" element={<Vote />} />
+                    <Route path="/votecreation" element={<VoteCreation />} />
                     <Route path="/vote/detail" element={<InstitutionDetail />} />
                     <Route path="/mypage/admin" element={<FoundationAdmin />} />
                     <Route path="/mypage/admin/new" element={<AdminForm />} />
