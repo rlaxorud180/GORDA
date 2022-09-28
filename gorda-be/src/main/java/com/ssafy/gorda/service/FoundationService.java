@@ -45,7 +45,13 @@ public class FoundationService {
 
     }
 
+    public List<Foundation> findAll(){
 
+        List<Foundation> foundationList = foundationRepository.findAll();
+
+        return foundationList;
+
+    }
 
 
 }
