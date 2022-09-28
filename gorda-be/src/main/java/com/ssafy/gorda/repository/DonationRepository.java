@@ -1,5 +1,6 @@
 package com.ssafy.gorda.repository;
 
+import com.ssafy.gorda.domain.Badge;
 import com.ssafy.gorda.domain.Donation;
 import com.ssafy.gorda.domain.Foundation;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,13 @@ public class DonationRepository {
     public Donation findByIdx (String Idx) {
 
         return em.find(Donation.class,Idx);
+    }
+
+    public List<Donation> findAll () {
+
+        List<Donation> donationList = em.createQuery("SELECT d FROM Donation d",Donation.class).getResultList();
+
+        return donationList;
     }
 
 

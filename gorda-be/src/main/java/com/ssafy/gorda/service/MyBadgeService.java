@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -35,6 +37,15 @@ public class MyBadgeService {
 
     }
 
+    //유저로 찾기
+
+    public List<MyBadge> findByUserIdx(String Idx){
+
+        List<MyBadge> myBadgeList = myBadgeRepository.findByUserIdx(Idx);
+
+        return myBadgeList;
+
+    }
 
 //업데이트
 }

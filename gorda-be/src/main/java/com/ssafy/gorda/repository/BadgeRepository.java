@@ -28,6 +28,15 @@ public class BadgeRepository {
         return em.find(Badge.class,Idx);
     }
 
+    // 전체 뱃지 찾기
+
+    public List<Badge> findAll () {
+
+        List<Badge> badgeList = em.createQuery("SELECT b FROM Badge b",Badge.class).getResultList();
+
+        return badgeList;
+    }
+
     //뱃지 삭제
 
     public String delete (Badge badge) {
