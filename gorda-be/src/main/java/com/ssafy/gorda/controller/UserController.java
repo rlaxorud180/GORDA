@@ -1,6 +1,7 @@
 package com.ssafy.gorda.controller;
 
 import com.ssafy.gorda.domain.User;
+import com.ssafy.gorda.dto.controllerdto.response.LoginUserResponseDto;
 import com.ssafy.gorda.service.UserService;
 import com.ssafy.gorda.util.SHA256;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +22,9 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public String login(String userAccount) {
-
+    public LoginUserResponseDto login(String userAccount) {
 
         User user = userService.findByAccount(userAccount);
-
-        Map map = new HashMap();
 
         if (user==null) {             //미등록 유저일 때
 
@@ -37,12 +35,10 @@ public class UserController {
 
             userService.regist (newUser);
 
-
-            return newUser.getUserNickname();
-
+            return new LoginUserResponseDto(newUser);
         }
 
-        return user.getUserNickname();
+        return new LoginUserResponseDto(user);
     }
 
 }
