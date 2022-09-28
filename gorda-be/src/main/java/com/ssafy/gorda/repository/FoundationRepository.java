@@ -40,6 +40,13 @@ public class FoundationRepository {
         return foundationList;
     }
 
+    public List<Foundation> findAll() {
+
+        List<Foundation> foundationList = em.createQuery("SELECT f FROM Foundation f",Foundation.class)
+                .getResultList();
+        return foundationList;
+    }
+
     //기관 삭제
 
     public String delete (Foundation foundation) {
