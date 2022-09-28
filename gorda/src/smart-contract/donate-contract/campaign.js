@@ -4,3 +4,4 @@ import Campaign from "./build/Campaign.json";
 export default (address) => {
   return new web3.eth.Contract(Campaign.abi, address);
 };
+//전체 배포 시 필요
