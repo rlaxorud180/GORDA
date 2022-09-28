@@ -6,6 +6,7 @@ import com.ssafy.gorda.dto.MessageResponseDto;
 import com.ssafy.gorda.dto.ResultDto;
 import com.ssafy.gorda.dto.controllerdto.request.RegistFoundationRequestDto;
 import com.ssafy.gorda.dto.controllerdto.request.RegistMyBadgeRequestDto;
+import com.ssafy.gorda.dto.controllerdto.response.ReadBadgeResponseDto;
 import com.ssafy.gorda.dto.controllerdto.response.ReadFoundationResponseDto;
 import com.ssafy.gorda.dto.controllerdto.response.ReadMyBadgeResponseDto;
 import com.ssafy.gorda.service.FoundationService;
@@ -63,6 +64,16 @@ public class FoundationController {
 
         return new ResultDto(new ReadFoundationResponseDto(tempFoundation));
 
+    }
+
+
+    @GetMapping
+    public ResultDto readAllFoundation() {
+        List<ReadFoundationResponseDto> foundationList = new ArrayList<>();
+
+        foundationList = foundationService.findAll().stream().map(foundation -> new ReadFoundationResponseDto(foundation)).collect(Collectors.toList());
+
+        return new ResultDto(foundationList);
     }
 
 }
