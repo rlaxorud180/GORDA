@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Data
 public class RegistDonationCommentRequestDto {
 
-    private User user;
+    private String userIdx;
     private String donationIdx;
     private String donationCommentContent;
 
