@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #f9f9f9;
+}
+
+.admin_container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 430px;
+    .admin_header {
+        display: flex;
+        flex-direction: column;
+        margin-top: 80px;
+        .admin_tag {
+            font-size: 22px;
+            color: #747474;
+            font-weight: 500;
+        }
+        .admin_name {
+            font-size: 44px;
+            font-weight: 500;
+            margin-bottom: 60px;
+        }
+    }
+    .btn_container {
+        display: flex;
+        justify-content: center;
+        margin-top: 75px;
+        margin-bottom: 235px;
+        .go_foundation {
+            text-align: center;
+            font-size: 28px;
+            color: #fff;
+            width: 530px;
+            height: 85px;
+            background-color: #454545;
+            padding: 24px 142px;
+            border-radius: 5px 0 0 5px;
+        }
+        .regist_btn {
+            width: 530px;
+            height: 85px;
+            padding: 24px 142px;
+            text-align: center;
+            font-size: 28px;
+            color: #fff;
+            background-color: #00aeef;
+            border-radius: 0 5px 5px 0;
+        }
+    }
+}
