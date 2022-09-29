@@ -33,7 +33,7 @@ function AdminForm() {
       "accounts",
       data.campaignName,
       data.category,
-      data.date.slice(0, 4) + data.date.slice(5, 7) + data.date.slice(8, 10),
+      data.date,
       data.description,
       data.imageUrl,
       web3.utils.toWei(data.target, "ether")
@@ -41,6 +41,8 @@ function AdminForm() {
     try {
       const accounts = await web3.eth.getAccounts();
       console.log("accounts", accounts);
+      data.date = new Date(data.date).getTime();
+
       const result = await factory.methods
         .createCampaign(
           ["0x46bc02098eb6a22cffaa8dd24f819fe5f6f58ae9"],
@@ -49,9 +51,7 @@ function AdminForm() {
           accounts[0],
           data.campaignName,
           data.category,
-          data.date.slice(0, 4) +
-            data.date.slice(5, 7) +
-            data.date.slice(8, 10),
+          data.date,
           data.description,
           data.imageUrl,
           web3.utils.toWei(data.target, "ether")
