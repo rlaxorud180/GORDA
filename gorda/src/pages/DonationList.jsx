@@ -22,9 +22,10 @@ function DonationList() {
   useEffect(() => {
     async function testlist() {
       if (campaigns[0] != undefined) {
-        console.log("111111111111111111111", campaigns[0]);
-        const tmp = await Campaign(campaigns[0]).methods.getSummary().call();
-        setInfos(tmp);
+        for (let i = 0; i < campaigns.length; i++) {
+          const tmp = await Campaign(campaigns[i]).methods.getSummary().call();
+          setInfos((infos) => [...infos, tmp]);
+        }
       }
     }
 
@@ -78,6 +79,19 @@ function DonationList() {
             <Link to="/dndetail">
             <DonationListCard />
             </Link>
+            {/* {infos.map((item, key) => {
+              return (
+                <Link to={`/${campaigns[key]}`}>
+                  <DonationListCard
+                    category={item[7]}
+                    imgURL={item[10]}
+                    title={item[5]}
+                    description={item[9]}
+                    target={item[11]}
+                  />
+                </Link>
+              );
+            })} */}
           </div>
         <div className="banner_card">
           <UnicefBanner />

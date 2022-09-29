@@ -26,7 +26,7 @@ function App() {
           <Route path="/vote/detail" element={<InstitutionDetail />} />
           <Route path="/mypage/admin" element={<FoundationAdmin />} />
           <Route path="/mypage/admin/new" element={<AdminForm />} />
-          <Route path="/detail" element={<Detail />} />
+          <Route path="/:campaignid" element={<Detail />} />
           {/* <Route path="/manage" element={<DonationManage />} /> */}
         </Routes>
       </BrowserRouter>
