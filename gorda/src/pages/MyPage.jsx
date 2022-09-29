@@ -7,13 +7,15 @@ import MypageComment from "../components/Mypage/MypageComment";
 import MypageStamp from "../components/Mypage/MypageStamp";
 
 function MyPage() {
+    const tag = "첫 기부자";
+    const name = "이몽룡";
     return (
         <>
             <NavigationBar />
             <div className="mypage_container">
                 <div className="mypage_header">
-                    <div className="header_tag">첫 기부자</div>
-                    <div className="header_name">이몽룡</div>
+                    <div className="header_tag">{tag}</div>
+                    <div className="header_name">{name}</div>
                 </div>
                 <DonationDetail />
                 <MypageComment />
