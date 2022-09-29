@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/Footer";
+import DonationDetailPage from "./pages/DonationDetailPage";
 import DonationList from "./pages/DonationList";
 import Home from "./pages/Home";
 import InstitutionDetail from "./pages/InstitutionDetail";
@@ -15,6 +16,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/dnlist" element={<DonationList />} />
+                    <Route path="/dndetail" element={<DonationDetailPage />} />
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/mypage/donation" element={<MyPageDonation />} />
                     <Route path="/vote" element={<Vote />} />
