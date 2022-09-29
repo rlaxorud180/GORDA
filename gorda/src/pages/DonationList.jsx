@@ -6,6 +6,7 @@ import NavigationBar from "../components/NavigationBar";
 import ShopBanner from "../components/Donation/ShopBanner";
 import UnicefBanner from "../components/Donation/UnicefBanner";
 import "./DonationList.scss";
+import { Link } from "react-router-dom";
 
 function DonationList() {
     const [count, setCount] = useState(47398495);
@@ -32,13 +33,18 @@ function DonationList() {
                 </div>
                 <div className="test">
                     <div className="page_card">
-                        <DonationListCard />
-                        <DonationListCard />
-                        <DonationListCard />
-                        <DonationListCard />
-                        <DonationListCard />
-                        <DonationListCard />
-                        <DonationListCard />
+                        <Link to="/dndetail">
+                            <DonationListCard />
+                        </Link>
+                        <Link to="/dndetail">
+                            <DonationListCard />
+                        </Link>
+                        <Link to="/dndetail">
+                            <DonationListCard />
+                        </Link>
+                        <Link to="/dndetail">
+                            <DonationListCard />
+                        </Link>
                     </div>
                     <div className="banner_card">
                         <UnicefBanner />

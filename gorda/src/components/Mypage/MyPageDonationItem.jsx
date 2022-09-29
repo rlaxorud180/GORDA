@@ -14,7 +14,7 @@ function MyPageDonationItem() {
                 <div className="item_eth">{daegu_eth} eth</div>
                 <div className="item_donation">{daegu_donation}</div>
             </div>
-            <hr />
+            <hr className="dashedhr" />
         </>
     );
 }
