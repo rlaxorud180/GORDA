@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import {
   getETHPrice,
   getETHPriceInUSD,
@@ -19,7 +20,10 @@ function Detail() {
   const [minContriInUSD, setMinContriInUSD] = useState();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [amountInUSD, setAmountInUSD] = useState();
+  const id = useParams();
 
+  // const tmp = await helle.methods.getSummary().call();
+  // console.log(helle, "====================", tmp);
   const { handleSubmit, register, formState, reset, getValues } = useForm({
     mode: "onChange",
   });
@@ -29,7 +33,7 @@ function Detail() {
     try {
       const accounts = await web3.eth.getAccounts();
       console.log("accounts===", accounts[0]);
-      const campaign = Campaign("0xbAf0f2FaB9EC1eCD2A932141C468B1D8fb3a7680");
+      const campaign = Campaign(id);
       console.log("campaign", campaign);
       console.log("크기", data.donation);
       await campaign.methods.contribute().send({
@@ -48,35 +52,15 @@ function Detail() {
   }
 
   useEffect(() => {
-    async function testlist() {
-      if (campaigns[0] !== undefined) {
-        for (let i = 0; i < campaigns.length; i++) {
-          const tmp = await Campaign(campaigns[i]).methods.getSummary().call();
-          console.log("tmp", tmp);
-          if (!infos.includes(tmp)) {
-            setInfos((infos) => [...infos, tmp]);
-          }
-        }
-      }
+    const helle = Campaign(id);
+    console.log("id", id, helle);
+    async function test() {
+      const testvalue = await helle.methods.getSummary().call();
+      console.log("testvalue", testvalue);
     }
-
-    testlist();
-  }, [campaigns]);
-
-  useEffect(() => {
-    async function dnlist() {
-      const tmp = await factory.methods.getDeployedCampaigns().call();
-      setCampaigns(tmp);
-      console.log(tmp[0]);
-    }
-    dnlist();
+    test();
+    console.log("---", helle, id);
   }, []);
-  //   const wallet = useWallet();
-
-  // const handlePrevent = (e) => {
-  //   e.preventDefault();
-  //   console.log(e);
-  // };
 
   return (
     <>
