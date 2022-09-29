@@ -25,16 +25,17 @@ function Detail() {
   });
 
   async function onSubmit(data) {
-    console.log(web3.utils.toWei(data.donation, "ether"));
+    console.log("hello ", web3.utils.toWei(data.donation, "ether"));
     try {
       const accounts = await web3.eth.getAccounts();
-      console.log("accounts", accounts);
-      const campaign = Campaign("0x653a365067eb7dd2Dd402a7AFBCf4f1dfDd7D4Dc");
-      const result = await campaign.methods.contribute().send({
+      console.log("accounts===", accounts[0]);
+      const campaign = Campaign("0xbAf0f2FaB9EC1eCD2A932141C468B1D8fb3a7680");
+      console.log("campaign", campaign);
+      console.log("크기", data.donation);
+      await campaign.methods.contribute().send({
         from: accounts[0],
         value: web3.utils.toWei(data.donation, "ether"),
       });
-      console.log("result", result);
       setAmountInUSD(null);
       reset("", {
         keepValues: false,
