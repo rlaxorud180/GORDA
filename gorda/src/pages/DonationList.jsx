@@ -8,7 +8,7 @@ import UnicefBanner from "../components/Donation/UnicefBanner";
 import "./DonationList.scss";
 import factory from "../smart-contract/factory";
 import Campaign from "../smart-contract/campaign";
-
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
 function DonationList() {
@@ -60,12 +60,14 @@ function DonationList() {
         </div>
         <div className="test">
           <div className="page_card">
-            <DonationListCard
-              imgURL={infos[10]}
-              title={infos[5]}
-              description={infos[9]}
-              target={infos[11]}
-            />
+            <Link to="/detail">
+              <DonationListCard
+                imgURL={infos[10]}
+                title={infos[5]}
+                description={infos[9]}
+                target={infos[11]}
+              />
+            </Link>
             <DonationListCard />
             <DonationListCard />
             <DonationListCard />

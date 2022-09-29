@@ -14,12 +14,44 @@ import Campaign from "../smart-contract/campaign";
 function Detail() {
   const [campaigns, setCampaigns] = useState([]);
   const [infos, setInfos] = useState([]);
+  const [error, setError] = useState("");
+  const [targetInUSD, setTargetInUSD] = useState();
+  const [minContriInUSD, setMinContriInUSD] = useState();
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [amountInUSD, setAmountInUSD] = useState();
+
+  const { handleSubmit, register, formState, reset, getValues } = useForm({
+    mode: "onChange",
+  });
+
+  async function onSubmit(data) {
+    console.log(web3.utils.toWei(data.donation, "ether"));
+    try {
+      const accounts = await web3.eth.getAccounts();
+      console.log("accounts", accounts);
+      const campaign = Campaign("0x5BCe2D979f6bA3B9ED0cE982aEAb46e1A7F101D5");
+      const result = await campaign.methods.contribute().send({
+        from: accounts[0],
+        value: web3.utils.toWei(data.donation, "ether"),
+      });
+      console.log("result", result);
+      setAmountInUSD(null);
+      reset("", {
+        keepValues: false,
+      });
+      setIsSubmitted(true);
+    } catch (err) {
+      setError(err.message);
+      console.log(err);
+    }
+  }
 
   useEffect(() => {
     async function testlist() {
       if (campaigns[0] !== undefined) {
         for (let i = 0; i < campaigns.length; i++) {
           const tmp = await Campaign(campaigns[i]).methods.getSummary().call();
+          console.log("tmp", tmp);
           if (!infos.includes(tmp)) {
             setInfos((infos) => [...infos, tmp]);
           }
@@ -34,6 +66,7 @@ function Detail() {
     async function dnlist() {
       const tmp = await factory.methods.getDeployedCampaigns().call();
       setCampaigns(tmp);
+      console.log(tmp[0]);
     }
     dnlist();
   }, []);
@@ -48,9 +81,27 @@ function Detail() {
     <>
       <NavigationBar />
 
-      {infos.map((item) => {
-        return <h3>기부 금액{item[0]}</h3>;
+      {infos.map((item, key) => {
+        return <h3>기부 금액{item + key}</h3>;
       })}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          className="titleinput"
+          placeholder="기부할 금액"
+          type="number"
+          step="any"
+          {...register("donation", { required: true })}
+          isDisabled={formState.isSubmitting}
+          onChange={(e) => {
+            setMinContriInUSD(Math.abs(e.target.value));
+          }}
+          min="0"
+        />
+
+        <button type="submit" className="createBtn">
+          기부하기
+        </button>
+      </form>
     </>
   );
 }
