@@ -9,7 +9,7 @@ import "./DonationList.scss";
 import { Link } from "react-router-dom";
 import factory from "../smart-contract/factory";
 import Campaign from "../smart-contract/campaign";
-
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
 function DonationList() {
