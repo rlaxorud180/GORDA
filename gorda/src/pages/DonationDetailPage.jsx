@@ -1,9 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavigationBar from "../components/NavigationBar";
 import "./DonationDetailPage.scss";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
+import {getETHPrice, getETHPriceInUSD} from "../lib/GetEtherPrice"
+import Modal from '@mui/material/Modal';
+import Web3 from "web3";
+import { async } from "q";
+
+
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '473px',
+    // height: '550px',
+    bgcolor: 'background.paper',
+    borderRadius: 5,
+    border: 'none',
+    p: '58px 30px 44px 27px',
+  };
 
 function DonationDetailPage() {
     const detail_title = "청소년에게 공연예술은 선택이 아닌 필수입니다!";
@@ -16,6 +35,10 @@ function DonationDetailPage() {
     const goaleth = 20000;
     const team = "프로젝트팀";
     const foundation_name = "킹니셰프한국위원회";
+
+    const [wallet_eth, setWallet_eth] = useState(0);
+
+    const [userInfo, setUserInfo] = useState({});
 
     const [progress, setProgress] = useState(50);
     const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -33,8 +56,160 @@ function DonationDetailPage() {
     const [openTap, setOpenTap] = useState(false);
     const handleTap = () => {
         setOpenTap((present) => !present);
+    }
+
+    const [valueLength, setValueLength] = useState(0)
+    const checkValueLength = (e) => {
+        setValueLength(e.target.value.length)
     };
-    console.log(openTap);
+
+    const comment_list_count = 0
+
+    const [cheerCount, setCheerCount] = useState(0)
+    const upCheerCount = () => {
+        setCheerCount(cheerCount + 1)
+    }
+
+    const [open, setOpen] = useState(false);
+    const handleOpen = async () => {
+        setOpen(true);
+        try {
+            const currentProvider = detectCurrentProvider();
+            if (currentProvider) {
+                if (currentProvider !== window.ethereum) {
+                    console.log("Non-Ethereum browser detected. You should consider trying MetaMask!");
+                }
+                
+                // 메타마스크 연결
+                await currentProvider.request({ method: "eth_requestAccounts" });
+                
+                const web3 = new Web3(currentProvider);
+                const userAccount = await web3.eth.getAccounts();
+                // const chainId = await web3.eth.getChainId();
+                const account = userAccount[0];
+                let ethBalance = await web3.eth.getBalance(account); // Get wallet balance
+                ethBalance = web3.utils.fromWei(ethBalance, "ether"); //Convert balance to wei
+                setWallet_eth(ethBalance);
+                // saveUserInfo(ethBalance, account, chainId);
+                if (userAccount.length === 0) {
+                    console.log("Please connect to meta mask");
+                } else {
+                    console.log(ethBalance);
+                }
+            }
+        } catch (err) {
+            console.log("There was an error fetching your accounts. Make sure your Ethereum client is configured correctly.");
+        }
+    } 
+    const handleClose = () => setOpen(false);
+    const [inputValue, setInputValue] = useState(0)
+    const resetBtn = () => {
+        setInputValue(0)
+    }
+
+    const testinput = (e) => {
+        if (e.target.value < 0) {
+            setInputValue(0)   
+            alert('음수는 입력하지 말아욧')
+        } else {
+            setInputValue(e.target.value)
+
+        }
+        console.log("달러값", getETHPriceInUSD(ethPrice, inputValue));
+        
+
+    }
+
+
+    const handlePreventDefault = (e) => {
+        console.log('ㅎㅇ')
+        e.preventDefault()
+    }
+
+    const detectCurrentProvider = () => {
+        let provider;
+        if (window.ethereum) {
+            provider = window.ethereum;
+        } else if (window.web3) {
+            // eslint-disable-next-line
+            provider = window.web3.currentProvider;
+        } else {
+            console.log("Non-Ethereum browser detected. You should consider trying MetaMask!");
+        }
+        return provider;
+    };
+
+    const alertMessage = async () => {
+        alert('정말 기부하시겠습니까?')
+        try {
+            const currentProvider = detectCurrentProvider();
+            if (currentProvider) {
+                if (currentProvider !== window.ethereum) {
+                    console.log("Non-Ethereum browser detected. You should consider trying MetaMask!");
+                }
+                
+                // 메타마스크 연결
+                await currentProvider.request({ method: "eth_requestAccounts" });
+                
+                const web3 = new Web3(currentProvider);
+                const userAccount = await web3.eth.getAccounts();
+                // const chainId = await web3.eth.getChainId();
+                const account = userAccount[0];
+                let ethBalance = await web3.eth.getBalance(account); // Get wallet balance
+                ethBalance = web3.utils.fromWei(ethBalance, "ether"); //Convert balance to wei
+                // saveUserInfo(ethBalance, account, chainId);
+                if (userAccount.length === 0) {
+                    console.log("Please connect to meta mask");
+                } else {
+                    console.log(ethBalance);
+                    // console.log(userAccount);
+                    // await signIn(
+                    //     { userAccount },
+                    //     (response) => {
+                    //         console.log("리스폰스", response);
+                    //         localStorage.setItem("NickName", response.data);
+                    //     },
+                    //     (err) => {
+                    //         console.log("에러", err);
+                    //         console.log("로그인 실패");
+                    //     }
+                    // );
+                }
+            }
+        } catch (err) {
+            console.log("There was an error fetching your accounts. Make sure your Ethereum client is configured correctly.");
+        }
+    }
+    // const saveUserInfo = (ethBalance, account, chainId) => {
+    //     console.log("이동희");
+    //     const userAccount = {
+    //         account: account,
+    //         balance: ethBalance,
+    //         connectionid: chainId,
+    //     };
+    //     window.localStorage.setItem("userAccount", JSON.stringify(userAccount)); //user persisted data
+    //     const userData = JSON.parse(localStorage.getItem("userAccount"));
+    //     setUserInfo(userData);
+    // };
+    // console.log(getETHPrice()  )
+    const [ethPrice, setEthPrice] = useState(0)
+    
+    useEffect(() => {
+        async function getEth() {
+             try {
+                const result = await getETHPrice();
+                setEthPrice(result);
+                
+                
+            } catch (error) {
+                console.log(error);
+            }
+        }
+       getEth();
+    }, []);
+
+
+// console.log("겟이더", ethPrice);
     return (
         <>
             <NavigationBar />
@@ -107,18 +282,68 @@ function DonationDetailPage() {
                     <div className="section_title">마음을 나누는 댓글</div>
                     <hr />
                     <br />
-                    <div className="my_comment">
-                        <div className="my_badge"></div>
-                        <textarea className="my_comment_box" maxlength="500" placeholder="댓글만 써도 마음이 전해집니다." />
-                    </div>
-                    <div className="comment_info">
-                        <div className="comment_count">0/500</div>
-                        <button className="registBtn" type="submit">
-                            등록
-                        </button>
+                    <form onSubmit={handlePreventDefault}>
+                        <div className="my_comment">
+                            <div className="my_badge"></div>
+                            <textarea onChange={checkValueLength} className="my_comment_box" maxLength="500" placeholder="댓글만 써도 마음이 전해집니다." />
+                        </div>
+                        <div className="comment_info">
+                            <div className="comment_count">{valueLength}/500</div>
+                            <button className="registBtn" type="submit">
+                                등록
+                            </button>
+                        </div>
+                    </form>
+                    <hr />
+                    <br />
+                    <div className="comment_list_section">
+                        <div className="comment_list_section_header">댓글 <span>{comment_list_count}</span></div>
                     </div>
                     <hr />
                     <br />
+                </div>
+                <div className="donation_menu">
+                    <div className="leftMenu">
+                        <div onClick={upCheerCount}  className="cheer">
+                            <div className="cheering">
+                                <i className='bx bxs-heart'></i>
+                                <div className="cheer_text">응원</div>
+                            </div>
+                            <div className="cheer_count">{cheerCount}</div>
+                        </div>
+                        <div className="line"></div>
+                        <div className="share">
+                            <i className='bx bxs-share-alt' ></i>
+                            공유
+                        </div>
+                    </div>
+                    <div onClick={handleOpen} className="rightMenu">
+                        <div className="rightMenu_text">기부하기</div>
+                    </div>
+                </div>
+                <div className="modal">
+                    <Modal
+                        keepMounted
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="keep-mounted-modal-title"
+                        aria-describedby="keep-mounted-modal-description"
+                    >
+                        <Box sx={style}>
+                            <form onSubmit ={handlePreventDefault}>
+                                <div className="modalTitle">기부금 결제</div>
+                                <div className="modalWallet">내 지갑 잔액: <span>{wallet_eth.toLocaleString("ko-KR")}eth</span></div>
+                                <input onChange={testinput} step="0.01" className="modalInput" value={inputValue} min="0" placeholder="값을 입력해 주세요"  type="number" />
+                                <div onClick={resetBtn} className="reinput">다시 입력</div>
+                                <div className="modalCost">
+                                    <div className="donationCost"><span>{inputValue}</span> eth</div>
+                                    {inputValue ? (<div className="dollar">~$ {getETHPriceInUSD(ethPrice, inputValue)}</div>) : ""}
+                                </div>
+                                <div className="modal_p">당신의 마음을 표현해주세요</div>
+                                <button onClick={alertMessage} type="submit" className="donBtn">기부하기</button>
+                            </form>
+                        </Box>
+                    </Modal>
                 </div>
             </div>
         </>
@@ -126,3 +351,5 @@ function DonationDetailPage() {
 }
 
 export default DonationDetailPage;
+
+
