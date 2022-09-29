@@ -3,8 +3,8 @@ pragma solidity ^0.8.0;
 contract CampaignFactory {
     address[] public deployedCampaigns;
 
-    function createCampaign(uint minimum, string memory name, string memory description, string memory image, uint target) public {
-        address newCampaign = address(new Campaign(minimum, msg.sender, name, description, image, target));
+    function createCampaign(address[] memory Destination, uint[] memory Amounts, uint minimum, address creator, string memory name, string memory category, uint date, string memory description, string memory image, uint target) public {
+        address newCampaign = address(new Campaign(Destination, Amounts, minimum, msg.sender, name, category, date, description, image, target));
         deployedCampaigns.push(newCampaign);
     }
 
@@ -25,13 +25,19 @@ contract Campaign {
   }
 
   Request[] public requests;
+  uint[] public amounts_;
+  address[] public destination_;
   address public manager;
-  uint public minimunContribution;
+  uint public minimumContribution;
   string public CampaignName;
+  uint public Deadline;
+  string public CategoryName;
   string public CampaignDescription;
   string public imageUrl;
   uint public targetToAchieve;
   address[] public contributers;
+  address payable[] public clients;
+  address[] public amounts;
   mapping(address => bool) public approvers;
   uint public approversCount;
 
@@ -41,17 +47,21 @@ contract Campaign {
       _;
   }
 
-  constructor (uint minimun, address creator, string memory name, string memory description, string memory image, uint target) public {
+  constructor (address[] memory destination, uint256[] memory amounts, uint minimum, address creator, string memory name, string memory category, uint date, string memory description, string memory image, uint target) public {
+      destination_ = destination;
+      amounts = amounts;
       manager = creator;
-      minimunContribution = minimun;
+      minimumContribution = minimum;
       CampaignName=name;
+      CategoryName=category;
+      Deadline=date;
       CampaignDescription=description;
       imageUrl=image;
       targetToAchieve=target;
   }
 
-  function contibute() public payable {
-      require(msg.value > minimunContribution );
+  function contribute() public payable {
+      require(msg.value > minimumContribution );
 
       contributers.push(msg.sender);
       approvers[msg.sender] = true;
@@ -85,14 +95,17 @@ contract Campaign {
   }
 
 
-    function getSummary() public view returns (uint, uint, uint, uint, address, string memory, string memory, string memory, uint) {
+    function getSummary() public view returns (uint, uint, uint, uint, address, string memory, uint, string memory, address[] memory,string memory, string memory, uint) {
         return(
-            minimunContribution,
+            minimumContribution,
             address(this).balance,
             requests.length,
             approversCount,
             manager,
             CampaignName,
+            Deadline,
+            CategoryName,
+            contributers,
             CampaignDescription,
             imageUrl,
             targetToAchieve

@@ -7,55 +7,84 @@ import ShopBanner from "../components/Donation/ShopBanner";
 import UnicefBanner from "../components/Donation/UnicefBanner";
 import "./DonationList.scss";
 import { Link } from "react-router-dom";
+import factory from "../smart-contract/factory";
+import Campaign from "../smart-contract/campaign";
+
+import { useEffect } from "react";
 
 function DonationList() {
-    const [count, setCount] = useState(47398495);
-    const pointCount = count.toLocaleString("ko-KR");
+  const [count, setCount] = useState(47398495);
+  const [campaigns, setCampaigns] = useState([]);
+  const pointCount = count.toLocaleString("ko-KR");
 
-    return (
-        <>
-            <NavigationBar />
-            <div className="donationlist_container">
-                <div className="page_header">
-                    <div className="header_p">
-                        <div>당신의 착한 마음을</div>
-                        <div>
-                            Gorda가 응원합니다{" "}
-                            <span>
-                                <i className="bx bxs-heart"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div className="donationCount">
-                        <i className="bx bxs-heart-circle"></i>
-                        <div className="countbox">기부 {pointCount}건</div>
-                    </div>
-                </div>
-                <div className="test">
-                    <div className="page_card">
-                        <Link to="/dndetail">
-                            <DonationListCard />
-                        </Link>
-                        <Link to="/dndetail">
-                            <DonationListCard />
-                        </Link>
-                        <Link to="/dndetail">
-                            <DonationListCard />
-                        </Link>
-                        <Link to="/dndetail">
-                            <DonationListCard />
-                        </Link>
-                    </div>
-                    <div className="banner_card">
-                        <UnicefBanner />
-                        <ShopBanner />
-                        <DonatorRanking />
-                    </div>
-                </div>
+  useEffect(() => {
+    async function testlist() {
+      if (campaigns[0] != undefined) {
+        console.log("111111111111111111111", campaigns[0]);
+        const hello = await Campaign(campaigns[0]).methods.getSummary().call();
+        console.log("!!!!!!!!!!!!!!", hello);
+      }
+    }
+
+    testlist();
+  }, [campaigns]);
+
+  useEffect(() => {
+    async function dnlist() {
+      const tmp = await factory.methods.getDeployedCampaigns().call();
+      setCampaigns(tmp);
+
+      const hello = Campaign(campaigns[0]).methods;
+      console.log("!!!!!!!!!!!!!!", hello);
+    }
+    dnlist();
+  }, []);
+
+  return (
+    <>
+      <NavigationBar />
+      {console.log("campaigns===========", campaigns)}
+      <div className="donationlist_container">
+        <div className="page_header">
+          <div className="header_p">
+            <div>당신의 착한 마음을</div>
+            <div>
+              Gorda가 응원합니다{" "}
+              <span>
+                <i className="bx bxs-heart"></i>
+              </span>
             </div>
-            {/* <Footer /> */}
-        </>
-    );
+          </div>
+          <div className="donationCount">
+            <i className="bx bxs-heart-circle"></i>
+            <div className="countbox">기부 {pointCount}건</div>
+          </div>
+        </div>
+        <div className="test">
+          <div className="page_card">
+           <Link to="/dndetail">
+             <DonationListCard />
+           </Link>
+           <Link to="/dndetail">
+             <DonationListCard />
+           </Link>
+           <Link to="/dndetail">
+             <DonationListCard />
+           </Link>
+            <Link to="/dndetail">
+            <DonationListCard />
+            </Link>
+          </div>
+        <div className="banner_card">
+          <UnicefBanner />
+          <ShopBanner />
+          <DonatorRanking />
+        </div>
+      </div>
+    </div>
+    {/* <Footer /> */}
+    </>
+  );
 }
 
 export default DonationList;
