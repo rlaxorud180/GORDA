@@ -7,9 +7,8 @@ import ShopBanner from "../components/Donation/ShopBanner";
 import UnicefBanner from "../components/Donation/UnicefBanner";
 import "./DonationList.scss";
 import { Link } from "react-router-dom";
-import factory from "../smart-contract/factory";
-import Campaign from "../smart-contract/campaign";
-import { Link } from "react-router-dom";
+import factory from "../smart-contract/donate-contract/factory";
+import Campaign from "../smart-contract/donate-contract/campaign";
 import { useEffect } from "react";
 
 function DonationList() {

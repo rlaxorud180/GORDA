@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import {
   getETHPrice,
   getETHPriceInUSD,
-} from "../smart-contract/lib/getETHPrice";
-import factory from "../smart-contract/factory";
-import web3 from "../smart-contract/web3";
+} from "../smart-contract/donate-contract/lib/getETHPrice";
+import factory from "../smart-contract/donate-contract/factory";
+import web3 from "../smart-contract/donate-contract/web3";
 import NavigationBar from "../components/NavigationBar";
 import "./AdminForm.scss";
 import FactoryList from "../components/FoundationAdmin/FactoryList";
@@ -84,25 +84,12 @@ function AdminForm() {
       address: "0x46BC02098eb6A22cffAa8dD24F819fE5F6f58aE9",
     },
   ];
-
-  // const handlePrevent = (e) => {
-  //   e.preventDefault();
-  //   console.log(e);
-  // };
-
   return (
     <>
       <NavigationBar />
       <div className="form_container">
         <div className="form_title">기관 모금 게시글 작성</div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/* <input placeholder="받는 사람들" {...register("destination1", { required: true })} isDisabled={isSubmitting} />
-                    <input type="number" placeholder="받는 사람들 얼마 주니?" {...register("amounts", { required: true })} isDisabled={isSubmitting} />
-                    <input placeholder="받는 사람들" {...register("destination2", { required: true })} isDisabled={isSubmitting} />
-                    <input type="number" placeholder="받는 사람들 얼마 주니?" {...register("amounts", { required: true })} isDisabled={isSubmitting} />
-                    <button>
-                        <h3>추가</h3>
-                    </button> */}
           <input
             className="titleinput"
             placeholder="제목"
@@ -229,57 +216,6 @@ function AdminForm() {
             </button>
           </div>
         </form>
-        {/* <form action="" onSubmit={handlePrevent}>
-          <input type="text" placeholder="데스티네이션 입력" />
-          <input className="titleinput" type="text" placeholder="어마운트" />
-          <input type="text" placeholder="이미지" />
-          <input className="titleinput" type="text" placeholder="타겟" />
-          <input className="titleinput" type="text" placeholder="어마운트" />
-          <input type="text" placeholder="이미지" />
-          <input className="titleinput" type="text" placeholder="타겟" />
-
-          <input className="titleinput" type="text" placeholder="제목 입력" />
-          <div className="datecontainer">
-            <input className="dateinput" id="currentDate" type="date" />
-            <input className="dateinput" type="date" />
-          </div> */}
-        {/* <select id="categories">
-            <option value="">카테고리 선택</option>
-            <option value="hunger">기아</option>
-            <option value="environment">환경</option>
-            <option value="poor">빈곤</option>
-            <option value="aged">노인</option>
-          </select> */}
-        {/* <div className="eth_input">
-            <input type="text" placeholder="최소 기부금 : eth" />
-            <input type="text" placeholder="목표 기부금 : eth" />
-          </div>
-          <div className="editor">에디터 쓸 예정</div>
-          <input type="text" />
-          <div className="button_container">
-            <a href="#DonationManage" type="submit" className="submit_Btn">
-              다음
-            </a>
-          </div>
-          <section id="DonationManage">
-            <div className="manage_container">
-              <div className="manage_title">관리 기관명</div>
-              <div className="selection">운반/운송/식품 업체 선택</div>
-              <hr className="hr" />
-              <div className="manage_list">
-                <FactoryList />
-                <FactoryList />
-                <FactoryList />
-                <FactoryList />
-                <FactoryList />
-                <FactoryList />
-                <FactoryList />
-                <FactoryList />
-                <FactoryList />
-              </div>
-            </div>
-          </section> */}
-        {/* </form> */}
       </div>
     </>
   );
