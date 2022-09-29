@@ -4,13 +4,13 @@ import { useParams } from "react-router-dom";
 import {
   getETHPrice,
   getETHPriceInUSD,
-} from "../smart-contract/lib/getETHPrice";
-import web3 from "../smart-contract/web3";
+} from "../smart-contract/donate-contract/lib/getETHPrice";
+import web3 from "../smart-contract/donate-contract/web3";
 import NavigationBar from "../components/NavigationBar";
 import "./AdminForm.scss";
 import FactoryList from "../components/FoundationAdmin/FactoryList";
-import factory from "../smart-contract/factory";
-import Campaign from "../smart-contract/campaign";
+import factory from "../smart-contract/donate-contract/factory";
+import Campaign from "../smart-contract/donate-contract/campaign";
 
 function Detail() {
   const [campaigns, setCampaigns] = useState([]);
