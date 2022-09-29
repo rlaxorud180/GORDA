@@ -61,7 +61,7 @@ contract Campaign {
   }
 
   function contribute() public payable {
-      require(msg.value > minimumContribution );
+      require(msg.value >= minimumContribution);
       require(block.timestamp < Deadline);
 
       contributers.push(msg.sender);
@@ -115,7 +115,8 @@ contract Campaign {
             contributers,
             CampaignDescription,
             imageUrl,
-            targetToAchieve
+            targetToAchieve,
+            block.timestamp
           );
     }
 

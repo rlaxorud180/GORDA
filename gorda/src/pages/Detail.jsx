@@ -29,7 +29,7 @@ function Detail() {
     try {
       const accounts = await web3.eth.getAccounts();
       console.log("accounts", accounts);
-      const campaign = Campaign("0x5BCe2D979f6bA3B9ED0cE982aEAb46e1A7F101D5");
+      const campaign = Campaign("0x653a365067eb7dd2Dd402a7AFBCf4f1dfDd7D4Dc");
       const result = await campaign.methods.contribute().send({
         from: accounts[0],
         value: web3.utils.toWei(data.donation, "ether"),
@@ -82,7 +82,12 @@ function Detail() {
       <NavigationBar />
 
       {infos.map((item, key) => {
-        return <h3>기부 금액{item + key}</h3>;
+        return (
+          <div>
+            <h3>기부 금액{item[0] + key}</h3>
+            <h3>d\{item[5]}</h3>
+          </div>
+        );
       })}
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
