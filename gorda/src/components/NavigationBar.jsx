@@ -5,7 +5,7 @@ import "./NavigationBar.scss";
 function NavigationBar() {
     const [isConnected, setIsConnected] = useState(false);
     const [userInfo, setUserInfo] = useState({});
-
+    const [admin, setAdmin] = useState(true);
     useEffect(() => {
         function checkConnectedWallet() {
             const userData = JSON.parse(localStorage.getItem("userAccount"));
@@ -91,6 +91,7 @@ function NavigationBar() {
                     <div className="nav-list">
                         <ul>
                             <li>
+                                {admin ? <Link to="/mypage/admin">기관 관리</Link> : <Link to="/mypage">마이페이지</Link>}
                                 <Link to="/dnlist">기부</Link>
                                 <Link to="/vote">투표</Link>
                                 {isConnected ? (
