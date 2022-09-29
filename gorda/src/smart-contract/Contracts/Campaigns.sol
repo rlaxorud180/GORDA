@@ -61,21 +61,18 @@ contract Campaign {
   }
 
   function contribute() public payable {
-      require(msg.value >= minimumContribution);
-      require(block.timestamp < Deadline);
+      require(msg.value > minimumContribution );
 
       contributers.push(msg.sender);
       approvers[msg.sender] = true;
       approversCount++;
-
   }
 
-  function createRequest(string memory description) public restricted {
-      require(block.timestamp >= Deadline);
-      require(address(this).balance > targetToAchieve);
-
+  function createRequest(string memory description, uint value, address recipient) public restricted {
       Request storage newRequest = requests.push();
       newRequest.description = description;
+      newRequest.value = value;
+      newRequest.recipient = recipient;
       newRequest.complete = false;
       newRequest.approvalCount = 0;
   }
@@ -91,18 +88,14 @@ contract Campaign {
   function finalizeRequest(uint index) public restricted{
       require(requests[index].approvalCount > (approversCount / 2));
       require(!requests[index].complete);
-      
 
-          for(uint i=1; i <= destination_.length; i++) {
-            address _to = destination_[i];
-            uint _amount = amounts_[i];
-            payable(_to).transfer(_amount);
-        }
+      payable(requests[index].recipient).transfer(requests[index].value);
       requests[index].complete = true;
+
   }
 
 
-     function getSummary() public view returns (uint, uint, uint, uint, address, string memory, uint, string memory, address[] memory,string memory, string memory, uint) {
+    function getSummary() public view returns (uint, uint, uint, uint, address, string memory, uint, string memory, address[] memory,string memory, string memory, uint) {
         return(
             minimumContribution,
             address(this).balance,
@@ -115,23 +108,11 @@ contract Campaign {
             contributers,
             CampaignDescription,
             imageUrl,
-            targetToAchieve,
-            block.timestamp
+            targetToAchieve
           );
     }
 
     function getRequestsCount() public view returns (uint){
         return requests.length;
-    }
-
-    function refundAll() public payable {
-      require(block.timestamp >= Deadline);
-      require(address(this).balance < targetToAchieve);
-
-        for(uint i=1; i <= contributers.length; i++) {
-            address _to = contributers[i];
-            uint _amount = amounts_[i];
-            payable(_to).transfer(_amount);
-        }
     }
 }

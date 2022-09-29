@@ -8,7 +8,7 @@ fs.removeSync(buildPath);
 const contractPath = path.resolve(__dirname, "contracts");
 const fileNames = fs.readdirSync(contractPath);
 // const fileName = "Campaigns.sol";
-console.log("filenames", fileNames);
+
 const compilerInput = {
   language: "Solidity",
   sources: fileNames.reduce((input, fileName) => {
@@ -29,9 +29,8 @@ const compilerInput = {
 const compiled = JSON.parse(solc.compile(JSON.stringify(compilerInput)));
 
 fs.ensureDirSync(buildPath);
-console.log("[==", fileNames);
+
 fileNames.map((fileName) => {
-  console.log("파일내임", fileName);
   const contracts = Object.keys(compiled.contracts[fileName]);
   contracts.map((contract) => {
     fs.outputJsonSync(
