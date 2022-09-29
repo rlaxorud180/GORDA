@@ -45,8 +45,11 @@ function AdminForm() {
 
       const result = await factory.methods
         .createCampaign(
-          ["0x46bc02098eb6a22cffaa8dd24f819fe5f6f58ae9"],
-          [1],
+          [
+            "0xA3A14BCa06E4Ca15522C56c09e654DB8422A922e",
+            "0x46BC02098eb6A22cffAa8dD24F819fE5F6f58aE9",
+          ],
+          [1, 3],
           web3.utils.toWei(data.minimumContribution, "ether"),
           accounts[0],
           data.campaignName,
