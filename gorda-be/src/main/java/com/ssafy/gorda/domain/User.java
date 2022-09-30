@@ -30,17 +30,19 @@ public class User {
     @Column(name = "user_account")
     private String userAccount;
 
-    @Column(name = "user_email")
-    private String userEmail;
 
     @Column(name = "user_nickname")
     private String userNickname;
 
+    @Column(name = "user_amount")
+    private String userAmount;
+
     @Column(name = "user_score")
     private String userScore;
 
-    @Column(name = "user_address")
-    private String userAddress;
+    @Column(name = "user_role")
+    private String userRole;
+
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
@@ -57,10 +59,10 @@ public class User {
 
     @Builder
     public User (String userAccount,
-                 String userEmail,
                  String userNickname,
                  String userScore,
-                 String userAddress
+                 String userAmount,
+                 String userRole
     )
     {
 
@@ -73,10 +75,10 @@ public class User {
         }
 
         this.userAccount = userAccount;
-        this.userEmail = userEmail;
         this.userNickname = userNickname;
         this.userScore = userScore;
-        this.userAddress = userAddress;
+        this.userAmount = userAmount;
+        this.userRole = userRole;
 
     }
 
