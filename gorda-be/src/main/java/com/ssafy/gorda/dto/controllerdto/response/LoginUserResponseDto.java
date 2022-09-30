@@ -10,8 +10,8 @@ public class LoginUserResponseDto {
 
     private String userIdx;
     private String userNickname;
-    private String userAmount;
-    private String userScore;
+    private int userAmount;
+    private int userScore;
     private String userRole;
 
     public LoginUserResponseDto(User user) {
