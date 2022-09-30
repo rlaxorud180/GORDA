@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
 import NavigationBar from "../components/NavigationBar";
 import "./DonationDetailPage.scss";
 import Box from "@mui/material/Box";
@@ -12,7 +11,6 @@ import LinearProgress, {
 import { getETHPrice, getETHPriceInUSD } from "../lib/GetEtherPrice";
 import Modal from "@mui/material/Modal";
 import Campaign from "../smart-contract/donate-contract/campaign";
-
 import Web3 from "web3";
 import web3 from "../smart-contract/donate-contract/web3";
 
@@ -30,14 +28,6 @@ const style = {
 };
 
 function DonationDetailPage() {
-  const detail_title = "청소년에게 공연예술은 선택이 아닌 필수입니다!";
-  const post_foundation = "청소년을 위한 공연예술 사회적협동조합";
-
-  const p_title =
-    "청소년에게 경쟁사회에서 살아남는 기술만 알려주면 되는 걸까요?";
-  const image_description = "사진 설명";
-  const eth = 10000;
-  const goaleth = 20000;
   const team = "프로젝트팀";
   const foundation_name = "킹니셰프한국위원회";
 
@@ -59,9 +49,6 @@ function DonationDetailPage() {
   });
 
   const [wallet_eth, setWallet_eth] = useState(0);
-
-  const [userInfo, setUserInfo] = useState({});
-
   const [progress, setProgress] = useState(0);
   const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
@@ -132,16 +119,6 @@ function DonationDetailPage() {
   const [inputValue, setInputValue] = useState(0);
   const resetBtn = () => {
     setInputValue(0);
-  };
-
-  const testinput = (e) => {
-    if (e.target.value < 0) {
-      setInputValue(0);
-      alert("음수는 입력하지 말아욧");
-    } else {
-      setInputValue(e.target.value);
-    }
-    console.log("달러값", getETHPriceInUSD(ethPrice, inputValue));
   };
 
   const detectCurrentProvider = () => {
