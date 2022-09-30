@@ -3,9 +3,11 @@ pragma solidity ^0.8.0;
 contract CampaignFactory {
     address[] public deployedCampaigns;
 
-    function createCampaign(address[] memory Destination, uint[] memory Amounts, uint minimum, address creator, string memory name, string memory category, uint date, string memory description, string memory image, uint target) public {
+    function createCampaign(address[] memory Destination, uint[] memory Amounts, uint minimum, address creator, string memory name, string memory category, uint date, string memory description, string memory image, uint target) public returns(address) {
         address newCampaign = address(new Campaign(Destination, Amounts, minimum, msg.sender, name, category, date, description, image, target));
         deployedCampaigns.push(newCampaign);
+
+        return newCampaign;
     }
     
     function finishCampaign(address[] memory Destination, uint[] memory Amounts, uint minimum, address creator, string memory name, string memory category, uint date, string memory description, string memory image, uint target) public {

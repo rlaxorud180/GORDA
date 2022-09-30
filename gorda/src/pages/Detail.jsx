@@ -13,7 +13,6 @@ import factory from "../smart-contract/donate-contract/factory";
 import Campaign from "../smart-contract/donate-contract/campaign";
 
 function Detail() {
-  const [campaigns, setCampaigns] = useState([]);
   const [infos, setInfos] = useState([]);
   const [error, setError] = useState("");
   const [targetInUSD, setTargetInUSD] = useState();
@@ -21,9 +20,9 @@ function Detail() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [amountInUSD, setAmountInUSD] = useState();
   const id = useParams();
+  const campaignItem = Campaign(id);
+  campaignItem.options.address = campaignItem.options.campaignid;
 
-  // const tmp = await helle.methods.getSummary().call();
-  // console.log(helle, "====================", tmp);
   const { handleSubmit, register, formState, reset, getValues } = useForm({
     mode: "onChange",
   });
@@ -32,14 +31,11 @@ function Detail() {
     console.log("hello ", web3.utils.toWei(data.donation, "ether"));
     try {
       const accounts = await web3.eth.getAccounts();
-      console.log("accounts===", accounts[0]);
-      const campaign = Campaign(id);
-      console.log("campaign", campaign);
-      console.log("크기", data.donation);
-      await campaign.methods.contribute().send({
+      const result = await campaignItem.methods.contribute().send({
         from: accounts[0],
         value: web3.utils.toWei(data.donation, "ether"),
       });
+      console.log("result", result);
       setAmountInUSD(null);
       reset("", {
         keepValues: false,
@@ -50,30 +46,25 @@ function Detail() {
       console.log(err);
     }
   }
-
+  async function campaignInfo() {
+    const summary = await campaignItem.methods.getSummary().call();
+    console.log("---", summary);
+    setInfos(summary);
+  }
   useEffect(() => {
-    const helle = Campaign(id);
-    console.log("id", id, helle);
-    async function test() {
-      const testvalue = await helle.methods.getSummary().call();
-      console.log("testvalue", testvalue);
-    }
-    test();
-    console.log("---", helle, id);
+    campaignInfo();
   }, []);
 
   return (
     <>
       <NavigationBar />
 
-      {infos.map((item, key) => {
-        return (
-          <div>
-            <h3>기부 금액{item[0] + key}</h3>
-            <h3>d\{item[5]}</h3>
-          </div>
-        );
-      })}
+      <div>
+        <h1>helasdfjslkd</h1>
+        <h3>기부 금액{infos[1]}</h3>
+        <h3>d\{infos[5]}</h3>
+      </div>
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           className="titleinput"

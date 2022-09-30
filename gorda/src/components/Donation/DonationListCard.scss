@@ -29,9 +29,13 @@
             margin-top: 15px;
             color: #747474;
             font-size: 14px;
+            height: 100px;
+            width: 400px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
         .fund {
-            margin-top: 50px;
             color: #fff;
             width: 150px;
             background-color: #3f3f3f;

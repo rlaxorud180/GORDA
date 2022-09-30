@@ -50,14 +50,14 @@ function AdminForm() {
             "0x46BC02098eb6A22cffAa8dD24F819fE5F6f58aE9",
           ],
           [1, 3],
-          data.minimumContribution,
+          web3.utils.toWei(data.minimumContribution, "ether"),
           accounts[0],
           data.campaignName,
           data.category,
           data.date,
           data.description,
           data.imageUrl,
-          data.target
+          web3.utils.toWei(data.target, "ether")
         )
         .send({
           from: accounts[0],
