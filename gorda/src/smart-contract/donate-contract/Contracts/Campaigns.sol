@@ -7,7 +7,18 @@ contract CampaignFactory {
         address newCampaign = address(new Campaign(Destination, Amounts, minimum, msg.sender, name, category, date, description, image, target));
         deployedCampaigns.push(newCampaign);
     }
-
+    
+    function finishCampaign(address[] memory Destination, uint[] memory Amounts, uint minimum, address creator, string memory name, string memory category, uint date, string memory description, string memory image, uint target) public {
+        address doneCampaign = address(new Campaign(Destination, Amounts, minimum, msg.sender, name, category, date, description, image, target));
+        require(block.timestamp > date);
+        
+           for (uint i = 0; i < deployedCampaigns.length; i++){
+            if (deployedCampaigns[i] == doneCampaign) {
+                delete deployedCampaigns[i];
+            }
+        }
+        deployedCampaigns.push(doneCampaign);
+    }
     function getDeployedCampaigns() public view returns (address[] memory) {
         return deployedCampaigns;
     }

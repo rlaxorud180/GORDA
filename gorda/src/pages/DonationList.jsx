@@ -61,24 +61,16 @@ function DonationList() {
         </div>
         <div className="test">
           <div className="page_card">
-           <Link to="/dndetail">
-             <DonationListCard
-              imgURL={infos[10]}
-              title={infos[5]}
-              description={infos[9]}
-              target={infos[11]}
-            />
-           </Link>
-           <Link to="/dndetail">
-             <DonationListCard />
-           </Link>
-           <Link to="/dndetail">
-             <DonationListCard />
-           </Link>
             <Link to="/dndetail">
-            <DonationListCard />
+              <DonationListCard
+                imgURL={infos[10]}
+                title={infos[5]}
+                description={infos[9]}
+                target={infos[11]}
+              />
             </Link>
-            {/* {infos.map((item, key) => {
+
+            {infos.map((item, key) => {
               return (
                 <Link to={`/${campaigns[key]}`}>
                   <DonationListCard
@@ -90,16 +82,16 @@ function DonationList() {
                   />
                 </Link>
               );
-            })} */}
+            })}
           </div>
-        <div className="banner_card">
-          <UnicefBanner />
-          <ShopBanner />
-          <DonatorRanking />
+          <div className="banner_card">
+            <UnicefBanner />
+            <ShopBanner />
+            <DonatorRanking />
+          </div>
         </div>
       </div>
-    </div>
-    {/* <Footer /> */}
+      {/* <Footer /> */}
     </>
   );
 }
