@@ -35,10 +35,10 @@ public class User {
     private String userNickname;
 
     @Column(name = "user_amount")
-    private String userAmount;
+    private int userAmount;
 
     @Column(name = "user_score")
-    private String userScore;
+    private int userScore;
 
     @Column(name = "user_role")
     private String userRole;
@@ -60,8 +60,8 @@ public class User {
     @Builder
     public User (String userAccount,
                  String userNickname,
-                 String userScore,
-                 String userAmount,
+                 int userScore,
+                 int userAmount,
                  String userRole
     )
     {
