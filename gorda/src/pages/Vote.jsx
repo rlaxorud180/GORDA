@@ -13,8 +13,8 @@ function Vote() {
   let datemonth = new Date().getMonth() + 1;
 
   const [open, setOpen] = useState(false);
-  const [voteList, setVoteList] = useState([]);
-  const [thisMonthVote, setThisMonthVote] = useState([]);
+  const [voteList, setVoteList] = useState([0]);
+  const [thisMonthVote, setThisMonthVote] = useState([0]);
 
   // 이달의 기관 (전월 기록 희망 시 -1 뒤에 추가 변수 빼기 필요)
   const voteItem = VoteItem(voteList[voteList.length - 1]);
