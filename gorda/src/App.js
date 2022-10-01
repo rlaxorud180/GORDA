@@ -10,9 +10,12 @@ import Home from "./pages/Home";
 import InstitutionDetail from "./pages/InstitutionDetail";
 import MyPage from "./pages/MyPage";
 import MyPageDonation from "./pages/MyPageDonation";
+import MyPageDonationRequest from "./pages/MyPageDonationRequest";
+
 import Detail from "./pages/Detail";
 import Vote from "./pages/Vote";
 import VoteCreation from "./pages/VoteCreation";
+import ApiTest from "./pages/ApiTest";
 
 function App() {
   return (
@@ -23,6 +26,7 @@ function App() {
           <Route path="/dnlist" element={<DonationList />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/mypage/donation" element={<MyPageDonation />} />
+          <Route path="/mypage/request" element={<MyPageDonationRequest />} />
           <Route path="/vote" element={<Vote />} />
           <Route path="/vote/detail" element={<InstitutionDetail />} />
           <Route path="/votecreation" element={<VoteCreation />} />
@@ -30,6 +34,7 @@ function App() {
           <Route path="/mypage/admin/new" element={<AdminForm />} />
           <Route path="/:campaignid" element={<Detail />} />
           <Route path="/detail/:campaignid" element={<DonationDetailPage />} />
+          <Route path="/apitest" element={<ApiTest />} />
           {/* <Route path="/manage" element={<DonationManage />} /> */}
         </Routes>
       </BrowserRouter>
