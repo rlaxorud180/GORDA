@@ -4,8 +4,8 @@ pragma solidity >=0.7.0 <0.9.0;
 contract VoteFactory {
     address[] public deployedVotes;
 
-    function createVote(address[] memory _account, string[] memory _name, uint256 [] memory _idx) public {
-        address newVote = address(new Vote(_account, _name, _idx));
+    function createVote(address[] memory _account, string[] memory _name, uint256 [] memory _idx, uint256 _date) public {
+        address newVote = address(new Vote(_account, _name, _idx, _date));
         deployedVotes.push(newVote);
     }
 
@@ -34,8 +34,9 @@ contract Vote {
     address owner;
     uint256 private voteEndDate;
 
-    constructor(address[] memory _account, string[] memory _name, uint256 [] memory _idx) {
-        voteEndDate = block.timestamp + 1 minutes;
+    constructor(address[] memory _account, string[] memory _name, uint256 [] memory _idx, uint256 _date) {
+        
+        voteEndDate = block.timestamp + _date;
         for(uint256 i = 0; i<_account.length; i++){
             candidates.push(
                 Candidate(
@@ -84,4 +85,7 @@ contract Vote {
         if(voter[msg.sender]) return true;
         else return false;
     }
+
+
+    
 }
