@@ -13,6 +13,8 @@ import axios from "axios";
 
 function VoteCreation() {
   const [voteData, setVotedata] = useState();
+  const [voteday1, setvoteday1] = useState();
+  const [voteday2, setvoteday2] = useState();
   const voteAccount = [];
   const voteName = [];
   const voteIdx = [];
@@ -45,22 +47,25 @@ function VoteCreation() {
     mode: "onChange",
   });
 
-  const handleOnClick = async () => {
-    console.log("나는 빡빡이다.");
+  const handleOnClick = async (e) => {
+    const time = (new Date(voteday2) - new Date(voteday1)) / 1000;
+    console.log(time);
+    e.preventDefault();
     for (let i = 0; i < voteData.length; i++) {
       voteAccount.push(voteData[i].foundationAccount);
       voteIdx.push(i);
       voteName.push(voteData[i].foundationName);
     }
-    console.log(voteAccount, voteIdx, voteName);
+    console.log([voteAccount, voteIdx, voteName]);
 
     try {
       const accounts = await web3.eth.getAccounts();
-      const result = await factory.methods.createVote(voteAccount, voteName, voteIdx).send({
-        from: accounts[0],
-      });
-      console.log('result', result);
-      
+      const result = await factory.methods
+        .createVote(voteAccount, voteName, voteIdx)
+        .send({
+          from: accounts[0],
+        });
+      console.log("result", result);
     } catch (err) {
       setError(err.message);
       console.log(err);
@@ -70,8 +75,12 @@ function VoteCreation() {
   return (
     <>
       <NavigationBar />
-      {console.log("하이하이")}
-      <button onClick={handleOnClick}>하이하이</button>
+
+      <form>
+        <input type="string" onChange={(e) => setvoteday1(e.target.value)} />
+        <input type="string" onChange={(e) => setvoteday2(e.target.value)} />
+        <input type="submit" onClick={handleOnClick} />
+      </form>
       <p>1</p>
     </>
   );
