@@ -72,7 +72,7 @@ function DonationList() {
 
             {infos.map((item, key) => {
               return (
-                <Link to={`/${campaigns[key]}`}>
+                <Link to={`/detail/${campaigns[key]}`}>
                   <DonationListCard
                     category={item[7]}
                     imgURL={item[10]}
