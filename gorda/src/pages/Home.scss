@@ -1,5 +1,5 @@
 #home {
-    background-image: url(/images/home_bg.png);
+    background-image: url(/images/test.jpg);
     background-size: cover;
     background-position: top center;
     position: relative;
@@ -12,7 +12,7 @@
         height: 100%;
         width: 100%;
         background-color: #000;
-        opacity: 30%;
+        opacity: 10%;
         z-index: -1;
     }
     .home_container {
@@ -54,7 +54,7 @@
             align-items: center;
             justify-content: center;
             margin-top: 100px;
-            position: absolute;
+            // position: absolute;
             top: 70%;
             cursor: pointer;
             text-decoration: none;
@@ -75,20 +75,21 @@
         height: 100%;
         width: 100%;
         background-color: #000000;
-        opacity: 20%;
+        opacity: 10%;
         z-index: -1;
     }
     .donation_container {
         min-height: 100vh;
         width: 100%;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         max-width: 1920px;
         margin: 0 auto;
         padding: 0 320px;
         .next_btn_2 {
-            background-color: transparent;
+            // background-color: transparent;
             border-radius: 50px;
             width: 4rem;
             height: 4rem;
@@ -99,8 +100,6 @@
             align-items: center;
             justify-content: center;
             margin-top: 100px;
-            position: absolute;
-            top: 70%;
             cursor: pointer;
             text-decoration: none;
         }
@@ -122,13 +121,12 @@
                 border: none;
                 cursor: pointer;
             }
-           
         }
     }
 }
 
 #poll {
-    background-image: url(/images/poll_bg.png);
+    background-image: url(/images/poll_bg_test.jpg);
     background-size: cover;
     background-position: top center;
     position: relative;
@@ -140,41 +138,45 @@
         top: 0;
         height: 100%;
         width: 100%;
-        background-color: #000000;
-        opacity: 20%;
+        background-color: #000;
+        opacity: 10%;
         z-index: -1;
     }
-   
+
     .poll_container {
         min-height: 100vh;
         width: 100%;
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
         justify-content: center;
         max-width: 1920px;
         margin: 0 auto;
         padding: 0 320px;
-        .next_btn_3 {
-            background-color: transparent;
-            border-radius: 50px;
-            width: 4rem;
-            height: 4rem;
-            border: 1px solid #fff;
-            color: #fff;
-            font-size: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 100px;
-            position: absolute;
-            top: 70%;
-            left: 48%;
-            cursor: pointer;
-            text-decoration: none;
+        .test {
+            // text-align: center;
+            margin: 0 auto;
+            .next_btn_3 {
+                background-color: transparent;
+                border-radius: 50px;
+                width: 4rem;
+                height: 4rem;
+                border: 1px solid #fff;
+                color: #fff;
+                font-size: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 100px;
+
+                cursor: pointer;
+                text-decoration: none;
+            }
         }
-        
+
         .poll_paragraph {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
             h1 {
                 color: #fff;
                 font-size: 44px;
@@ -196,7 +198,6 @@
                 border-radius: 5px;
                 cursor: pointer;
             }
-            
         }
     }
 }
@@ -251,9 +252,7 @@
             align-items: center;
             justify-content: center;
             margin-top: 100px;
-            position: absolute;
-            top: 70%;
-            left: 48%;
+
             cursor: pointer;
         }
         .market_paragraph {
@@ -275,4 +274,3 @@
         }
     }
 }
-

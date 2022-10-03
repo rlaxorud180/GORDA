@@ -174,15 +174,17 @@ function Home() {
             {/* Poll Section */}
             <section id="poll">
                 <div className="poll_container">
-                    <a href="#market" className="next_btn_3">
-                        <i className="bx bx-down-arrow-alt"></i>
-                    </a>
                     <div className="poll_paragraph">
                         <h1>새겨지는 가을 묻힌 무엇인지</h1>
                         <p>얼마나 이상은 이상이 대한 듣기만 동산에는 속잎나고, 것이다.</p>
                         <p> 착목한는 천고에 이상의 사막이다. 두기 얼마나 그러므로 보이는 속잎나고, 되는 물방아 보라</p>
                         <a href="/vote">
                             <button className="go_btn">투표 바로가기</button>
+                        </a>
+                    </div>
+                    <div className="test">
+                        <a href="#market" className="next_btn_3">
+                            <i className="bx bx-down-arrow-alt"></i>
                         </a>
                     </div>
                 </div>
