@@ -6,10 +6,12 @@ import DonationDetail from "../components/Mypage/DonationDetail";
 import MypageComment from "../components/Mypage/MypageComment";
 import MypageStamp from "../components/Mypage/MypageStamp";
 import Approval from "../components/Mypage/Approval";
+import { useEffect, useState } from "react";
+import { getUserInfo } from "../api/Users";
 
 function MyPage() {
   const tag = "첫 기부자";
-  const name = "이몽룡";
+  const name = localStorage.getItem("NickName");
   return (
     <>
       <NavigationBar />
