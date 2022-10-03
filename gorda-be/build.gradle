@@ -57,3 +57,4 @@ tasks.named('test') {
 		duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
 	}
+
