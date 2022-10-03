@@ -35,6 +35,8 @@ public class FoundationController {
          Foundation tempFoundation = Foundation.builder()
                  .foundationAccount(request.getFoundationAccount())
                  .foundationName(request.getFoundationName())
+                 .foundationContent(request.getFoundationContent())
+                 .foundationLogo(request.getFoundationLogo())
                  .foundationAddress(request.getFoundationAddress())
                 .build();
 
