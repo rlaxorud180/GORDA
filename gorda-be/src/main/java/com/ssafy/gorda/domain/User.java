@@ -30,7 +30,6 @@ public class User {
     @Column(name = "user_account")
     private String userAccount;
 
-
     @Column(name = "user_nickname")
     private String userNickname;
 
