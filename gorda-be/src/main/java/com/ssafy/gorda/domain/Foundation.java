@@ -32,6 +32,12 @@ public class Foundation {
     @Column(name = "foundation_name")
     private String foundationName;
 
+    @Column(name = "foundation_content")
+    private String foundationContent;
+
+    @Column(name = "foundation_logo")
+    private String foundationLogo;
+
     @Column(name = "foundation_address")
     private String foundationAddress;
 
@@ -44,6 +50,8 @@ public class Foundation {
     @Builder
     public Foundation (String foundationAccount,
                  String foundationName,
+                 String foundationContent,
+                 String foundationLogo,
                  String foundationAddress
     )
     {
@@ -58,8 +66,9 @@ public class Foundation {
 
         this.foundationAccount = foundationAccount;
         this.foundationName = foundationName;
+        this.foundationContent = foundationContent;
+        this.foundationLogo = foundationLogo;
         this.foundationAddress = foundationAddress;
-
     }
 
 }
