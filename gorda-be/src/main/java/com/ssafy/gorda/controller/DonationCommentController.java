@@ -56,7 +56,7 @@ public class DonationCommentController {
 
     //나의 모든 댓글 가져오기 기능
 
-    @GetMapping("/userIdx")
+    @GetMapping("/{userIdx}")
     public ResultDto readDonationCommentByUser (@PathVariable ("userIdx") String userIdx) {
 
         List<ReadDonationCommentResponseDto> donationCommentList = new ArrayList<>();

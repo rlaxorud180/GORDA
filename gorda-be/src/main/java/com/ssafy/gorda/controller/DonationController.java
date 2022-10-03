@@ -37,8 +37,9 @@ public class DonationController {
 
         Donation tempDonation = Donation.builder()
                 .foundation(foundationService.findByIdx(request.getFoundationIdx()))
-                .donationContent(request.getDonationSubject())
+                .donationSubject(request.getDonationSubject())
                 .donationContent(request.getDonationContent())
+                .donationLike(request.getDonationLike())
                 .donationStartDate(request.getDonationStartDate())
                 .donationEndDate(request.getDonationEndDate())
                 .build();
