@@ -12,13 +12,22 @@ function DonationListCard(props) {
       <div className="listcard">
         <div className="cardImg">
           {/* <img src={props.imgURL} alt="cardImg" /> */}
-          <div className="img"></div>
+          <div
+            className="img"
+            style={{
+              width: "290px",
+              height: "300px",
+              borderRadius: "20px 0px 0px 20px",
+              backgroundImage: `url(${props.imgURL})`,
+              backgroundSize: "cover",
+            }}
+          ></div>
         </div>
         <div className="cardP">
           <div className="hashtag"># {props.category}</div>
           <div className="title">{props.title}</div>
           <div className="paragraph">{props.description}</div>
-          <div className="fund">{props.target}원 모금중</div>
+          <div className="fund">{props.target}ETH 모금 중</div>
         </div>
       </div>
     </>

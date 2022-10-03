@@ -1,7 +1,7 @@
 import MyPageDonationItem from "./MyPageDonationItem";
 import "./MyPageDonationList.scss";
 
-function MyPageDonationList() {
+function MyPageDonationRequestList() {
   let date = new Date();
   let year = date.getFullYear();
   let month = date.getMonth() + 1;
@@ -32,4 +32,4 @@ function MyPageDonationList() {
   );
 }
 
-export default MyPageDonationList;
+export default MyPageDonationRequestList;
