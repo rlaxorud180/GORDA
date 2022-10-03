@@ -12,6 +12,8 @@ public class ReadFoundationResponseDto {
     private String foundationIdx;
     private String foundationAccount;
     private String foundationName;
+    private String foundationContent;
+    private String foundationLogo;
     private String foundationAddress;
 
     public ReadFoundationResponseDto(Foundation foundation) {
@@ -19,6 +21,8 @@ public class ReadFoundationResponseDto {
         this.foundationIdx = foundation.getFoundationIdx();
         this.foundationAccount = foundation.getFoundationAccount();
         this.foundationName = foundation.getFoundationName();
+        this.foundationContent = foundation.getFoundationContent();
+        this.foundationLogo = foundation.getFoundationLogo();
         this.foundationAddress = foundation.getFoundationAddress();
 
     }

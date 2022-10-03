@@ -48,10 +48,10 @@ public class UserController {
         return new LoginUserResponseDto(user);
     }
 
-    @GetMapping("{userAccount}")
-    public ResultDto readUserByAccount(@PathVariable ("userAccount") String userAccount) {
+    @GetMapping("{userIdx}")
+    public ResultDto readUserByAccount(@PathVariable ("userIdx") String userIdx) {
 
-        User user = userService.findByAccount(userAccount);
+        User user = userService.findByIdx(userIdx);
 
         return new ResultDto(user);
     }

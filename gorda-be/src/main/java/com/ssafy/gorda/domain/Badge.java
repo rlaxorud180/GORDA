@@ -29,6 +29,9 @@ public class Badge {
     @Column(name = "badge_title")
     private String badgeTitle;
 
+    @Column(name = "badge_logo")
+    private String badgeLogo;
+
     @Column(name = "badge_content")
     private String badgeContent;
 
@@ -38,6 +41,7 @@ public class Badge {
 
     @Builder
     public Badge (String badgeTitle,
+                  String badgeLogo,
                   String badgeContent
     )
     {
@@ -51,6 +55,7 @@ public class Badge {
         }
 
         this.badgeTitle = badgeTitle;
+        this.badgeLogo = badgeLogo;
         this.badgeContent = badgeContent;
 
     }
