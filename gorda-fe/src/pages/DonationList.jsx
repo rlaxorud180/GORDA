@@ -17,6 +17,7 @@ function DonationList() {
   const [infos, setInfos] = useState([]);
 
   const pointCount = count.toLocaleString("ko-KR");
+  console.log("인포스", infos);
 
   useEffect(() => {
     async function testlist() {
@@ -47,7 +48,7 @@ function DonationList() {
           <div className="header_p">
             <div>당신의 착한 마음을</div>
             <div>
-              Gorda가 응원합니다{" "}
+              Gorda가 응원합니다
               <span>
                 <i className="bx bxs-heart"></i>
               </span>
@@ -60,24 +61,6 @@ function DonationList() {
         </div>
         <div className="test">
           <div className="page_card">
-            <Link to="/dndetail">
-              <DonationListCard
-                imgURL={infos[10]}
-                title={infos[5]}
-                description={infos[9]}
-                target={infos[11]}
-              />
-            </Link>
-            <Link to="/dndetail">
-              <DonationListCard />
-            </Link>
-            <Link to="/dndetail">
-              <DonationListCard />
-            </Link>
-            <Link to="/dndetail">
-              <DonationListCard />
-            </Link>
-
             {infos.map((item, key) => {
               return (
                 <Link to={`/detail/${campaigns[key]}`}>

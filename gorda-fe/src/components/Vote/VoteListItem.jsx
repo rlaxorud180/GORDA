@@ -57,7 +57,10 @@ function VoteListItem(props) {
     <>
       <div className="vote_item_card">
         <a href="/vote/detail">
-          <div className="cardImg"></div>
+          <div
+            className="cardImg"
+            style={{ backgroundImage: `url(${props.foundationLogo})` }}
+          ></div>
         </a>
         <div className="card_content">
           <div className="card_header">
