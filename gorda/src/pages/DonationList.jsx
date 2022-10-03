@@ -42,7 +42,6 @@ function DonationList() {
   return (
     <>
       <NavigationBar />
-      {console.log("campaigns===========", campaigns)}
       <div className="donationlist_container">
         <div className="page_header">
           <div className="header_p">

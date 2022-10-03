@@ -227,19 +227,21 @@ function DonationDetailPage() {
       console.log(err);
     }
   }
-  async function campaignInfo() {
-    const summary = await campaignItem.methods.getSummary().call();
-    setInfos(summary);
-    setTargetEth(infos[11]);
-    setBalanceEth(infos[1]);
-    setProgress(balanceEth / targetEth);
-    let tmpDate = new Date(parseInt(infos[6])).toLocaleString();
-    console.log("tmp date", tmpDate);
-    setDate(tmpDate);
-  }
+
   useEffect(() => {
+    async function campaignInfo() {
+      const summary = await campaignItem.methods.getSummary().call();
+      setInfos(summary);
+      console.log("ssummary", summary);
+      setTargetEth(infos[11]);
+      setBalanceEth(infos[1]);
+      setProgress(balanceEth / targetEth);
+      let tmpDate = new Date(parseInt(infos[6])).toLocaleString();
+      console.log("tmp date", tmpDate);
+      setDate(tmpDate);
+    }
     campaignInfo();
-  }, []);
+  }, [balanceEth]);
 
   // console.log("겟이더", ethPrice);
   return (
