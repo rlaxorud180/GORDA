@@ -1,0 +1,32 @@
+.stampList {
+    text-align: center;
+    position: relative;
+    .stamp {
+        img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+        }
+    }
+    .stamp_name {
+        margin-top: 10px;
+    }
+    .hoverTest {
+        width: 240px;
+        height: 100px;
+        border-radius: 10px;
+        background-color: #fff;
+        opacity: 1;
+        transition: all 0.3s;
+        border: 1px solid #444;
+        position: absolute;
+        top: 5%;
+        left: -220%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .hoverP {
+            color: #00aeef;
+        }
+    }
+}
