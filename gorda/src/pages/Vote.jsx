@@ -8,13 +8,15 @@ import Select from "@mui/material/Select";
 import VoteListItem from "../components/Vote/VoteListItem";
 import factory from "../smart-contract/vote-contract/factory";
 import VoteItem from "../smart-contract/vote-contract/vote";
+import axios from "axios";
 
 function Vote() {
   let datemonth = new Date().getMonth() + 1;
-
   const [open, setOpen] = useState(false);
   const [voteList, setVoteList] = useState([0]);
   const [thisMonthVote, setThisMonthVote] = useState([0]);
+  const [voteProps, setVoteProps] = useState([]);
+  const [foundation, setFoundation] = useState([]);
 
   // 이달의 기관 (전월 기록 희망 시 -1 뒤에 추가 변수 빼기 필요)
   const voteItem = VoteItem(voteList[voteList.length - 1]);
@@ -32,6 +34,7 @@ function Vote() {
     if (voteList) {
       async function callThisMonthVote() {
         const summary = await voteItem.methods.show().call();
+        console.log("summary", summary);
         setThisMonthVote(summary);
       }
       callThisMonthVote();
@@ -42,34 +45,37 @@ function Vote() {
     async function callVoteList() {
       const tmp = await factory.methods.getDeployedVotes().call();
       setVoteList(tmp);
+      console.log("voteList", voteList);
     }
-    console.log("====", voteList);
+
     callVoteList();
-
-    // setThisMonthVote(voteList[0]);
-
-    // async function callThisMonthVote() {
-    //   const voteItem = VoteItem(thisMonthVote);
-    //   const tmp = await voteItem.methods.getSummary().call();
-    //   setThisMonthVote(tmp);
-    // }
-    // callThisMonthVote();
   }, []);
 
+  useEffect(() => {
+    axios({
+      headers: {},
+      url: "http://localhost:8080/api/foundation",
+      method: "GET",
+    })
+      .then((res) => {
+        setFoundation(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <>
       <NavigationBar />
       <div className="vote_container">
         <div className="vote_header">
-          {/* {console.log(thisMonthVote[0])} */}
-          {console.log(thisMonthVote)}
-          {thisMonthVote[0].length >= 1 ? (
+          {/* {thisMonthVote[0].length >= 1 ? (
             <div>
               {thisMonthVote[0].map((item) => (
                 <h3>안녕하세요. {item} 입니다.</h3>
               ))}
             </div>
-          ) : null}
+          ) : null} */}
 
           <br />
 
@@ -133,7 +139,6 @@ function Vote() {
         <div className="vote_list">
           {month === 1 ? (
             <>
-              <VoteListItem />
               <VoteListItem />
               <VoteListItem />
               <VoteListItem />
@@ -224,7 +229,40 @@ function Vote() {
           ) : (
             ""
           )}
-          {month === 10 ? <></> : ""}
+          {month === 10 ? (
+            <div>
+              {foundation &&
+                foundation.map((item, key) => {
+                  return (
+                    <VoteListItem
+                      foundationName={item.foundationName}
+                      foundationAccount={item.foundationAccount}
+                      voteAddress={voteList[voteList.length - 1]}
+                    />
+                  );
+                })}
+            </div>
+          ) : null}
+          {/* {month === 10 ? (
+            <div>
+              
+              {thisMonthVote[0].map((item, key) => {
+                {
+                  Object.keys(thisMonthVote).map((item2, key2) => {
+                    {
+                      console.log("순회", key, thisMonthVote[key2][key]);
+                    }
+                    tmp .append()
+                    <VoteListItem name={tmp} />;
+                  });
+                }
+              })}
+            </div>
+          ) : null} */}
+
+          {/* Array.from({ length: 8 }, (v, i) => i + 1); // v: value, i: index
+            // [1,2,3,4,5,6,7,8] */}
+
           {month === 11 ? (
             <>
               <VoteListItem />

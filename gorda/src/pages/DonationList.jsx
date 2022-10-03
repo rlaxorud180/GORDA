@@ -68,6 +68,15 @@ function DonationList() {
                 target={infos[11]}
               />
             </Link>
+            <Link to="/dndetail">
+              <DonationListCard />
+            </Link>
+            <Link to="/dndetail">
+              <DonationListCard />
+            </Link>
+            <Link to="/dndetail">
+              <DonationListCard />
+            </Link>
 
             {infos.map((item, key) => {
               return (
