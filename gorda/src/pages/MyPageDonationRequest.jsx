@@ -1,8 +1,8 @@
-import MyPageDonationList from "../components/Mypage/MyPageDonationList";
+import MyPageDonationRequestList from "../components/Mypage/MyPageDonationRequestList";
 import NavigationBar from "../components/NavigationBar";
 import "./MyPageDonation.scss";
 
-function MyPageDonation() {
+function MyPageDonationRequest() {
   return (
     <>
       <NavigationBar />
@@ -10,11 +10,11 @@ function MyPageDonation() {
         <div className="list_header">
           <div className="list_header_tag">첫 기부자</div>
           <div className="list_header_name">이몽룡</div>
-          <MyPageDonationList />
+          <MyPageDonationRequestList />
         </div>
       </div>
     </>
   );
 }
 
-export default MyPageDonation;
+export default MyPageDonationRequest;

@@ -1,0 +1,30 @@
+.list_title {
+    margin-top: 20px;
+    margin-bottom: 80px;
+    font-size: 44px;
+    font-weight: 500;
+    color: #444;
+}
+
+.list_count {
+    display: flex;
+    font-size: 44px;
+    gap: 10px;
+    margin-bottom: 15px;
+    .dstring {
+        font-weight: 500;
+    }
+    .dcount {
+        color: #999;
+    }
+}
+.list_box {
+    margin-bottom: 126px;
+    width: 1060px;
+    border: 1px solid #888;
+    padding: 40px 72px;
+    :last-child {
+        margin-bottom: 0px;
+        border: none;
+    }
+}
