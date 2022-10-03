@@ -32,7 +32,7 @@ function VoteCreation() {
     })
       .then((res) => {
         setVotedata(res.data.data);
-        console.log("기관 리스트업", res);
+        console.log("기관 리스트업", res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -61,7 +61,7 @@ function VoteCreation() {
     try {
       const accounts = await web3.eth.getAccounts();
       const result = await factory.methods
-        .createVote(voteAccount, voteName, voteIdx)
+        .createVote(voteAccount, voteName, voteIdx, time)
         .send({
           from: accounts[0],
         });

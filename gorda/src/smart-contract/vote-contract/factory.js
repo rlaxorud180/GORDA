@@ -3,7 +3,7 @@ import VoteFactory from "./build/VoteFactory.json";
 
 const instance = new web3.eth.Contract(
   VoteFactory.abi,
-  "0x42C08BFA423E324F088A1AC51Ea435770Db05846"
+  "0x9f79313F1E5776Cd554195FC3D7ba46b3F84aF91"
 );
 
 console.log("instance", instance);
