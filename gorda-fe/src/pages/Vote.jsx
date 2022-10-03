@@ -58,6 +58,7 @@ function Vote() {
       method: "GET",
     })
       .then((res) => {
+        console.log("리스폰스 데이터", res.data);
         setFoundation(res.data.data);
       })
       .catch((err) => {
@@ -79,8 +80,8 @@ function Vote() {
 
           <br />
 
-          <div className="vote_title">{month}월의 기관</div>
-          <div onClick={handleCalender} className="vote_arrow">
+          <div className="vote_title">이달의 기관</div>
+          {/* <div onClick={handleCalender} className="vote_arrow">
             <svg
               width="34"
               height="22"
@@ -121,11 +122,11 @@ function Vote() {
             </div>
           ) : (
             ""
-          )}
+          )} */}
         </div>
         <hr className="hr_box" />
         <div className="vote_title">
-          <div>이 한달,</div>
+          <div>지난 한달 동안</div>
           <div>여러분이 기부한 곳 중</div>
           <div>
             가장 <span className="title_box">투명하고 만족스러운</span> 기관에
@@ -137,149 +138,20 @@ function Vote() {
         <hr className="hr_box_2" />
         <div className="vote_list_p">지난 달 모금에 참여한 기관</div>
         <div className="vote_list">
-          {month === 1 ? (
-            <>
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-            </>
-          ) : (
-            ""
-          )}
-          {month === 2 ? (
-            <>
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-            </>
-          ) : (
-            ""
-          )}
-          {month === 3 ? (
-            <>
-              <VoteListItem />
-            </>
-          ) : (
-            ""
-          )}
-          {month === 4 ? (
-            <>
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-            </>
-          ) : (
-            ""
-          )}
-          {month === 5 ? (
-            <>
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-            </>
-          ) : (
-            ""
-          )}
-          {month === 6 ? (
-            <>
-              <VoteListItem />
-              <VoteListItem />
-            </>
-          ) : (
-            ""
-          )}
-          {month === 7 ? (
-            <>
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-            </>
-          ) : (
-            ""
-          )}
-          {month === 8 ? (
-            <>
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-            </>
-          ) : (
-            ""
-          )}
-          {month === 9 ? (
-            <>
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-            </>
-          ) : (
-            ""
-          )}
-          {month === 10 ? (
-            <div>
-              {foundation &&
-                foundation.map((item, key) => {
-                  return (
-                    <VoteListItem
-                      foundationName={item.foundationName}
-                      foundationAccount={item.foundationAccount}
-                      voteAddress={voteList[voteList.length - 1]}
-                    />
-                  );
-                })}
-            </div>
-          ) : null}
-          {/* {month === 10 ? (
-            <div>
-              
-              {thisMonthVote[0].map((item, key) => {
-                {
-                  Object.keys(thisMonthVote).map((item2, key2) => {
-                    {
-                      console.log("순회", key, thisMonthVote[key2][key]);
-                    }
-                    tmp .append()
-                    <VoteListItem name={tmp} />;
-                  });
-                }
+          {" "}
+          <div>
+            {foundation &&
+              foundation.map((item, key) => {
+                return (
+                  <VoteListItem
+                    foundationName={item.foundationName}
+                    foundationAccount={item.foundationAccount}
+                    foundationLogo={item.foundationLogo}
+                    voteAddress={voteList[voteList.length - 1]}
+                  />
+                );
               })}
-            </div>
-          ) : null} */}
-
-          {/* Array.from({ length: 8 }, (v, i) => i + 1); // v: value, i: index
-            // [1,2,3,4,5,6,7,8] */}
-
-          {month === 11 ? (
-            <>
-              <VoteListItem />
-              <VoteListItem />
-            </>
-          ) : (
-            ""
-          )}
-          {month === 12 ? (
-            <>
-              <VoteListItem />
-              <VoteListItem />
-              <VoteListItem />
-            </>
-          ) : (
-            ""
-          )}
+          </div>
         </div>
       </div>
     </>
