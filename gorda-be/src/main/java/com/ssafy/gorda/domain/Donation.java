@@ -28,8 +28,14 @@ public class Donation {
     @Setter (AccessLevel.NONE)
     private Foundation foundation;
 
+    @Column(name = "donation_Logo")
+    private String donationLogo;
+
     @Column(name = "donation_subject")
     private String donationSubject;
+
+    @Column(name = "donation_Account")
+    private String donationAccount;
 
     @Column(name = "donation_like")
     private int donationLike;
@@ -53,7 +59,9 @@ public class Donation {
 
     @Builder
     public Donation (Foundation foundation,
+                     String donationLogo,
                      String donationSubject,
+                     String donationAccount,
                      String donationContent,
                      int donationLike,
                      LocalDateTime donationStartDate,
@@ -70,7 +78,9 @@ public class Donation {
         }
 
         this.foundation = foundation;
+        this.donationLogo = donationLogo;
         this.donationSubject = donationSubject;
+        this.donationAccount = donationAccount;
         this.donationContent = donationContent;
         this.donationLike = donationLike;
         this.donationStartDate = donationStartDate;
