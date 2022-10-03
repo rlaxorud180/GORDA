@@ -30,6 +30,7 @@ contract Vote {
 
     mapping(address => Candidate) candidate;
     mapping(address => bool) voter;
+    address[] voters;
 
     address owner;
     uint256 private voteEndDate;
@@ -75,17 +76,20 @@ contract Vote {
             if(candidates[i].Candidate_account == candidateAddress){
                 candidates[i].Candidate_voteCnt++;
                 voter[msg.sender] = true;
+                voters.push(msg.sender);
                 break;
             }
         }
     }
 
-    function isVote() public view returns(bool) {
-        //투표를 했으면(투표했냐 값이 트루면) 트루 리턴
-        if(voter[msg.sender]) return true;
-        else return false;
+    // function isVote() public view returns(bool) {
+    //     //투표를 했으면(투표했냐 값이 트루면) 트루 리턴
+    //     if(voter[msg.sender]) return true;
+    //     else return false;
+    // }
+    function isVote() public view returns (address[] memory) {
+        return voters;
     }
-
 
     
 }
