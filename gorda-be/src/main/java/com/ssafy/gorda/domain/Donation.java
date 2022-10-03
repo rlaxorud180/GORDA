@@ -31,6 +31,9 @@ public class Donation {
     @Column(name = "donation_subject")
     private String donationSubject;
 
+    @Column(name = "donation_like")
+    private int donationLike;
+
     @Column(name = "donation_content")
     private String donationContent;
 
@@ -52,6 +55,7 @@ public class Donation {
     public Donation (Foundation foundation,
                      String donationSubject,
                      String donationContent,
+                     int donationLike,
                      LocalDateTime donationStartDate,
                      LocalDateTime donationEndDate
     )
@@ -68,6 +72,7 @@ public class Donation {
         this.foundation = foundation;
         this.donationSubject = donationSubject;
         this.donationContent = donationContent;
+        this.donationLike = donationLike;
         this.donationStartDate = donationStartDate;
         this.donationEndDate = donationEndDate;
 

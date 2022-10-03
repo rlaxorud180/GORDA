@@ -45,7 +45,7 @@ public class FoundationController {
     }
 
     // 기부한 기관 불러오기 기능
-    @GetMapping ("/donationIdx")
+    @GetMapping ("/{donationIdx}")
     public ResultDto readFoundationByDonation (@PathVariable ("donationIdx") String donationIdx) {
 
         List<ReadFoundationResponseDto> foundationList = new ArrayList<>();
