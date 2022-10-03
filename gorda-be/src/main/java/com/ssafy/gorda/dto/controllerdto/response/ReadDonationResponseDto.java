@@ -17,6 +17,7 @@ public class ReadDonationResponseDto {
     private Foundation foundation;
     private String donationSubject;
     private String donationContent;
+    private int donationLike;
     private LocalDateTime donationStartDate;
     private LocalDateTime donationEndDate;
 
@@ -26,6 +27,7 @@ public class ReadDonationResponseDto {
         this.foundation = donation.getFoundation();
         this.donationSubject = donation.getDonationSubject();
         this.donationContent = donation.getDonationContent();
+        this.donationLike = donation.getDonationLike();
         this.donationStartDate = donation.getDonationStartDate();
         this.donationEndDate = donation.getDonationEndDate();
 
