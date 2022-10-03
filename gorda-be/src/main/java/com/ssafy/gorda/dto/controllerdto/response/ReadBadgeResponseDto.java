@@ -10,11 +10,14 @@ public class ReadBadgeResponseDto {
 
     private String badgeIdx;
     private String badgeTitle;
+
+    private String badgeLogo;
     private String badgeContent;
 
     public ReadBadgeResponseDto (Badge badge) {
         this.badgeIdx = badge.getBadgeIdx();
         this.badgeTitle = badge.getBadgeTitle();
+        this.badgeLogo = badge.getBadgeLogo();
         this.badgeContent = badge.getBadgeContent();
 
     }

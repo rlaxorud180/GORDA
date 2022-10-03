@@ -8,7 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class LoginUserResponseDto {
 
-    private String userIdx;
+    private String userAccount;
     private String userNickname;
     private int userAmount;
     private int userScore;
@@ -16,7 +16,7 @@ public class LoginUserResponseDto {
 
     public LoginUserResponseDto(User user) {
 
-        this.userIdx = user.getUserIdx();
+        this.userAccount = user.getUserAccount();
         this.userNickname = user.getUserNickname();
         this.userAmount = user.getUserAmount();
         this.userScore = user.getUserScore();
