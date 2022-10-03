@@ -3,14 +3,14 @@ pragma solidity ^0.8.0;
 contract CampaignFactory {
     address[] public deployedCampaigns;
 
-    function createCampaign(address[] memory Destination, uint[] memory Amounts, uint minimum, address creator, string memory name, string memory category, uint date, string memory description, string memory image, uint target) public returns(address) {
+    function createCampaign(address payable[] memory Destination, uint[] memory Amounts, uint minimum, address creator, string memory name, string memory category, uint date, string memory description, string memory image, uint target) public returns(address) {
         address newCampaign = address(new Campaign(Destination, Amounts, minimum, msg.sender, name, category, date, description, image, target));
         deployedCampaigns.push(newCampaign);
 
         return newCampaign;
     }
     
-    function finishCampaign(address[] memory Destination, uint[] memory Amounts, uint minimum, address creator, string memory name, string memory category, uint date, string memory description, string memory image, uint target) public {
+    function finishCampaign(address payable[] memory Destination, uint[] memory Amounts, uint minimum, address creator, string memory name, string memory category, uint date, string memory description, string memory image, uint target) public {
         address doneCampaign = address(new Campaign(Destination, Amounts, minimum, msg.sender, name, category, date, description, image, target));
         require(block.timestamp > date);
         
@@ -30,8 +30,8 @@ contract CampaignFactory {
 contract Campaign {
   struct Request {
       string description;
-      uint value;
-      address recipient;
+      uint[] value;
+      address payable[] recipient;
       bool complete;
       uint approvalCount;
       mapping(address => bool) approvals;
@@ -39,7 +39,7 @@ contract Campaign {
 
   Request[] public requests;
   uint[] public amounts_;
-  address[] public destination_;
+  address payable[] public destination_;
   address public manager;
   uint public minimumContribution;
   string public CampaignName;
@@ -60,9 +60,9 @@ contract Campaign {
       _;
   }
 
-  constructor (address[] memory destination, uint256[] memory amounts, uint minimum, address creator, string memory name, string memory category, uint date, string memory description, string memory image, uint target) public {
+  constructor (address payable[] memory destination, uint256[] memory amounts, uint minimum, address creator, string memory name, string memory category, uint date, string memory description, string memory image, uint target) public {
       destination_ = destination;
-      amounts = amounts;
+      amounts_ = amounts;
       manager = creator;
       minimumContribution = minimum;
       CampaignName=name;
@@ -81,13 +81,16 @@ contract Campaign {
       approversCount++;
   }
 
-  function createRequest(string memory description, uint value, address recipient) public restricted {
+  function createRequest(string memory description) public restricted returns(uint[] memory) {
+      require(requests.length < 1);
+
       Request storage newRequest = requests.push();
       newRequest.description = description;
-      newRequest.value = value;
-      newRequest.recipient = recipient;
+      newRequest.value = amounts_;
+      newRequest.recipient = destination_;
       newRequest.complete = false;
       newRequest.approvalCount = 0;
+      return(amounts_);
   }
 
   function approveRequest(uint index) public {
@@ -98,17 +101,22 @@ contract Campaign {
       requests[index].approvalCount++;
   }
 
-  function finalizeRequest(uint index) public restricted{
+  function finalizeRequest(uint index) public restricted {
       require(requests[index].approvalCount > (approversCount / 2));
       require(!requests[index].complete);
 
-      payable(requests[index].recipient).transfer(requests[index].value);
+      uint totalBalance = address(this).balance;
+
+      for (uint i = 0; i < requests[index].recipient.length; i++){
+        payable(requests[index].recipient[i]).transfer(totalBalance * requests[index].value[i] / 100);
+      }
       requests[index].complete = true;
+
 
   }
 
 
-    function getSummary() public view returns (uint, uint, uint, uint, address, string memory, uint, string memory, address[] memory,string memory, string memory, uint) {
+     function getSummary() public view returns (uint, uint, uint, uint, address, string memory, uint, string memory, address[] memory,string memory, string memory, uint) {
         return(
             minimumContribution,
             address(this).balance,
