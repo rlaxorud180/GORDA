@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
   getETHPrice,
@@ -9,6 +9,7 @@ import web3 from "../smart-contract/donate-contract/web3";
 import NavigationBar from "../components/NavigationBar";
 import "./AdminForm.scss";
 import FactoryList from "../components/FoundationAdmin/FactoryList";
+import axios from "axios";
 
 function AdminForm() {
   //   const wallet = useWallet();
@@ -16,6 +17,7 @@ function AdminForm() {
   const [targetInUSD, setTargetInUSD] = useState();
   const [minContriInUSD, setMinContriInUSD] = useState();
   const [ETHPrice, setETHPrice] = useState(0);
+  const [foundation, setFoundation] = useState([]);
 
   const {
     handleSubmit,
@@ -63,11 +65,62 @@ function AdminForm() {
           from: accounts[0],
         });
       console.log("result", result);
+
+      const newCampaign = await factory.methods.getDeployedCampaigns().call();
+      console.log("new", newCampaign);
+
+      console.log("보내는 데이터 ", {
+        donationAccount: newCampaign[newCampaign.length - 1],
+        donationContent: data.description,
+        donationEndDate: "2022-10-03T14:19:46.980Z",
+        donationLike: 0,
+        donationLogo: data.imageUrl,
+        donationStartDate: "2022-10-03T14:19:46.980Z",
+        donationSubject: data.category,
+        foundationIdx: data.foundation,
+      });
+
+      axios({
+        headers: {},
+        url: "http://localhost:8080/api/donation/regist",
+        method: "POST",
+        data: {
+          donationAccount: newCampaign[newCampaign.length - 1],
+          donationContent: data.description,
+          donationEndDate: "2022-10-03T14:19:46.980Z",
+          donationLike: 0,
+          donationLogo: data.imageUrl,
+          donationStartDate: "2022-10-03T14:19:46.980Z",
+          donationSubject: data.category,
+          foundationIdx: data.foundation,
+        },
+      })
+        .then((res) => {
+          console.log("리스폰스 데이터", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } catch (err) {
       setError(err.message);
       console.log(err);
     }
   }
+
+  useEffect(() => {
+    axios({
+      headers: {},
+      url: "http://localhost:8080/api/foundation",
+      method: "GET",
+    })
+      .then((res) => {
+        console.log("파운데이션 목록", res.data.data);
+        setFoundation(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const [inputValue, setInputValue] = useState([]);
   const changeInput = (value) => {
@@ -90,6 +143,20 @@ function AdminForm() {
       <div className="form_container">
         <div className="form_title">기관 모금 게시글 작성</div>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <select
+            id="categories"
+            placeholder="기관명"
+            {...register("foundation", { required: true })}
+            isDisabled={isSubmitting}
+          >
+            {foundation.map((item) => {
+              return (
+                <option value={item.foundationIdx}>
+                  {item.foundationName}
+                </option>
+              );
+            })}
+          </select>
           <input
             className="titleinput"
             placeholder="제목"
