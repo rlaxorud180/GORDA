@@ -10,6 +10,8 @@ public class RegistFoundationRequestDto {
 
     private String foundationAccount;
     private String foundationName;
+    private String foundationContent;
+    private String foundationLogo;
     private String foundationAddress;
 
 }
