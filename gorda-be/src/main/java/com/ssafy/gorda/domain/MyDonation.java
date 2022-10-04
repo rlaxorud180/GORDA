@@ -30,8 +30,11 @@ public class MyDonation {
     @Setter(AccessLevel.NONE)
     private Donation donation;
 
-    @Column(name = "my_donation_content")
-    private String myDonationContent;
+    @Column(name = "my_donation_amount")
+    private double myDonationAmount;
+
+    @Column(name = "my_donation_name")
+    private String myDonationName;
 
     @Column(name = "my_donation_date")
     private LocalDateTime myDonationDate;
@@ -40,7 +43,8 @@ public class MyDonation {
     public MyDonation (
                      User user,
                      Donation donation,
-                     String myDonationContent,
+                     double myDonationAmount,
+                     String myDonationName,
                      LocalDateTime myDonationDate
     )
     {
@@ -55,7 +59,8 @@ public class MyDonation {
 
         this.user = user;
         this.donation = donation;
-        this.myDonationContent = myDonationContent;
+        this.myDonationAmount = myDonationAmount;
+        this.myDonationName = myDonationName;
         this.myDonationDate = myDonationDate;
 
     }
