@@ -30,7 +30,7 @@ public class MyDonation {
     @Setter(AccessLevel.NONE)
     private Donation donation;
 
-    @Column(name = "my_donation_content")
+    @Column(name = "my_donation_amount")
     private double myDonationAmount;
 
     @Column(name = "my_donation_name")
