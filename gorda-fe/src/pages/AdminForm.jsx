@@ -12,12 +12,14 @@ import FactoryList from "../components/FoundationAdmin/FactoryList";
 import axios from "axios";
 
 function AdminForm() {
-  //   const wallet = useWallet();
   const [error, setError] = useState("");
   const [targetInUSD, setTargetInUSD] = useState();
   const [minContriInUSD, setMinContriInUSD] = useState();
   const [ETHPrice, setETHPrice] = useState(0);
   const [foundation, setFoundation] = useState([]);
+  const [selectedFoundation, setSelectedFoundation] = useState([]);
+  const [selectedAmounts, setSelectedAmounts] = useState([]);
+  // const [companyArr, setCompanyArr] = useState([]);
 
   const {
     handleSubmit,
@@ -42,9 +44,7 @@ function AdminForm() {
     );
     try {
       const accounts = await web3.eth.getAccounts();
-      console.log("accounts", accounts);
-      data.date = new Date(data.date).getTime();
-
+      const timeStamp = parseInt(new Date(data.date).getTime() / 1000);
       const result = await factory.methods
         .createCampaign(
           [
@@ -56,7 +56,7 @@ function AdminForm() {
           accounts[0],
           data.campaignName,
           data.category,
-          data.date,
+          timeStamp,
           data.description,
           data.imageUrl,
           web3.utils.toWei(data.target, "ether")
@@ -68,14 +68,15 @@ function AdminForm() {
 
       const newCampaign = await factory.methods.getDeployedCampaigns().call();
       console.log("new", newCampaign);
+      const now = new Date();
 
       console.log("보내는 데이터 ", {
         donationAccount: newCampaign[newCampaign.length - 1],
         donationContent: data.description,
-        donationEndDate: "2022-10-03T14:19:46.980Z",
+        donationEndDate: data.date,
         donationLike: 0,
         donationLogo: data.imageUrl,
-        donationStartDate: "2022-10-03T14:19:46.980Z",
+        donationStartDate: now,
         donationSubject: data.category,
         foundationIdx: data.foundation,
       });
@@ -87,10 +88,10 @@ function AdminForm() {
         data: {
           donationAccount: newCampaign[newCampaign.length - 1],
           donationContent: data.description,
-          donationEndDate: "2022-10-03T14:19:46.980Z",
+          donationEndDate: data.date,
           donationLike: 0,
           donationLogo: data.imageUrl,
-          donationStartDate: "2022-10-03T14:19:46.980Z",
+          donationStartDate: now,
           donationSubject: data.category,
           foundationIdx: data.foundation,
         },
@@ -123,18 +124,33 @@ function AdminForm() {
   }, []);
 
   const [inputValue, setInputValue] = useState([]);
+
   const changeInput = (value) => {
-    setInputValue((inputValue) => [...inputValue, value]);
-    console.log("인풋 밸류", inputValue);
+    console.log(inputValue);
+    const tmpIdx = inputValue.findIndex((e) => e === value);
+
+    if (tmpIdx >= 0) {
+      inputValue.splice(tmpIdx, 1);
+    } else {
+      setInputValue((inputValue) => [...inputValue, value]);
+    }
   };
 
-  const institutionArr = [
-    { name: "옥수수", address: "0xA3A14BCa06E4Ca15522C56c09e654DB8422A922e" },
-    { name: "학용품", address: "0xA3A14BCa06E4Ca15522C56c09e654DB8422A922e" },
-    { name: "인건비", address: "0xA3A14BCa06E4Ca15522C56c09e654DB8422A922e" },
+  const companyArr = [
     {
-      name: "수수료 냠냠",
-      address: "0x46BC02098eb6A22cffAa8dD24F819fE5F6f58aE9",
+      companyIdx: "124",
+      name: "옥수수",
+      address: "0xA3A14BCa06E4Ca15522C56c09e654DB8422A922e",
+    },
+    {
+      companyIdx: "1241",
+      name: "학용품",
+      address: "0xA3A14BCa06E4Ca15522C56c09e654DB8422A922e",
+    },
+    {
+      companyIdx: "1234",
+      name: "인건비",
+      address: "0xA3A14BCa06E4Ca15522C56c09e654DB8422A922e",
     },
   ];
   return (
@@ -145,10 +161,11 @@ function AdminForm() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <select
             id="categories"
-            placeholder="기관명"
             {...register("foundation", { required: true })}
             isDisabled={isSubmitting}
           >
+            <option value="">기관 선택</option>
+
             {foundation.map((item) => {
               return (
                 <option value={item.foundationIdx}>
@@ -221,60 +238,23 @@ function AdminForm() {
             {...register("description", { required: true })}
             isDisabled={isSubmitting}
           />
-
-          {/* <input
-                        placeholder="카테고리"
-                        {...register("category", { required: true })}
-                        isDisabled={isSubmitting}
-                      /> */}
-          {/* <div className="datecontainer">
-                        <input className="dateinput" id="currentDate" type="date" />
-                        <input className="dateinput" type="date" />
-                      </div> */}
-
           <div className="btnContainer">
             <a href="#DonationManage" className="nextBtn">
               다음
             </a>
           </div>
-          {error ? <h1>wrong </h1> : null}
           <section id="DonationManage">
             <div className="manage_container">
-              <div className="manage_title">관리 기관명</div>
+              <div className="manage_title">모금액 사용처</div>
               <div className="selection">운반/운송/식품 업체 선택</div>
               <hr className="hr" />
               <div className="manage_list">
                 <FactoryList
-                  name={institutionArr[0].name}
-                  changeInput={changeInput}
-                />
-                <FactoryList
-                  name={institutionArr[1].name}
-                  changeInput={changeInput}
-                />
-                <FactoryList
-                  name={institutionArr[2].name}
-                  changeInput={changeInput}
-                />
-                <FactoryList
-                  name={institutionArr[3].name}
+                  key={companyArr[0].companyIdx}
+                  name={companyArr[0].name}
                   changeInput={changeInput}
                 />
               </div>
-            </div>
-          </section>
-
-          <div className="button_container">
-            <a href="#pageCost" type="submit" className="submit_Btn">
-              다음
-            </a>
-          </div>
-          <section id="pageCost">
-            <div className="pageCost_container">
-              <div className="cost_title">기부 관리</div>
-              <div className="cost_input_header">금액 배분 입력</div>
-              <hr className="hr" />
-              <div className="cost_list"></div>
             </div>
           </section>
           <div className="createBtn">
