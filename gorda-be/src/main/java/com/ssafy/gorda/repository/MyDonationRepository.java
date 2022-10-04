@@ -18,7 +18,6 @@ public class MyDonationRepository {
 
     // 나의 기부 등록
 
-
     public String regist (MyDonation myDonation) {
 
         em.persist(myDonation);
