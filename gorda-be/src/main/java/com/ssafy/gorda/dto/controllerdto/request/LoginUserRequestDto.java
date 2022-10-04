@@ -8,7 +8,7 @@ public class LoginUserRequestDto {
     private String userIdx;
     private String userAccount;
     private String userNickname;
-    private int userAmount;
+    private double userAmount;
     private int userScore;
     private String userRole;
 
