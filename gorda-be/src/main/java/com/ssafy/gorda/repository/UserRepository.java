@@ -43,6 +43,18 @@ public class UserRepository {
 
     }
 
+    // 점수 관련
+
+    public void addUserDonationLevel (String Idx , double donAmount) {
+
+        User tempUser = em.find(User.class, Idx);
+
+        tempUser.setUserScore(tempUser.getUserScore()+1);
+
+        tempUser.setUserAmount(tempUser.getUserAmount()+donAmount);
+
+    }
+
     //유저 삭제
     
     public String delete (User user) {
