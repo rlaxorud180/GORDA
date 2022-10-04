@@ -34,7 +34,7 @@ public class User {
     private String userNickname;
 
     @Column(name = "user_amount")
-    private int userAmount;
+    private double userAmount;
 
     @Column(name = "user_score")
     private int userScore;
@@ -60,7 +60,7 @@ public class User {
     public User (String userAccount,
                  String userNickname,
                  int userScore,
-                 int userAmount,
+                 double userAmount,
                  String userRole
     )
     {
