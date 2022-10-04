@@ -104,6 +104,10 @@
             text-decoration: none;
         }
         .donation_paragraph {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             color: #fff;
             h1 {
                 font-size: 36px;
@@ -176,7 +180,8 @@
         .poll_paragraph {
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center;
+            align-items: center;
             h1 {
                 color: #fff;
                 font-size: 44px;
