@@ -56,7 +56,7 @@ public class DonationCommentController {
 
     //나의 모든 댓글 가져오기 기능
 
-    @GetMapping("/{userIdx}")
+    @GetMapping("/user/{userIdx}")
     public ResultDto readDonationCommentByUser (@PathVariable ("userIdx") String userIdx) {
 
         List<ReadDonationCommentResponseDto> donationCommentList = new ArrayList<>();
@@ -69,7 +69,7 @@ public class DonationCommentController {
 
     //지정된 나의 댓글 삭제
 
-    @DeleteMapping("{DonationCommentIdx}")
+    @DeleteMapping("/{DonationCommentIdx}")
     @ApiOperation(value="댓글을 삭제", notes = "Idx에 해당하는 댓글 제거 / id는 pathVariable로 request")
     public MessageResponseDto deleteDiary(@PathVariable("DonationCommentIdx") String DonationCommentIdx) {
 

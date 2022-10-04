@@ -50,7 +50,7 @@ public class MyBadgeController {
     }
 
     //개인별 획득 뱃지 불러오기
-    @GetMapping("/{userIdx}")
+    @GetMapping("/user/{userIdx}")
     public ResultDto readMyBadge(@PathVariable ("userIdx") String userIdx) {
 
         List<ReadMyBadgeResponseDto> myBadgeList = new ArrayList<>();
