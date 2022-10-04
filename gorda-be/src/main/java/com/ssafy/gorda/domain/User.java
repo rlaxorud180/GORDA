@@ -23,7 +23,7 @@ public class User {
 
     @Column(name = "user_idx")
     @Id
-    @Setter (AccessLevel.NONE) // access 제한
+    @Setter (AccessLevel.NONE) // access 제한하기
     @NotBlank
     private String userIdx;
 

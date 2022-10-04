@@ -13,6 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedMethods("*")
                 .allowedOrigins("http://j7a307.p.ssafy.io:3000",
                         "http://j7a307.p.ssafy.io",
+                        "http://j7a307.p.ssafy.io:80",
                         "http://localhost:3000"
                         )
 
