@@ -1,8 +1,10 @@
 package com.ssafy.gorda.controller;
 
 import com.ssafy.gorda.domain.User;
+import com.ssafy.gorda.dto.MessageResponseDto;
 import com.ssafy.gorda.dto.ResultDto;
 import com.ssafy.gorda.dto.controllerdto.request.LoginUserRequestDto;
+import com.ssafy.gorda.dto.controllerdto.request.ModifyUserDonateLevelRequestDto;
 import com.ssafy.gorda.dto.controllerdto.response.LoginUserResponseDto;
 import com.ssafy.gorda.dto.controllerdto.response.ReadMyDonationResponseDto;
 import com.ssafy.gorda.service.UserService;
@@ -48,12 +50,21 @@ public class UserController {
         return new LoginUserResponseDto(user);
     }
 
-    @GetMapping("{userIdx}")
+    @GetMapping("/{userIdx}")
     public ResultDto readUserByAccount(@PathVariable ("userIdx") String userIdx) {
 
         User user = userService.findByIdx(userIdx);
 
         return new ResultDto(user);
     }
+
+    @PutMapping("/{userIdx}")
+    public MessageResponseDto modifyUserDonateLevel (@PathVariable ("userIdx") String userIdx, @RequestBody ModifyUserDonateLevelRequestDto request){
+
+        userService.addUserDonationLevel(userIdx, request.getDonateAmount());
+
+        return new MessageResponseDto("기부 금액 적용 완료");
+    }
+
 
 }

@@ -45,6 +45,15 @@ public class UserService {
 
     //업데이트
 
+    @Transactional
+    public void addUserDonationLevel (String Idx, double donAmount) {
+
+        userRepository.addUserDonationLevel(Idx, donAmount);
+
+        return;
+
+    }
+
 
 
     // 닉네임 생성 - 후에 ENUM 타입 추가
