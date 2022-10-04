@@ -54,7 +54,7 @@ public class DonationController {
 
 
     //해당 도네이션 정보 가져오기
-    @GetMapping("{DonationIdx}")
+    @GetMapping("/{DonationIdx}")
     public ResultDto readDonationByIdx(@PathVariable("donationIdx") String donationIdx){
 
         Donation tempDonation = donationService.findByIdx(donationIdx);

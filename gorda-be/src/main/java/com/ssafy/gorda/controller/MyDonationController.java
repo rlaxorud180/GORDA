@@ -50,7 +50,7 @@ public class MyDonationController {
     }
 
     //개인별 기부 항목 불러오기
-    @GetMapping("/{userIdx}")
+    @GetMapping("/user/{userIdx}")
     public ResultDto readMyDonation(@PathVariable ("userIdx") String userIdx) {
 
         List<ReadMyDonationResponseDto> myDonationList = new ArrayList<>();
