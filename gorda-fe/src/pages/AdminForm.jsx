@@ -17,6 +17,9 @@ function AdminForm() {
   const [minContriInUSD, setMinContriInUSD] = useState();
   const [ETHPrice, setETHPrice] = useState(0);
   const [foundation, setFoundation] = useState([]);
+  const [company, setCompany] = useState([]);
+  const [inputValue, setInputValue] = useState([]);
+
   const [selectedFoundation, setSelectedFoundation] = useState([]);
   const [selectedAmounts, setSelectedAmounts] = useState([]);
   // const [companyArr, setCompanyArr] = useState([]);
@@ -30,14 +33,21 @@ function AdminForm() {
   });
 
   async function onSubmit(data) {
+    const tmpCompanyArr = [];
+    const tmpAmountArr = [];
+
+    for (let i = 0; i < inputValue.length; i++) {
+      tmpCompanyArr.push(inputValue[i][0]);
+      tmpAmountArr.push(inputValue[i][1]);
+    }
     console.log(
-      data.destination,
-      data.amounts,
+      tmpCompanyArr,
+      tmpAmountArr,
       web3.utils.toWei(data.minimumContribution, "ether"),
       "accounts",
       data.campaignName,
       data.category,
-      data.date,
+      new Date(data.date),
       data.description,
       data.imageUrl,
       web3.utils.toWei(data.target, "ether")
@@ -47,11 +57,8 @@ function AdminForm() {
       const timeStamp = parseInt(new Date(data.date).getTime() / 1000);
       const result = await factory.methods
         .createCampaign(
-          [
-            "0xA3A14BCa06E4Ca15522C56c09e654DB8422A922e",
-            "0x46BC02098eb6A22cffAa8dD24F819fE5F6f58aE9",
-          ],
-          [30, 70],
+          tmpCompanyArr,
+          tmpAmountArr,
           web3.utils.toWei(data.minimumContribution, "ether"),
           accounts[0],
           data.campaignName,
@@ -83,12 +90,12 @@ function AdminForm() {
 
       axios({
         headers: {},
-        url: "http://localhost:8080/api/donation/regist",
+        url: "http://j7a307.p.ssafy.io:8080/api/donation/regist",
         method: "POST",
         data: {
           donationAccount: newCampaign[newCampaign.length - 1],
           donationContent: data.description,
-          donationEndDate: data.date,
+          donationEndDate: new Date(data.date),
           donationLike: 0,
           donationLogo: data.imageUrl,
           donationStartDate: now,
@@ -111,7 +118,20 @@ function AdminForm() {
   useEffect(() => {
     axios({
       headers: {},
-      url: "http://localhost:8080/api/foundation",
+      url: "http://j7a307.p.ssafy.io:8080/api/company",
+      method: "GET",
+    })
+      .then((res) => {
+        console.log("컴퍼니 목록", res.data.data);
+        setCompany(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    axios({
+      headers: {},
+      url: "http://j7a307.p.ssafy.io:8080/api/foundation",
       method: "GET",
     })
       .then((res) => {
@@ -122,16 +142,31 @@ function AdminForm() {
         console.log(err);
       });
   }, []);
-
-  const [inputValue, setInputValue] = useState([]);
-
+  console.log(inputValue);
   const changeInput = (value) => {
-    console.log(inputValue);
-    const tmpIdx = inputValue.findIndex((e) => e === value);
+    let done = 0;
 
-    if (tmpIdx >= 0) {
-      inputValue.splice(tmpIdx, 1);
-    } else {
+    for (let i = 0; i < inputValue.length; i++) {
+      let cnt = 0;
+      for (let j = 0; j < inputValue[i].length; j++) {
+        if (inputValue[i][j] === value[j]) {
+          cnt = cnt + 1;
+        }
+        if (cnt === 2) {
+          console.log("삭제할 것", inputValue[i], value);
+          let tmpArr = inputValue;
+          let tmpValue = tmpArr.splice(i, 1);
+          setInputValue(tmpArr);
+          done = done + 1;
+          break;
+        }
+      }
+      if (done === 1) {
+        break;
+      }
+    }
+
+    if (done === 0) {
       setInputValue((inputValue) => [...inputValue, value]);
     }
   };
@@ -166,9 +201,9 @@ function AdminForm() {
           >
             <option value="">기관 선택</option>
 
-            {foundation.map((item) => {
+            {foundation.map((item, key) => {
               return (
-                <option value={item.foundationIdx}>
+                <option key={key} value={item.foundationAccount}>
                   {item.foundationName}
                 </option>
               );
@@ -249,11 +284,15 @@ function AdminForm() {
               <div className="selection">운반/운송/식품 업체 선택</div>
               <hr className="hr" />
               <div className="manage_list">
-                <FactoryList
-                  key={companyArr[0].companyIdx}
-                  name={companyArr[0].name}
-                  changeInput={changeInput}
-                />
+                {company.map((item, key) => {
+                  return (
+                    <FactoryList
+                      idx={item.companyAccount}
+                      name={item.companyName}
+                      changeInput={changeInput}
+                    />
+                  );
+                })}
               </div>
             </div>
           </section>
