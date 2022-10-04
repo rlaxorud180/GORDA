@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./FactoryList.scss";
 
-function FactoryList({ companyIdx, name, changeInput }) {
+function FactoryList({ idx, name, changeInput }) {
   const [tmpData, setTmpData] = useState(0);
 
   const changeTmpData = (e) => {
@@ -22,7 +22,7 @@ function FactoryList({ companyIdx, name, changeInput }) {
           <input
             type="checkbox"
             className="selectBtn"
-            onClick={() => changeInput([companyIdx, tmpData])}
+            onClick={() => changeInput([idx, tmpData])}
           />
         </div>
       </div>
