@@ -38,10 +38,13 @@ public class DonationController {
         Donation tempDonation = Donation.builder()
                 .foundation(foundationService.findByIdx(request.getFoundationIdx()))
                 .donationLogo(request.getDonationLogo())
+                .donationName(request.getDonationName())
                 .donationSubject(request.getDonationSubject())
                 .donationAccount(request.getDonationAccount())
                 .donationContent(request.getDonationContent())
                 .donationLike(request.getDonationLike())
+                .donationTargetEth(request.getDonationTargetEth())
+                .donationCurrentEth(request.getDonationTargetEth())
                 .donationStartDate(request.getDonationStartDate())
                 .donationEndDate(request.getDonationEndDate())
                 .build();

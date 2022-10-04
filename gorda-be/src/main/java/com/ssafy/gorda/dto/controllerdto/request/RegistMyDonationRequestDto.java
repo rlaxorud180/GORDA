@@ -12,6 +12,7 @@ public class RegistMyDonationRequestDto {
 
     private String userIdx;
     private String donationIdx;
-    private String myDonationContent;
+    private double myDonationAmount;
+    private String myDonationName;
 
 }

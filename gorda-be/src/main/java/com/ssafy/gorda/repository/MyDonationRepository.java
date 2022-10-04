@@ -18,7 +18,6 @@ public class MyDonationRepository {
 
     // 나의 기부 등록
 
-
     public String regist (MyDonation myDonation) {
 
         em.persist(myDonation);
@@ -36,7 +35,7 @@ public class MyDonationRepository {
 
     public List<MyDonation> findByUserIdx(String userIdx) {
 
-        List<MyDonation> myDonationList = em.createQuery("SELECT m FROM MyBadge m WHERE m.userIdx = :user_idx",MyDonation.class)
+        List<MyDonation> myDonationList = em.createQuery("SELECT m FROM MyDonation m WHERE m.user.userIdx = :user_idx",MyDonation.class)
                 .setParameter("user_idx",userIdx).getResultList();
 
         return myDonationList;
