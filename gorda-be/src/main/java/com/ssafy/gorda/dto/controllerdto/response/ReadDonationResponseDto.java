@@ -15,9 +15,12 @@ public class ReadDonationResponseDto {
 
     private String donationIdx;
     private Foundation foundation;
+    private String donationName;
     private String donationSubject;
     private String donationContent;
     private int donationLike;
+    private double donationTargetEth;
+    private double donationCurrentEth;
     private LocalDateTime donationStartDate;
     private LocalDateTime donationEndDate;
 
@@ -25,9 +28,12 @@ public class ReadDonationResponseDto {
 
         this.donationIdx = donation.getDonationIdx();
         this.foundation = donation.getFoundation();
+        this.donationName = donation.getDonationName();
         this.donationSubject = donation.getDonationSubject();
         this.donationContent = donation.getDonationContent();
         this.donationLike = donation.getDonationLike();
+        this.donationTargetEth = donation.getDonationTargetEth();
+        this.donationCurrentEth = donation.getDonationCurrentEth();
         this.donationStartDate = donation.getDonationStartDate();
         this.donationEndDate = donation.getDonationEndDate();
 

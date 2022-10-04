@@ -39,7 +39,8 @@ public class MyDonationController {
         MyDonation tempMyDonation = MyDonation.builder()
                 .user(userService.findByIdx(request.getUserIdx()))
                 .donation(donationService.findByIdx(request.getDonationIdx()))
-                .myDonationContent(request.getMyDonationContent())
+                .myDonationName(request.getMyDonationName())
+                .myDonationAmount(request.getMyDonationAmount())
                 .myDonationDate(LocalDateTime.now())
                 .build();
 

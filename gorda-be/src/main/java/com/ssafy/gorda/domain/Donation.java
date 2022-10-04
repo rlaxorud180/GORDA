@@ -28,14 +28,23 @@ public class Donation {
     @Setter (AccessLevel.NONE)
     private Foundation foundation;
 
-    @Column(name = "donation_Logo")
+    @Column(name = "donation_logo")
     private String donationLogo;
+
+    @Column(name = "donation_name")
+    private String donationName;
 
     @Column(name = "donation_subject")
     private String donationSubject;
 
-    @Column(name = "donation_Account")
+    @Column(name = "donation_account")
     private String donationAccount;
+
+    @Column(name = "donation_target_eth")
+    private double donationTargetEth;
+
+    @Column(name = "donation_current_eth")
+    private double donationCurrentEth;
 
     @Column(name = "donation_like")
     private int donationLike;
@@ -60,10 +69,13 @@ public class Donation {
     @Builder
     public Donation (Foundation foundation,
                      String donationLogo,
+                     String donationName,
                      String donationSubject,
                      String donationAccount,
                      String donationContent,
                      int donationLike,
+                     double donationCurrentEth,
+                     double donationTargetEth,
                      LocalDateTime donationStartDate,
                      LocalDateTime donationEndDate
     )
@@ -79,10 +91,13 @@ public class Donation {
 
         this.foundation = foundation;
         this.donationLogo = donationLogo;
+        this.donationName = donationName;
         this.donationSubject = donationSubject;
         this.donationAccount = donationAccount;
         this.donationContent = donationContent;
         this.donationLike = donationLike;
+        this.donationTargetEth = donationTargetEth;
+        this.donationCurrentEth = donationCurrentEth;
         this.donationStartDate = donationStartDate;
         this.donationEndDate = donationEndDate;
 

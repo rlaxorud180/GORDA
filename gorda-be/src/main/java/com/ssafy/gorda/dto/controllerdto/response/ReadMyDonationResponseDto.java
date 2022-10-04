@@ -13,7 +13,8 @@ public class ReadMyDonationResponseDto {
     private String myDonationIdx;
     private User user;
     private Donation donation;
-    private String myDonationContent;
+    private double myDonationAmount;
+    private String myDonationName;
     private LocalDateTime myDonationDate;
 
     public ReadMyDonationResponseDto (MyDonation myDonation) {
@@ -21,7 +22,8 @@ public class ReadMyDonationResponseDto {
         this.myDonationIdx = myDonation.getMyDonationIdx();
         this.user = myDonation.getUser();
         this.donation = myDonation.getDonation();
-        this.myDonationContent = myDonation.getMyDonationContent();
+        this.myDonationAmount = myDonation.getMyDonationAmount();
+        this.myDonationName = myDonation.getMyDonationName();
         this.myDonationDate = myDonation.getMyDonationDate();
 
     }
