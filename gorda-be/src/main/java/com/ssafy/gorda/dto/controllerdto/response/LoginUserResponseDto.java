@@ -10,7 +10,7 @@ public class LoginUserResponseDto {
 
     private String userAccount;
     private String userNickname;
-    private int userAmount;
+    private double userAmount;
     private int userScore;
     private String userRole;
 
