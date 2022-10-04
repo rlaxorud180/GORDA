@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import factory from "../smart-contract/donate-contract/factory";
 import Campaign from "../smart-contract/donate-contract/campaign";
 import { useEffect } from "react";
+import axios from "axios";
 
 function DonationList() {
   const [count, setCount] = useState(47398495);
@@ -38,6 +39,20 @@ function DonationList() {
       setCampaigns(tmp);
     }
     dnlist();
+  }, []);
+
+  useEffect(() => {
+    axios({
+      headers: {},
+      url: "http://j7a307.p.ssafy.io:8080/api/donation/readall",
+      method: "GET",
+    })
+      .then((res) => {
+        console.log("기부 목록", res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (
