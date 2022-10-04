@@ -1,20 +1,29 @@
+import { useState } from "react";
 import "./FactoryList.scss";
 
-function FactoryList({ name, changeInput }) {
+function FactoryList({ companyIdx, name, changeInput }) {
+  const [tmpData, setTmpData] = useState(0);
+
+  const changeTmpData = (e) => {
+    setTmpData(e.target.value);
+  };
   return (
     <>
       <div className="factory_card">
-        <div className="factoryImg"></div>
         <div className="factoryName">{name}</div>
         <div className="amount">
           <input
             type="text"
             className="amountInput"
-            onChange={(event) => changeInput(event.target.value)}
+            onChange={(e) => changeTmpData(e)}
           />
         </div>
         <div className="card_btn">
-          <button className="selectBtn">선택하기</button>
+          <input
+            type="checkbox"
+            className="selectBtn"
+            onClick={() => changeInput([companyIdx, tmpData])}
+          />
         </div>
       </div>
     </>

@@ -73,16 +73,23 @@ contract Campaign {
       targetToAchieve=target;
   }
 
-  function contribute() public payable {
+
+  function now() public returns(uint) {
+      return (block.timestamp);
+  }
+
+  function contribute() public payable  {
       require(msg.value > minimumContribution );
 
       contributers.push(msg.sender);
       approvers[msg.sender] = true;
       approversCount++;
+
   }
 
   function createRequest(string memory description) public restricted returns(uint[] memory) {
       require(requests.length < 1);
+      require(block.timestamp <= Deadline);
 
       Request storage newRequest = requests.push();
       newRequest.description = description;
@@ -111,8 +118,6 @@ contract Campaign {
         payable(requests[index].recipient[i]).transfer(totalBalance * requests[index].value[i] / 100);
       }
       requests[index].complete = true;
-
-
   }
 
 
