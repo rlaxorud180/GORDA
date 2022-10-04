@@ -47,7 +47,7 @@ public class FoundationController {
     }
 
     // 기부한 기관 불러오기 기능
-    @GetMapping ("/{donationIdx}")
+    @GetMapping ("/donation/{donationIdx}")
     public ResultDto readFoundationByDonation (@PathVariable ("donationIdx") String donationIdx) {
 
         List<ReadFoundationResponseDto> foundationList = new ArrayList<>();
@@ -59,7 +59,7 @@ public class FoundationController {
     }
 
     // 해당 기관 정보 불러오기 기능
-    @GetMapping("{FoundationIdx}")
+    @GetMapping("/{FoundationIdx}")
     public ResultDto readFoundationByIdx(@PathVariable("FoundationIdx") String foundationIdx){
 
         Foundation tempFoundation = foundationService.findByIdx(foundationIdx);
