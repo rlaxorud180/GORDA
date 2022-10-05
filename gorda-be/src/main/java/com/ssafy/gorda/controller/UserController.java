@@ -40,6 +40,7 @@ public class UserController {
                     .userAmount(request.getUserAmount())
                     .userRole(request.getUserRole())
                     .userScore(request.getUserScore())
+                    .userVoteCount(request.getUserVoteCount())
                     .build();
 
             userService. regist(newUser);
