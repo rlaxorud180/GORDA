@@ -9,12 +9,14 @@ import { styled } from "@mui/material/styles";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
-import { getETHPrice, getETHPriceInUSD } from "../lib/GetEtherPrice";
+// import { getETHPrice, getETHPriceInUSD } from "../lib/GetEtherPrice";
 import Modal from "@mui/material/Modal";
 import Campaign from "../smart-contract/donate-contract/campaign";
+import axios from "axios";
 
 import Web3 from "web3";
 import web3 from "../smart-contract/donate-contract/web3";
+import apiInstance from "../api/Index";
 
 const style = {
   position: "absolute",
@@ -30,18 +32,27 @@ const style = {
 };
 
 function DonationDetailPage() {
-  const detail_title = "청소년에게 공연예술은 선택이 아닌 필수입니다!";
-  const post_foundation = "청소년을 위한 공연예술 사회적협동조합";
-
-  const p_title =
-    "청소년에게 경쟁사회에서 살아남는 기술만 알려주면 되는 걸까요?";
-  const image_description = "사진 설명";
-  const eth = 10000;
-  const goaleth = 20000;
+  const api = apiInstance();
   const team = "프로젝트팀";
   const foundation_name = "킹니셰프한국위원회";
 
-  const [infos, setInfos] = useState([]);
+  const [infos, setInfos] = useState({
+    donationIdx:
+      "f8ef9f089d14a37e9c540fd903a7543e661a80cdd63f3e3e2d00f79558c9b9da",
+    foundationIdx:
+      "1f42d8a83d86b4e2c91f0f66c3dc79b35bad41dce2ae86f996d48556b9c153df",
+    donationLogo:
+      "http://newsimg.hankookilbo.com/2017/01/09/201701091433285687_1.jpg",
+    donationName: "기아대책",
+    donationSubject: "hunger",
+    donationAccount: "0xeb25b55CFA479F7a7C9e8A618f42e9F241AE5c24",
+    donationContent: "홈리스를 위한 기부",
+    donationLike: 0,
+    donationTargetEth: 3000000000000000000,
+    donationCurrentEth: 3000000000000000000,
+    donationStartDate: "2022-10-05T06:15:25.658",
+    donationEndDate: "2022-11-02T00:00:00",
+  });
   const [error, setError] = useState("");
   const [targetInUSD, setTargetInUSD] = useState();
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -50,8 +61,10 @@ function DonationDetailPage() {
   const [balanceEth, setBalanceEth] = useState("");
   const [date, setDate] = useState("");
   const id = useParams();
-  const campaignItem = Campaign(id);
-  campaignItem.options.address = campaignItem.options.campaignid;
+  const [address, setAddress] = useState("");
+  const [foundation, setFoundation] = useState([]);
+  // const campaignItem = Campaign(infos.donationAccount);
+  // campaignItem.options.address = campaignItem.options.campaignid;
 
   const { handleSubmit, register, formState, reset, getValues } = useForm({
     mode: "onChange",
@@ -140,7 +153,6 @@ function DonationDetailPage() {
     } else {
       setInputValue(e.target.value);
     }
-    console.log("달러값", getETHPriceInUSD(ethPrice, inputValue));
   };
 
   const detectCurrentProvider = () => {
@@ -163,24 +175,24 @@ function DonationDetailPage() {
   };
 
   async function onSubmit(data) {
-    alert("정말 기부하시겠습니까?");
-    try {
-      console.log("dadgasdgf", data.donation);
-      const accounts = await web3.eth.getAccounts();
-      const result = await campaignItem.methods.contribute().send({
-        from: accounts[0],
-        value: web3.utils.toWei(data.donation, "ether"),
-      });
-      console.log("result", result);
-      setAmountInUSD(null);
-      reset("", {
-        keepValues: false,
-      });
-      setIsSubmitted(true);
-    } catch (err) {
-      setError(err.message);
-      console.log(err);
-    }
+    // alert("정말 기부하시겠습니까?");
+    // try {
+    //   console.log("dadgasdgf", data.donation);
+    //   const accounts = await web3.eth.getAccounts();
+    //   const result = await campaignItem.methods.contribute().send({
+    //     from: accounts[0],
+    //     value: web3.utils.toWei(data.donation, "ether"),
+    //   });
+    //   console.log("result", result);
+    //   setAmountInUSD(null);
+    //   reset("", {
+    //     keepValues: false,
+    //   });
+    //   setIsSubmitted(true);
+    // } catch (err) {
+    //   setError(err.message);
+    //   console.log(err);
+    // }
   }
   // const saveUserInfo = (ethBalance, account, chainId) => {
   //     console.log("이동희");
@@ -194,101 +206,110 @@ function DonationDetailPage() {
   //     setUserInfo(userData);
   // };
   // console.log(getETHPrice()  )
-  const [ethPrice, setEthPrice] = useState(0);
+  // const [ethPrice, setEthPrice] = useState(0);
 
-  useEffect(() => {
-    async function getEth() {
-      try {
-        const result = await getETHPrice();
-        setEthPrice(result);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getEth();
-  }, []);
+  // useEffect(() => {
+  //   async function getEth() {
+  //     try {
+  //       const result = await getETHPrice();
+  //       setEthPrice(result);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   getEth();
+  // }, []);
 
   async function onSubmit(data) {
-    console.log("hello ", web3.utils.toWei(data.donation, "ether"));
-    try {
-      const accounts = await web3.eth.getAccounts();
-      const result = await campaignItem.methods.contribute().send({
-        from: accounts[0],
-        value: web3.utils.toWei(data.donation, "ether"),
-      });
-      console.log("result", result);
-      setAmountInUSD(null);
-      reset("", {
-        keepValues: false,
-      });
-      setIsSubmitted(true);
-    } catch (err) {
-      setError(err.message);
-      console.log(err);
-    }
+    // console.log("hello ", web3.utils.toWei(data.donation, "ether"));
+    // try {
+    //   const accounts = await web3.eth.getAccounts();
+    //   const result = await campaignItem.methods.contribute().send({
+    //     from: accounts[0],
+    //     value: web3.utils.toWei(data.donation, "ether"),
+    //   });
+    //   console.log("result", result);
+    //   setAmountInUSD(null);
+    //   reset("", {
+    //     keepValues: false,
+    //   });
+    //   setIsSubmitted(true);
+    // } catch (err) {
+    //   setError(err.message);
+    //   console.log(err);
+    // }
   }
 
+  // useEffect(() => {
+  //   async function campaignInfo() {
+  //     const summary = await campaignItem.methods.getSummary().call();
+  //     setInfos(summary);
+  //     console.log("ssummary", summary);
+  //     setTargetEth(infos[11]);
+  //     setBalanceEth(infos[1]);
+  //     setProgress(balanceEth / targetEth);
+  //     let tmpDate = new Date(parseInt(infos[6])).toLocaleString();
+  //     console.log("tmp date", tmpDate);
+  //     setDate(tmpDate);
+  //   }
+  //   campaignInfo();
+  // }, [balanceEth]);
+
   useEffect(() => {
-    async function campaignInfo() {
-      const summary = await campaignItem.methods.getSummary().call();
-      setInfos(summary);
-      console.log("ssummary", summary);
-      setTargetEth(infos[11]);
-      setBalanceEth(infos[1]);
-      setProgress(balanceEth / targetEth);
-      let tmpDate = new Date(parseInt(infos[6])).toLocaleString();
-      console.log("tmp date", tmpDate);
-      setDate(tmpDate);
+    api
+      .get(`api/donation/${id.campaignid}`)
+      .then((res) => {
+        console.log("도네이션 세부 정보", res.data.data);
+        setInfos(res.data.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (infos) {
+      api
+        .get(`api/foundation/${infos.foundationIdx}`)
+        .then((res) => {
+          setFoundation(res.data.data);
+          console.log("파운데이션", res.data.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     }
-    campaignInfo();
-  }, [balanceEth]);
+  }, [infos]);
 
   // console.log("겟이더", ethPrice);
   return (
     <>
       <NavigationBar />
       <div className="detail_header">
-        {console.log("-", infos)}
-        <div className="header_title">{infos[5]}</div>
-        <div className="header_foundation">
-          by {infos[4]} 백엔드에 미리 저장 요망
-        </div>
+        <div className="header_title">{infos.donationName}</div>
+        <div className="header_foundation">by {foundation.foundationName}</div>
       </div>
       <div className="detail_container">
         <div className="box_notion">
           <div className="notion_top">
-            참여하면 Gorda에서 뱃지 NFT SoulBound를 제공!
+            참여하면 Gorda에서 뱃지 SoulBound를 제공!
           </div>
           <div className="notion_bottom">
             1ETH 이상 기부하는 분들께는 Honor 뱃지를 드립니다.
           </div>
         </div>
-        <p className="p_title">{p_title}</p>
-        <p className="p_content">{infos[9]}</p>
-        <div
-          className="p_image"
-          style={{ backgroundImage: `url(${infos[10]})` }}
-        ></div>
-        <div className="image_description"></div>
-        <p className="p_content">
-          공란 == <br />
-          <br />
-        </p>
-        <div className="circle_box">
-          <div className="cl"></div>
-          <div className="cl"></div>
-          <div className="cl"></div>
-        </div>
-        {/* <div className="related_links">
-          <div className="links_header">관련 링크</div>
+        <p className="p_content">{infos.donationContent}</p>
 
-          <li className="libox">예술활동이 청소년 비행 줄여준다(연구)</li>
-          <li className="libox">청소년을 위한 공연예술축제</li>
-        </div> */}
         <div className="eth_box">
           {console.log("balance", balanceEth)}
-          <div className="now_eth">{balanceEth} eth</div>
-          <div className="goal_eth">{targetEth} eth 목표</div>
+          <div className="now_eth">
+            {web3.utils.fromWei(infos.donationCurrentEth.toString(), "ether")}
+            eth
+          </div>
+          <div className="goal_eth">
+            {web3.utils.fromWei(infos.donationTargetEth.toString(), "ether")}{" "}
+            eth 목표
+          </div>
           <div className="goal_progress">
             <Box sx={{ flexGrow: 1 }}>
               <div className="testPro">
@@ -301,17 +322,20 @@ function DonationDetailPage() {
         <div className="foundation">
           <div className="foundation_image"></div>
           <div className="foundation_profile">
-            <div className="team">{team}</div>
-            <div className="foundation_name">{foundation_name}</div>
+            <div className="team">주최기관</div>
+            <div className="foundation_name">{foundation.foundationName}</div>
           </div>
         </div>
-        <div className="period">모금기간: 2022.08.31 ~ {date}</div>
+        <div className="period">
+          모금기간: {infos.donationStartDate.substr(0, 10)} ~
+          {infos.donationEndDate.substr(0, 10)}
+        </div>
         <div className="found_data" onClick={handleTap}>
           <i className="bx bxs-down-arrow"></i>
-          {foundation_name}는?
+          {foundation.foundationName}는?
           {openTap ? (
             <>
-              <div>ㅎㅇ</div>
+              <div>{foundation.foundationContent}</div>
             </>
           ) : (
             ""
@@ -402,7 +426,7 @@ function DonationDetailPage() {
                   </div>
                   {inputValue ? (
                     <div className="dollar">
-                      ~$ {getETHPriceInUSD(ethPrice, inputValue)}
+                      {/* ~$달러 {getETHPriceInUSD(ethPrice, inputValue)} */}
                     </div>
                   ) : (
                     ""
