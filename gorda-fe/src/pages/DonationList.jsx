@@ -26,6 +26,7 @@ function DonationList() {
     api
       .get("api/donation/readall")
       .then((res) => {
+        console.log("도네리스트", res);
         setInfos(res.data.data);
       })
       .catch((err) => {
