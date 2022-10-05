@@ -58,4 +58,19 @@ public class DonationRepository {
         return "Loc : DonationRepository - 기부 삭제 완료";
 
     }
+
+    // 기부 좋아요
+    public void addDonationLike (String Idx){
+        Donation tempDonation = em.find(Donation.class, Idx);
+
+        tempDonation.setDonationLike(tempDonation.getDonationLike() + 1);
+    }
+
+    //기부하기
+    public void addDonationAmount (String Idx, double donAmount){
+
+        Donation tempDonation = em.find(Donation.class, Idx);
+
+        tempDonation.setDonationCurrentEth(tempDonation.getDonationCurrentEth() + donAmount);
+    }
 }
