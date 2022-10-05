@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import Web3 from "web3";
 import { signIn } from "../api/Users";
+import apiInstance from "../api/Index";
 
 export default function useLogin() {
+  const api = apiInstance();
   const [isConnected, setIsConnected] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const [role, setrole] = useState();
+  const [idx, setIdx] = useState();
 
   useEffect(() => {
     function checkConnectedWallet() {
@@ -64,7 +67,9 @@ export default function useLogin() {
             (response) => {
               console.log("리스폰스", response);
               localStorage.setItem("Role", response.data.userRole);
+              localStorage.setItem("idx", response.data.userIdx);
               setrole(response.data.userRole);
+              setIdx(response.data.userIdx);
             },
             (err) => {
               console.log("에러", err);
@@ -103,6 +108,8 @@ export default function useLogin() {
     };
     window.localStorage.setItem("userAccount", JSON.stringify(userAccount));
     window.localStorage.setItem("Role", JSON.stringify(role)); //user persisted data
+    window.localStorage.setItem("idx", JSON.stringify(idx));
+
     const userData = JSON.parse(localStorage.getItem("userAccount"));
     setUserInfo(userData);
     setIsConnected(true);
