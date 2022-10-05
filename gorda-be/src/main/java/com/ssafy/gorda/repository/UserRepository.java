@@ -55,6 +55,14 @@ public class UserRepository {
 
     }
 
+    public void addUserVoteCount (String Idx) {
+
+        User tempUser = em.find(User.class, Idx);
+
+        tempUser.setUserVoteCount(tempUser.getUserVoteCount()+1);
+
+    }
+
     //유저 삭제
     
     public String delete (User user) {
