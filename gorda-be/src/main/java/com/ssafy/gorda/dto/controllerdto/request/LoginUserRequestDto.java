@@ -10,5 +10,6 @@ public class LoginUserRequestDto {
     private double userAmount;
     private int userScore;
     private int userRole;
+    private int userVoteCount;
 
 }
