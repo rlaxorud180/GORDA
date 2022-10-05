@@ -35,7 +35,7 @@ public class DonationCommentRepository {
 
     public List<DonationComment> findByUserIdx(String userIdx) {
 
-        List<DonationComment> donationCommentList = em.createQuery("SELECT d FROM DonationComment d WHERE d.userIdx = :user_idx",DonationComment.class)
+        List<DonationComment> donationCommentList = em.createQuery("SELECT d FROM DonationComment d WHERE d.user.userIdx = :user_idx",DonationComment.class)
                 .setParameter("user_idx",userIdx).getResultList();
 
         return donationCommentList;

@@ -13,15 +13,15 @@ import java.time.LocalDateTime;
 public class ReadMyBadgeResponseDto {
 
     private String myBadgeIdx;
-    private Badge badge;
-    private User user;
+    private String badgeIdx;
+    private String userIdx;
     private LocalDateTime myBadgeDate;
 
     public ReadMyBadgeResponseDto(MyBadge myBadge) {
 
         this.myBadgeIdx = myBadge.getMyBadgeIdx();
-        this.badge = myBadge.getBadge();
-        this.user = myBadge.getUser();
+        this.badgeIdx = myBadge.getBadge().getBadgeIdx();
+        this.userIdx = myBadge.getUser().getUserIdx();
         this.myBadgeDate = myBadge.getMyBadgeDate();
 
     }
