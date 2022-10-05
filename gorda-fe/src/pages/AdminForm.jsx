@@ -67,11 +67,14 @@ function AdminForm() {
         data: {
           donationAccount: newCampaign[newCampaign.length - 1],
           donationContent: data.description,
+          donationCurrentEth: 0,
           donationEndDate: new Date(data.date),
           donationLike: 0,
           donationLogo: data.imageUrl,
+          donationName: data.campaignName,
           donationStartDate: now,
           donationSubject: data.category,
+          donationTargetEth: 0,
           foundationIdx: data.foundation,
         },
       })
