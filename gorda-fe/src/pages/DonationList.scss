@@ -48,12 +48,14 @@ html {
 }
 .test {
     display: flex;
+
     gap: 70px;
     .banner_card {
         margin-top: 110px;
         display: flex;
         flex-direction: column;
         gap: 40px;
+        margin-bottom: 400px;
     }
     .page_card {
         display: flex;
@@ -62,5 +64,19 @@ html {
         justify-content: space-between;
         margin-top: 110px;
         margin-bottom: 400px;
+    }
+}
+
+@media (max-width: 1745px) {
+    .test {
+        display: block;
+        margin: 0 auto;
+        .page_card {
+            margin-bottom: 100px;
+            align-items: center;
+        }
+        .banner_card {
+            align-items: center;
+        }
     }
 }

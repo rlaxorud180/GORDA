@@ -22,28 +22,6 @@ function DonationList() {
 
   const pointCount = count.toLocaleString("ko-KR");
 
-  // useEffect(() => {
-  //   async function testlist() {
-  //     if (campaigns[0] != undefined) {
-  //       for (let i = 0; i < campaigns.length; i++) {
-  //         const tmp = await Campaign(campaigns[i]).methods.getSummary().call();
-  //         setInfos((infos) => [...infos, tmp]);
-  //       }
-  //     }
-  //   }
-
-  //   testlist();
-  // }, [campaigns]);
-
-  // useEffect(() => {
-  //   async function dnlist() {
-  //     const tmp = await factory.methods.getDeployedCampaigns().call();
-  //     setCampaigns(tmp);
-  //     console.log("tmp", tmp);
-  //   }
-  //   dnlist();
-  // }, []);
-
   useEffect(() => {
     api
       .get("api/donation/readall")
@@ -78,16 +56,13 @@ function DonationList() {
           <div className="page_card">
             {infos.map((item, key) => {
               return (
-                <Link to={`/detail/${item.donationIdx}`}>
+                <Link to={`/detail/${campaigns[key]}`}>
                   <DonationListCard
-                    category={item.donationSubject}
-                    imgURL={item.donationLogo}
-                    title={item.donationName}
-                    description={item.donationContent}
-                    target={web3.utils.fromWei(
-                      item.donationTargetEth.toString(),
-                      "ether"
-                    )}
+                    category={item[7]}
+                    imgURL={item[10]}
+                    title={item[5]}
+                    description={item[9]}
+                    target={item[11]}
                   />
                 </Link>
               );
