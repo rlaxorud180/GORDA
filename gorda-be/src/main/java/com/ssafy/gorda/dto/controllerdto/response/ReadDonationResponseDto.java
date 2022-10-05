@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class ReadDonationResponseDto {
 
     private String donationIdx;
-    private Foundation foundation;
+    private String foundationIdx;
     private String donationName;
     private String donationSubject;
     private String donationContent;
@@ -27,7 +27,7 @@ public class ReadDonationResponseDto {
     public ReadDonationResponseDto(Donation donation) {
 
         this.donationIdx = donation.getDonationIdx();
-        this.foundation = donation.getFoundation();
+        this.foundationIdx = donation.getFoundation().getFoundationIdx();
         this.donationName = donation.getDonationName();
         this.donationSubject = donation.getDonationSubject();
         this.donationContent = donation.getDonationContent();
