@@ -77,5 +77,14 @@ public class DonationController {
 
     }
 
+    @PutMapping("/{donationIdx}")
+    public MessageResponseDto modifyDonationLevel (@PathVariable("donationIdx") String donationIdx,@RequestBody double donAmount) {
+
+        donationService.addDonationLevel(donationIdx,donAmount);
+
+        return new MessageResponseDto("기부 금액,좋아요 변경 완료");
+    }
+
+
 
 }
