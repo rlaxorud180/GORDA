@@ -13,7 +13,7 @@ public class LoginUserResponseDto {
     private String userNickname;
     private double userAmount;
     private int userScore;
-    private String userRole;
+    private int userRole;
 
     public LoginUserResponseDto(User user) {
 
