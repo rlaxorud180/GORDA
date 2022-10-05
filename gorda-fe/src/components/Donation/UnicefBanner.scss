@@ -37,3 +37,9 @@
     transform: scale(1.04);
     transition: 0.2s;
 }
+
+@media (max-width: 1745px) {
+    .unicef_container {
+        width: 810px;
+    }
+}
