@@ -38,6 +38,15 @@ public class DonationService {
 
     }
 
+    @Transactional
+    public String addDonationLevel (String Idx, double donAmount) {
+
+        donationRepository.addDonationLike(Idx);
+        donationRepository.addDonationAmount(Idx,donAmount);
+
+        return "Loc : DonationService - 기부금 변경사항 적용완료";
+    }
+
     public List<Donation> findAll() {
 
         List<Donation> donationList = donationRepository.findAll();
