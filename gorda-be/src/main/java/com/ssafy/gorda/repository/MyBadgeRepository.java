@@ -31,7 +31,7 @@ public class MyBadgeRepository {
 
     public List<MyBadge> findByUserIdx(String userIdx) {
 
-        List<MyBadge> myBadgeList = em.createQuery("SELECT m FROM MyBadge m WHERE m.userIdx = :user_idx",MyBadge.class)
+        List<MyBadge> myBadgeList = em.createQuery("SELECT m FROM MyBadge m WHERE m.user.userIdx = :user_idx",MyBadge.class)
                 .setParameter("user_idx",userIdx).getResultList();
 
         return myBadgeList;
