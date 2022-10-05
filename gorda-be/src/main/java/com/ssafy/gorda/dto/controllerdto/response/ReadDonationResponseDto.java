@@ -18,6 +18,7 @@ public class ReadDonationResponseDto {
     private String donationLogo;
     private String donationName;
     private String donationSubject;
+    private String donationAccount;
     private String donationContent;
     private int donationLike;
     private double donationTargetEth;
@@ -32,6 +33,7 @@ public class ReadDonationResponseDto {
         this.donationLogo = donation.getDonationLogo();
         this.donationName = donation.getDonationName();
         this.donationSubject = donation.getDonationSubject();
+        this.donationAccount = donation.getDonationAccount();
         this.donationContent = donation.getDonationContent();
         this.donationLike = donation.getDonationLike();
         this.donationTargetEth = donation.getDonationTargetEth();
