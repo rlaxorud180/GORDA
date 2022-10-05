@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiInstance } from "./Index";
+import apiInstance from "./Index";
 
 const api = apiInstance();
 

@@ -11,44 +11,44 @@ import factory from "../smart-contract/donate-contract/factory";
 import Campaign from "../smart-contract/donate-contract/campaign";
 import { useEffect } from "react";
 import axios from "axios";
+import apiInstance from "../api/Index";
+import web3 from "../smart-contract/vote-contract/web3";
 
 function DonationList() {
+  const api = apiInstance();
   const [count, setCount] = useState(47398495);
   const [campaigns, setCampaigns] = useState([]);
   const [infos, setInfos] = useState([]);
 
   const pointCount = count.toLocaleString("ko-KR");
-  console.log("인포스", infos);
+
+  // useEffect(() => {
+  //   async function testlist() {
+  //     if (campaigns[0] != undefined) {
+  //       for (let i = 0; i < campaigns.length; i++) {
+  //         const tmp = await Campaign(campaigns[i]).methods.getSummary().call();
+  //         setInfos((infos) => [...infos, tmp]);
+  //       }
+  //     }
+  //   }
+
+  //   testlist();
+  // }, [campaigns]);
+
+  // useEffect(() => {
+  //   async function dnlist() {
+  //     const tmp = await factory.methods.getDeployedCampaigns().call();
+  //     setCampaigns(tmp);
+  //     console.log("tmp", tmp);
+  //   }
+  //   dnlist();
+  // }, []);
 
   useEffect(() => {
-    async function testlist() {
-      if (campaigns[0] != undefined) {
-        for (let i = 0; i < campaigns.length; i++) {
-          const tmp = await Campaign(campaigns[i]).methods.getSummary().call();
-          setInfos((infos) => [...infos, tmp]);
-        }
-      }
-    }
-
-    testlist();
-  }, [campaigns]);
-
-  useEffect(() => {
-    async function dnlist() {
-      const tmp = await factory.methods.getDeployedCampaigns().call();
-      setCampaigns(tmp);
-    }
-    dnlist();
-  }, []);
-
-  useEffect(() => {
-    axios({
-      headers: {},
-      url: "http://j7a307.p.ssafy.io:8080/api/donation/readall",
-      method: "GET",
-    })
+    api
+      .get("api/donation/readall")
       .then((res) => {
-        console.log("기부 목록", res.data.data);
+        setInfos(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -78,13 +78,16 @@ function DonationList() {
           <div className="page_card">
             {infos.map((item, key) => {
               return (
-                <Link to={`/detail/${campaigns[key]}`}>
+                <Link to={`/detail/${item.donationIdx}`}>
                   <DonationListCard
-                    category={item[7]}
-                    imgURL={item[10]}
-                    title={item[5]}
-                    description={item[9]}
-                    target={item[11]}
+                    category={item.donationSubject}
+                    imgURL={item.donationLogo}
+                    title={item.donationName}
+                    description={item.donationContent}
+                    target={web3.utils.fromWei(
+                      item.donationTargetEth.toString(),
+                      "ether"
+                    )}
                   />
                 </Link>
               );

@@ -7,9 +7,10 @@ import NavigationBar from "../components/NavigationBar";
 import FactoryList from "../components/FoundationAdmin/FactoryList";
 import CircularProgress from "@mui/material/CircularProgress";
 import "./AdminForm.scss";
-import axios from "axios";
+import apiInstance from "../api/Index";
 
 function AdminForm() {
+  const api = apiInstance();
   const [error, setError] = useState("");
   const [targetInUSD, setTargetInUSD] = useState();
   const [minContriInUSD, setMinContriInUSD] = useState();
@@ -28,13 +29,21 @@ function AdminForm() {
   });
 
   async function onSubmit(data) {
+    data.foundation = data.foundation.split(",");
+    console.log(data.foundation);
     const tmpCompanyArr = [];
     const tmpAmountArr = [];
 
     for (let i = 0; i < inputValue.length; i++) {
-      tmpCompanyArr.push(inputValue[i][0]);
-      tmpAmountArr.push(inputValue[i][1]);
+      if (inputValue[i][0] === "0") {
+        tmpCompanyArr.push(data.foundation[0]);
+        tmpAmountArr.push(inputValue[i][1]);
+      } else {
+        tmpCompanyArr.push(inputValue[i][0]);
+        tmpAmountArr.push(inputValue[i][1]);
+      }
     }
+    console.log("테스트", tmpCompanyArr, tmpAmountArr);
 
     try {
       const accounts = await web3.eth.getAccounts();
@@ -60,11 +69,8 @@ function AdminForm() {
       const newCampaign = await factory.methods.getDeployedCampaigns().call();
       const now = new Date();
 
-      axios({
-        headers: {},
-        url: "http://j7a307.p.ssafy.io:8080/api/donation/regist",
-        method: "POST",
-        data: {
+      api
+        .post("api/donation/regist", {
           donationAccount: newCampaign[newCampaign.length - 1],
           donationContent: data.description,
           donationCurrentEth: 0,
@@ -74,16 +80,16 @@ function AdminForm() {
           donationName: data.campaignName,
           donationStartDate: now,
           donationSubject: data.category,
-          donationTargetEth: 0,
-          foundationIdx: data.foundation,
-        },
-      })
-        .then((res) => {
-          setLoading(false);
-          navigate(`/detail/${newCampaign[newCampaign.length - 1]}`);
+          donationTargetEth: web3.utils.toWei(data.target, "ether"),
+          foundationIdx: data.foundation[1],
         })
-        .catch((err) => {
-          console.log(err);
+        .then((res) => {
+          console.log("성공");
+          setLoading(false);
+          navigate("/dnlist");
+        })
+        .catch((e) => {
+          console.log(e);
         });
     } catch (err) {
       setError(err.message);
@@ -92,11 +98,8 @@ function AdminForm() {
   }
 
   useEffect(() => {
-    axios({
-      headers: {},
-      url: "http://j7a307.p.ssafy.io:8080/api/company",
-      method: "GET",
-    })
+    api
+      .get("api/company")
       .then((res) => {
         setCompany(res.data.data);
       })
@@ -104,11 +107,8 @@ function AdminForm() {
         console.log(err);
       });
 
-    axios({
-      headers: {},
-      url: "http://j7a307.p.ssafy.io:8080/api/foundation",
-      method: "GET",
-    })
+    api
+      .get("api/foundation")
       .then((res) => {
         setFoundation(res.data.data);
       })
@@ -116,6 +116,7 @@ function AdminForm() {
         console.log(err);
       });
   }, []);
+
   const changeInput = (value) => {
     let done = 0;
 
@@ -169,7 +170,10 @@ function AdminForm() {
 
             {foundation.map((item, key) => {
               return (
-                <option key={key} value={item.foundationAccount}>
+                <option
+                  key={key}
+                  value={[item.foundationAccount, item.foundationIdx]}
+                >
                   {item.foundationName}
                 </option>
               );
@@ -250,6 +254,11 @@ function AdminForm() {
               <div className="selection">운반/운송/식품 업체 선택</div>
               <hr className="hr" />
               <div className="manage_list">
+                <FactoryList
+                  idx="0"
+                  name="기관 운영비"
+                  changeInput={changeInput}
+                />
                 {company.map((item, key) => {
                   return (
                     <FactoryList
