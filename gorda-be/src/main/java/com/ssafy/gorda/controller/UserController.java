@@ -58,12 +58,20 @@ public class UserController {
         return new ResultDto(user);
     }
 
-    @PutMapping("/{userIdx}")
+    @PutMapping("/donate/{userIdx}")
     public MessageResponseDto modifyUserDonateLevel (@PathVariable ("userIdx") String userIdx, @RequestBody ModifyUserDonateLevelRequestDto request){
 
         userService.addUserDonationLevel(userIdx, request.getDonateAmount());
 
         return new MessageResponseDto("기부 금액 적용 완료");
+    }
+
+    @PutMapping("/vote/{userIdx}")
+    public MessageResponseDto modifyUserVoteCount (@PathVariable ("userIdx") String userIdx){
+
+        userService.addUserVoteCount(userIdx);
+
+        return new MessageResponseDto("투표 횟수 증가");
     }
 
 

@@ -54,6 +54,15 @@ public class UserService {
 
     }
 
+    @Transactional
+    public void addUserVoteCount (String Idx) {
+
+        userRepository.addUserVoteCount(Idx);
+
+        return;
+
+    }
+
 
 
     // 닉네임 생성 - 후에 ENUM 타입 추가
