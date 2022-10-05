@@ -56,13 +56,16 @@ function DonationList() {
           <div className="page_card">
             {infos.map((item, key) => {
               return (
-                <Link to={`/detail/${campaigns[key]}`}>
+                <Link to={`/detail/${item.donationIdx}`}>
                   <DonationListCard
-                    category={item[7]}
-                    imgURL={item[10]}
-                    title={item[5]}
-                    description={item[9]}
-                    target={item[11]}
+                    category={item.donationSubject}
+                    imgURL={item.donationLogo}
+                    title={item.donationName}
+                    description={item.donationContent}
+                    target={web3.utils.fromWei(
+                      item.donationTargetEth.toString(),
+                      "ether"
+                    )}
                   />
                 </Link>
               );
