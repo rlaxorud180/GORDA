@@ -5,6 +5,7 @@ import { signIn } from "../api/Users";
 export default function useLogin() {
   const [isConnected, setIsConnected] = useState(false);
   const [userInfo, setUserInfo] = useState({});
+  const [role, setrole] = useState();
 
   useEffect(() => {
     function checkConnectedWallet() {
@@ -49,6 +50,7 @@ export default function useLogin() {
         const userAccount = await web3.eth.getAccounts();
         const chainId = await web3.eth.getChainId();
         const account = userAccount[0];
+
         let ethBalance = await web3.eth.getBalance(account); // Get wallet balance
         ethBalance = web3.utils.fromWei(ethBalance, "ether"); //Convert balance to wei
         saveUserInfo(ethBalance, account, chainId);
@@ -61,7 +63,8 @@ export default function useLogin() {
             { userAccount: userAccount[0] },
             (response) => {
               console.log("리스폰스", response);
-              localStorage.setItem("NickName", response.data.userNickname);
+              localStorage.setItem("Role", response.data.userRole);
+              setrole(response.data.userRole);
             },
             (err) => {
               console.log("에러", err);
@@ -98,7 +101,8 @@ export default function useLogin() {
       balance: ethBalance,
       connectionid: chainId,
     };
-    window.localStorage.setItem("userAccount", JSON.stringify(userAccount)); //user persisted data
+    window.localStorage.setItem("userAccount", JSON.stringify(userAccount));
+    window.localStorage.setItem("Role", JSON.stringify(role)); //user persisted data
     const userData = JSON.parse(localStorage.getItem("userAccount"));
     setUserInfo(userData);
     setIsConnected(true);
