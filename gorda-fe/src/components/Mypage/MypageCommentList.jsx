@@ -47,7 +47,7 @@ function MypageCommentList(index) {
       { donationCommentIdx: donationCommentIdx },
       (response) => {
         console.log("딜리트코멘토", response);
-        Location.reload();
+        window.location.replace("/mypage");
       },
       (err) => {
         console.log(err);
@@ -68,7 +68,7 @@ function MypageCommentList(index) {
       </div>
       <div className="comment_box">{commentContent}</div>
       <div className="comment_time_like">
-        <div className="comment_time">{donationResitTime}</div>
+        <div className="comment_time">{donationResitTime.substring(0, 10)}</div>
         <div className="comment_like">
           <div className="comment_delete" onClick={OnClick}>
             삭제
