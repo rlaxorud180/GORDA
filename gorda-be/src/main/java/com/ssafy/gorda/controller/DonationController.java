@@ -44,7 +44,7 @@ public class DonationController {
                 .donationContent(request.getDonationContent())
                 .donationLike(request.getDonationLike())
                 .donationTargetEth(request.getDonationTargetEth())
-                .donationCurrentEth(request.getDonationTargetEth())
+                .donationCurrentEth(request.getDonationCurrentEth())
                 .donationStartDate(request.getDonationStartDate())
                 .donationEndDate(request.getDonationEndDate())
                 .build();
