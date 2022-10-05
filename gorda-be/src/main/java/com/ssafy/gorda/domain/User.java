@@ -40,7 +40,7 @@ public class User {
     private int userScore;
 
     @Column(name = "user_role")
-    private String userRole;
+    private int userRole;
 
 
     @OneToMany(mappedBy = "user")
@@ -61,7 +61,7 @@ public class User {
                  String userNickname,
                  int userScore,
                  double userAmount,
-                 String userRole
+                 int userRole
     )
     {
 
