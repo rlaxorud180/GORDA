@@ -42,6 +42,9 @@ public class User {
     @Column(name = "user_role")
     private int userRole;
 
+    @Column(name = "user_vote_count")
+    private int userVoteCount;
+
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
@@ -61,7 +64,8 @@ public class User {
                  String userNickname,
                  int userScore,
                  double userAmount,
-                 int userRole
+                 int userRole,
+                 int userVoteCount
     )
     {
 
@@ -78,6 +82,7 @@ public class User {
         this.userScore = userScore;
         this.userAmount = userAmount;
         this.userRole = userRole;
+        this.userVoteCount = userVoteCount;
 
     }
 
