@@ -18,26 +18,59 @@ import ApiTest from "./pages/ApiTest";
 import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
+  const userrole = localStorage.Role;
+
   return (
     <div className="App">
       <BrowserRouter>
         <ScrollToTop />
-
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/dnlist" element={<DonationList />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="/mypage/donation" element={<MyPageDonation />} />
-          <Route path="/mypage/request" element={<MyPageDonationRequest />} />
-          <Route path="/vote" element={<Vote />} />
-          <Route path="/vote/detail" element={<InstitutionDetail />} />
-          <Route path="/votecreation" element={<VoteCreation />} />
-          <Route path="/mypage/admin" element={<FoundationAdmin />} />
-          <Route path="/mypage/admin/new" element={<AdminForm />} />
-          <Route path="/:campaignid" element={<Detail />} />
-          <Route path="/detail/:campaignid" element={<DonationDetailPage />} />
-          <Route path="/apitest" element={<ApiTest />} />
-          {/* <Route path="/manage" element={<DonationManage />} /> */}
+          {userrole === "1" ? (
+            <>
+              <Route path="/" element={<Home />} />
+              <Route path="/dnlist" element={<DonationList />} />
+              <Route path="/mypage" element={<MyPage />} />
+              <Route path="/mypage/donation" element={<MyPageDonation />} />
+              <Route
+                path="/mypage/request"
+                element={<MyPageDonationRequest />}
+              />
+              <Route path="/vote" element={<Vote />} />
+              <Route path="/vote/detail" element={<InstitutionDetail />} />
+              <Route path="/votecreation" element={<VoteCreation />} />
+              <Route path="/mypage/admin" element={<FoundationAdmin />} />
+              <Route path="/mypage/admin/new" element={<AdminForm />} />
+              <Route path="/:campaignid" element={<Detail />} />
+              <Route
+                path="/detail/:campaignid"
+                element={<DonationDetailPage />}
+              />
+              <Route path="/apitest" element={<ApiTest />} />
+              {/* <Route path="/manage" element={<DonationManage />} /> */}
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Home />} />
+              <Route path="/dnlist" element={<DonationList />} />
+              <Route path="/mypage" element={<MyPage />} />
+              <Route path="/mypage/donation" element={<MyPageDonation />} />
+              <Route
+                path="/mypage/request"
+                element={<MyPageDonationRequest />}
+              />
+              <Route path="/vote" element={<Vote />} />
+              <Route path="/vote/detail" element={<InstitutionDetail />} />
+
+              <Route path="/mypage/admin" element={<FoundationAdmin />} />
+
+              <Route path="/:campaignid" element={<Detail />} />
+              <Route
+                path="/detail/:campaignid"
+                element={<DonationDetailPage />}
+              />
+              <Route path="/apitest" element={<ApiTest />} />
+            </>
+          )}
         </Routes>
       </BrowserRouter>
       <Footer />
