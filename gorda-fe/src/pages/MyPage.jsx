@@ -14,7 +14,7 @@ function MyPage() {
     const tag = "첫 기부자";
 
     const getNickName = async() => {
-        await getUserInfo({userIdx: localStorage.getItem("userIdx")},
+        await getUserInfo({userIdx: localStorage.getItem("idx")},
         (response) => {
             setUserName(response.data.data.userNickname);
         },

@@ -24,7 +24,7 @@ function MypageCommentList(index) {
 
   const getCommentCnt = async () => {
     await getComment(
-      { userIdx: localStorage.getItem("userIdx") },
+      { userIdx: localStorage.getItem("idx") },
       (response) => {
         setCommentContent(
           response.data.data[index.index].donationCommentContent

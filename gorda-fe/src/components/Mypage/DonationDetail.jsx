@@ -8,7 +8,7 @@ function DonationDetail() {
   const [donateCnt, setDonateCnt] = useState(0);
 
   const getNickName = async() => {
-    await getUserInfo({userIdx: localStorage.getItem("userIdx")},
+    await getUserInfo({userIdx: localStorage.getItem("idx")},
     (response) => {
         let donAmount = response.data.data.userAmount;
         donAmount = donAmount / 1000000000000000000;

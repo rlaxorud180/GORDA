@@ -7,7 +7,7 @@ function MypageComment() {
     const [comment, setComment] = useState([""]);
 
     const getCommentCnt = async() => {
-        await getComment({userIdx: localStorage.getItem("userIdx")},
+        await getComment({userIdx: localStorage.getItem("idx")},
         (response) => {
             setComment(response.data.data);
         },
