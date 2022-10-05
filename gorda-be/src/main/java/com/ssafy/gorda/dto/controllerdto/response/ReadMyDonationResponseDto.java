@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 public class ReadMyDonationResponseDto {
 
     private String myDonationIdx;
-    private User user;
-    private Donation donation;
+    private String userIdx;
+    private String donationIdx;
     private double myDonationAmount;
     private String myDonationName;
     private LocalDateTime myDonationDate;
@@ -20,8 +20,8 @@ public class ReadMyDonationResponseDto {
     public ReadMyDonationResponseDto (MyDonation myDonation) {
 
         this.myDonationIdx = myDonation.getMyDonationIdx();
-        this.user = myDonation.getUser();
-        this.donation = myDonation.getDonation();
+        this.userIdx = myDonation.getUser().getUserIdx();
+        this.donationIdx = myDonation.getDonation().getDonationIdx();
         this.myDonationAmount = myDonation.getMyDonationAmount();
         this.myDonationName = myDonation.getMyDonationName();
         this.myDonationDate = myDonation.getMyDonationDate();
