@@ -138,20 +138,17 @@ function Vote() {
         <hr className="hr_box_2" />
         <div className="vote_list_p">지난 달 모금에 참여한 기관</div>
         <div className="vote_list">
-          {" "}
-          <div>
-            {foundation &&
-              foundation.map((item, key) => {
-                return (
-                  <VoteListItem
-                    foundationName={item.foundationName}
-                    foundationAccount={item.foundationAccount}
-                    foundationLogo={item.foundationLogo}
-                    voteAddress={voteList[voteList.length - 1]}
-                  />
-                );
-              })}
-          </div>
+          {foundation &&
+            foundation.map((item, key) => {
+              return (
+                <VoteListItem
+                  foundationName={item.foundationName}
+                  foundationAccount={item.foundationAccount}
+                  foundationLogo={item.foundationLogo}
+                  voteAddress={voteList[voteList.length - 1]}
+                />
+              );
+            })}
         </div>
       </div>
     </>
