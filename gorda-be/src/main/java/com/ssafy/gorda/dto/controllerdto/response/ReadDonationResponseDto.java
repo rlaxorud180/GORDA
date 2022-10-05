@@ -15,6 +15,7 @@ public class ReadDonationResponseDto {
 
     private String donationIdx;
     private String foundationIdx;
+    private String donationLogo;
     private String donationName;
     private String donationSubject;
     private String donationContent;
@@ -28,6 +29,7 @@ public class ReadDonationResponseDto {
 
         this.donationIdx = donation.getDonationIdx();
         this.foundationIdx = donation.getFoundation().getFoundationIdx();
+        this.donationLogo = donation.getDonationLogo();
         this.donationName = donation.getDonationName();
         this.donationSubject = donation.getDonationSubject();
         this.donationContent = donation.getDonationContent();
