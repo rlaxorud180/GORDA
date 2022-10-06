@@ -3,6 +3,7 @@ package com.ssafy.gorda.service;
 
 import com.ssafy.gorda.domain.Badge;
 import com.ssafy.gorda.domain.Donation;
+import com.ssafy.gorda.domain.DonationComment;
 import com.ssafy.gorda.domain.Foundation;
 import com.ssafy.gorda.repository.DonationRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,13 @@ public class DonationService {
 
         return donationRepository.findByIdx(Idx);
 
+    }
+
+    public List<Donation> findByFoundationIdx (String foundationIdx){
+
+        List<Donation> donationList = donationRepository.findByFoundationIdx(foundationIdx);
+
+        return donationList;
     }
 
     public Donation findByName(String name){
