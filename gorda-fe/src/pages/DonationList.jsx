@@ -21,6 +21,7 @@ function DonationList() {
   const [infos, setInfos] = useState([]);
 
   const pointCount = count.toLocaleString("ko-KR");
+  console.log(infos);
 
   useEffect(() => {
     api

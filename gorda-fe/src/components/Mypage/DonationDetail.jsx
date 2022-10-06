@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -6,14 +6,15 @@ import web3 from "../../smart-contract/donate-contract/web3";
 
 import "./DonationDetail.scss";
 import Campaign from "../../smart-contract/donate-contract/campaign";
+import apiInstance from "../../api/Index";
 
 function DonationDetail() {
-  const campaign = Campaign("0xDE3Afec5017350210a7D1FBE280f8e355b79dD24");
+  const api = apiInstance();
+  const campaign = Campaign("0x00b507cc850DD219B90392B2562a14f683DDC0e1");
   const [error, setError] = useState("");
-  const [targetInUSD, setTargetInUSD] = useState();
-  const [minContriInUSD, setMinContriInUSD] = useState();
-  const [ETHPrice, setETHPrice] = useState(0);
-
+  const [myDonationArr, setMyDonationArr] = useState([]);
+  const [requestArr, setRequestArr] = useState([]);
+  const [cnt, setCnt] = useState([]);
   const {
     handleSubmit,
     register,
@@ -22,7 +23,6 @@ function DonationDetail() {
     mode: "onChange",
   });
 
-  console.log("campaign", campaign);
   async function onSubmit(data) {
     console.log(data);
 
@@ -42,9 +42,7 @@ function DonationDetail() {
 
       const result = await campaign.methods
         .createRequest("안녕하세요. 돈 좀 주세요")
-        .send({
-          from: accounts[0],
-        });
+        .call();
       console.log("result", result);
     } catch (err) {
       setError(err.message);
@@ -82,8 +80,51 @@ function DonationDetail() {
     }
   }
 
+  useEffect(() => {
+    const userIdx = localStorage.getItem("idx");
+    api
+      .get(`api/my_donation/user/${userIdx}`)
+      .then((res) => {
+        setMyDonationArr(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    async function getRequests(i, id) {
+      try {
+        const campaign = Campaign(id);
+        const result = await campaign.methods.getRequestsCount().call();
+        if (result >= 1) {
+          setCnt((cnt) => [...cnt, i]);
+        }
+      } catch (err) {
+        setError(err.message);
+        console.log(err);
+      }
+    }
+
+    for (let i = 0; i < myDonationArr.length; i++) {
+      api
+        .get(`api/donation/${myDonationArr[i].donationIdx}`)
+        .then((res) => {
+          getRequests(i, res.data.data.donationAccount);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [myDonationArr]);
+
   return (
     <>
+      {console.log(cnt)}
+      {console.log(cnt.includes(1))}
+      {console.log(cnt.includes(6))}
+
       <div className="donation_detail">
         <div className="detail_title">기부내역</div>
         <div className="total_container">

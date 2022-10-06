@@ -298,6 +298,13 @@ function DonationDetailPage() {
       .get(`api/donation/${id.campaignid}`)
       .then((res) => {
         setInfos(res.data.data);
+        console.log("==", res.data.data.donationCurrentEth);
+        console.log("==", res.data.data.donationTargetEth);
+
+        setProgress(
+          (res.data.data.donationCurrentEth / res.data.data.donationTargetEth) *
+            100
+        );
       })
       .catch((e) => {
         console.log(e);
@@ -366,7 +373,11 @@ function DonationDetailPage() {
           </div>
         </div>
         <div className="foundation">
-          <div className="foundation_image"></div>
+          {console.log("asdfas", infos.donationLogo)}
+          <div
+            className="foundation_image"
+            style={{ backgroundImage: `url(${infos.donationLogo})` }}
+          ></div>
           <div className="foundation_profile">
             <div className="team">주최기관</div>
             <div className="foundation_name">{foundation.foundationName}</div>
