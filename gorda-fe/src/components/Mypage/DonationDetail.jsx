@@ -1,10 +1,20 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import "./DonationDetail.scss";
+import { useState, useEffect } from "react";
 import { getUserInfo } from "../../api/Users";
 import { getComment } from "../../api/Comment";
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import web3 from "../../smart-contract/donate-contract/web3";
+
+import "./DonationDetail.scss";
+import Campaign from "../../smart-contract/donate-contract/campaign";
+import apiInstance from "../../api/Index";
 
 function DonationDetail() {
+  const api = apiInstance();
+  const [error, setError] = useState("");
+  const [myDonationArr, setMyDonationArr] = useState([]);
+  const [requestArr, setRequestArr] = useState([]);
+  const [cnt, setCnt] = useState([]);
   const [donateAmount, setDonateAmount] = useState("");
   const [donateCnt, setDonateCnt] = useState(0);
   const [commentCnt, setCommentCnt] = useState(0);
@@ -36,6 +46,45 @@ function DonationDetail() {
       }
     );
   };
+
+  useEffect(() => {
+    const userIdx = localStorage.getItem("idx");
+    api
+      .get(`api/my_donation/user/${userIdx}`)
+      .then((res) => {
+        setMyDonationArr(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    async function getRequests(i, id) {
+      try {
+        const campaign = Campaign(id);
+        const result = await campaign.methods.getRequestsCount().call();
+        if (result >= 1) {
+          setCnt((cnt) => [...cnt, i]);
+        }
+      } catch (err) {
+        setError(err.message);
+        console.log(err);
+      }
+    }
+
+    for (let i = 0; i < myDonationArr.length; i++) {
+      api
+        .get(`api/donation/${myDonationArr[i].donationIdx}`)
+        .then((res) => {
+          getRequests(i, res.data.data.donationAccount);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [myDonationArr]);
 
   useEffect(() => {
     getNickName();
