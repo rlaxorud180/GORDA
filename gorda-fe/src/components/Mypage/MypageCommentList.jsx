@@ -1,25 +1,84 @@
+import { useEffect, useState } from "react";
+import { deleteComment, getComment } from "../../api/Comment";
+import { getDonationByIdx } from "../../api/Donation";
 import "./MypageCommentList.scss";
 
-function MypageCommentList() {
-    const comment_list_1 = "제 11회 대구여성영화제 함께 해주세요!";
-    const comment = "응원합니다!";
-    return (
-        <>
-            <div className="comment_list">
-                <div className="box_tag">모금함</div>
-                <div className="comment_list_title">{comment_list_1}</div>
-            </div>
-            <div className="comment_box">{comment}</div>
-            <div className="comment_time_like">
-                <div className="comment_time">방금 전</div>
-                <div className="comment_like">
-                    <div className="comment_heart">
-                        <i className="bx bxs-heart"></i>좋아요
-                    </div>
-                    <div className="comment_delete">삭제</div>
-                </div>
-            </div>
-        </>
+function MypageCommentList(index) {
+  const [commentContent, setCommentContent] = useState("");
+  const [donationName, setDonationName] = useState("");
+  const [donationResitTime, setDonationRegistTime] = useState("");
+  const [donationCommentIdx, setDonationCommentIdx] = useState("");
+
+  // console.log(index)
+  const getMyDonation = async () => {
+    await getDonationByIdx(
+      { donationIdx: index.donationIdx },
+      (response) => {
+        console.log(index.index, ": ", response.data.data.donationName);
+        setDonationName(response.data.data.donationName);
+        console.log(donationName)
+      },
+      (err) => {
+        console.log(err);
+      }
     );
+  };
+
+
+  const getCommentCnt = async () => {
+    await getComment(
+      { userIdx: localStorage.getItem("idx") },
+      (response) => {
+        setCommentContent(
+          response.data.data[index.index].donationCommentContent
+        );
+        setDonationRegistTime(
+          response.data.data[index.index].donationCommentDate
+        );
+        setDonationCommentIdx(
+          response.data.data[index.index].donationCommentIdx
+        );
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  };
+
+  const OnClick = async () => {
+    await deleteComment(
+      { donationCommentIdx: donationCommentIdx },
+      (response) => {
+        console.log("딜리트코멘토", response);
+        window.location.replace("/mypage");
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  };
+
+  useEffect(() => {
+    getCommentCnt();
+    getMyDonation();
+  }, []);
+
+  return (
+    <>
+      <div className="comment_list">
+        <div className="box_tag">모금함</div>
+        <div className="comment_list_title">{donationName}</div>
+      </div>
+      <div className="comment_box">{commentContent}</div>
+      <div className="comment_time_like">
+        <div className="comment_time">{donationResitTime.substring(0, 10)}</div>
+        <div className="comment_like">
+          <div className="comment_delete" onClick={OnClick}>
+            삭제
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 export default MypageCommentList;

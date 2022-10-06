@@ -1,7 +1,7 @@
 import "./Vote.scss";
 import NavigationBar from "../components/NavigationBar";
 import { useState, useEffect } from "react";
-
+import apiInstance from "../api/Index";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -17,7 +17,7 @@ function Vote() {
   const [thisMonthVote, setThisMonthVote] = useState([0]);
   const [voteProps, setVoteProps] = useState([]);
   const [foundation, setFoundation] = useState([]);
-
+  const api = apiInstance();
   // 이달의 기관 (전월 기록 희망 시 -1 뒤에 추가 변수 빼기 필요)
   const voteItem = VoteItem(voteList[voteList.length - 1]);
   const handleCalender = () => {
@@ -45,26 +45,24 @@ function Vote() {
     async function callVoteList() {
       const tmp = await factory.methods.getDeployedVotes().call();
       setVoteList(tmp);
-      console.log("voteList", voteList);
+      // console.log("voteList==================", voteList);
     }
 
     callVoteList();
   }, []);
 
   useEffect(() => {
-    axios({
-      headers: {},
-      url: "http://localhost:8080/api/foundation",
-      method: "GET",
-    })
+    api
+      .get("api/foundation")
       .then((res) => {
-        console.log("리스폰스 데이터", res.data);
+        // console.log("투표리스트", res);
         setFoundation(res.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+  console.log(foundation);
   return (
     <>
       <NavigationBar />
@@ -145,7 +143,8 @@ function Vote() {
                   foundationName={item.foundationName}
                   foundationAccount={item.foundationAccount}
                   foundationLogo={item.foundationLogo}
-                  voteAddress={voteList[voteList.length - 1]}
+                  foundationIdx={item.foundationIdx}
+                  voteAddress={voteList[0]}
                 />
               );
             })}

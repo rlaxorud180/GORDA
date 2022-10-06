@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-
+import { getUserInfo } from "../../api/Users";
+import { getComment } from "../../api/Comment";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import web3 from "../../smart-contract/donate-contract/web3";
@@ -10,75 +11,41 @@ import apiInstance from "../../api/Index";
 
 function DonationDetail() {
   const api = apiInstance();
-  const campaign = Campaign("0x00b507cc850DD219B90392B2562a14f683DDC0e1");
   const [error, setError] = useState("");
   const [myDonationArr, setMyDonationArr] = useState([]);
   const [requestArr, setRequestArr] = useState([]);
   const [cnt, setCnt] = useState([]);
-  const {
-    handleSubmit,
-    register,
-    formState: { isSubmitting, errors },
-  } = useForm({
-    mode: "onChange",
-  });
+  const [donateAmount, setDonateAmount] = useState("");
+  const [donateCnt, setDonateCnt] = useState(0);
+  const [commentCnt, setCommentCnt] = useState(0);
+  const [voteCnt, setVoteCnt] = useState(0);
 
-  async function onSubmit(data) {
-    console.log(data);
+  const getNickName = async () => {
+    await getUserInfo(
+      { userIdx: localStorage.getItem("idx") },
+      (response) => {
+        let donAmount = response.data.data.userAmount;
+        donAmount = donAmount / 1000000000000000000;
+        setDonateAmount(donAmount);
+        setDonateCnt(response.data.data.userScore);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  };
 
-    //   function createRequest(string memory description, uint value, address recipient) public restricted {
-    //     Request storage newRequest = requests.push();
-    //     newRequest.description = description;
-    //     newRequest.value = value;
-    //     newRequest.recipient = recipient;
-    //     newRequest.complete = false;
-    //     newRequest.approvalCount = 0;
-    // }
-
-    try {
-      const accounts = await web3.eth.getAccounts();
-      console.log("accounts", accounts);
-      data.date = new Date(data.date).getTime();
-
-      const result = await campaign.methods
-        .createRequest("안녕하세요. 돈 좀 주세요")
-        .call();
-      console.log("result", result);
-    } catch (err) {
-      setError(err.message);
-      console.log(err);
-    }
-  }
-
-  async function onApprove() {
-    try {
-      const accounts = await web3.eth.getAccounts();
-      console.log("accounts", accounts);
-
-      const result = await campaign.methods.approveRequest(0).send({
-        from: accounts[0],
-      });
-      console.log("result", result);
-    } catch (err) {
-      setError(err.message);
-      console.log(err);
-    }
-  }
-
-  async function onFinalize() {
-    try {
-      const accounts = await web3.eth.getAccounts();
-      console.log("accounts", accounts);
-
-      const result = await campaign.methods.finalizeRequest(0).send({
-        from: accounts[0],
-      });
-      console.log("result", result);
-    } catch (err) {
-      setError(err.message);
-      console.log(err);
-    }
-  }
+  const getCommentCnt = async () => {
+    await getComment(
+      { userIdx: localStorage.getItem("idx") },
+      (response) => {
+        setCommentCnt(response.data.data.length);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  };
 
   useEffect(() => {
     const userIdx = localStorage.getItem("idx");
@@ -119,50 +86,35 @@ function DonationDetail() {
     }
   }, [myDonationArr]);
 
+  useEffect(() => {
+    getNickName();
+    getCommentCnt();
+  }, []);
+
   return (
     <>
-      {console.log(cnt)}
-      {console.log(cnt.includes(1))}
-      {console.log(cnt.includes(6))}
-
       <div className="donation_detail">
         <div className="detail_title">기부내역</div>
         <div className="total_container">
           <div>
             <div className="total_donation">총 기부금</div>
-            <div className="total_eth">total_etheth</div>
+            <div className="total_eth">{donateAmount} eth</div>
           </div>
           <div className="total_detail_container">
             <div className="total_detail">
               <div>기부횟수</div>
-              <span>0회</span>
+              <span>{donateCnt} 회</span>
             </div>
             <div className="total_detail">
-              <div>직접기부</div>
-              <span>0회</span>
+              <div>댓글 수</div>
+              <span>{commentCnt} 회</span>
             </div>
             <div className="total_detail">
-              <div>참여기부</div>
-              <span>0eth</span>
+              <div>투표횟수</div>
+              <span>{voteCnt} 회</span>
             </div>
           </div>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input
-            className="titleinput"
-            placeholder="이미지"
-            {...register("imageUrl", { required: true })}
-            isDisabled={isSubmitting}
-            type="url"
-          />
-          <button type="submit">리퀘스트</button>
-        </form>
-        <button type="button" onClick={onApprove}>
-          허가해주기
-        </button>
-        <button type="button" onClick={onFinalize}>
-          파이널라이즈
-        </button>
         <Link to="/mypage/donation" className="donation_list">
           기부내역
         </Link>

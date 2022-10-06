@@ -27,6 +27,7 @@ function DonationList() {
     api
       .get("api/donation/readall")
       .then((res) => {
+        console.log("도네리스트", res);
         setInfos(res.data.data);
       })
       .catch((err) => {
@@ -56,6 +57,7 @@ function DonationList() {
         <div className="test">
           <div className="page_card">
             {infos.map((item, key) => {
+              console.log("아이템", infos);
               return (
                 <Link to={`/detail/${item.donationIdx}`}>
                   <DonationListCard

@@ -18,6 +18,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Web3 from "web3";
 import web3 from "../smart-contract/donate-contract/web3";
 import apiInstance from "../api/Index";
+import { putDonation } from "../api/Donation";
+import { postMyDonation } from "../api/MyDonation";
+import { putUserDonate } from "../api/Users";
+import { postComment } from "../api/Comment";
+
 
 const style = {
   position: "absolute",
@@ -34,8 +39,7 @@ const style = {
 
 function DonationDetailPage() {
   const api = apiInstance();
-  const team = "프로젝트팀";
-  const foundation_name = "킹니셰프한국위원회";
+
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -96,10 +100,7 @@ function DonationDetailPage() {
     setOpenTap((present) => !present);
   };
 
-  const [valueLength, setValueLength] = useState(0);
-  const checkValueLength = (e) => {
-    setValueLength(e.target.value.length);
-  };
+
 
   const comment_list_count = 0;
 
@@ -173,13 +174,14 @@ function DonationDetailPage() {
     return provider;
   };
 
-  const handlePreventDefault = () => {
-    console.log("test");
-  };
+ 
 
+  console.log();
   async function onSubmit(data) {
     alert("정말 기부하시겠습니까?");
+
     try {
+      console.log("데이타", data," / ", infos);
       const myIdx = localStorage.getItem("idx");
 
       const accounts = await web3.eth.getAccounts();
@@ -196,102 +198,72 @@ function DonationDetailPage() {
         keepValues: false,
       });
       setIsSubmitted(true);
+      console.log(isSubmitted);
 
-      api
-        .post("api/my_donation/regist", {
-          donationIdx: infos.donationIdx,
-          myDonationAmount: web3.utils.toWei(String(data.donation), "ether"),
-          myDonationName: "공백",
-          userIdx: myIdx,
-        })
-        .then((res) => {
-          console.log("성공");
-          navigate("/dnlist");
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      await putDonation({donationIdx: infos.donationIdx, donAmount: web3.utils.toWei(String(data.donation), "ether")},
+        (response) => {
+            setComment(response.data.data);
+            console.log("도네이션 넣기 성공", response);
+        },
+        (err) => {
+            console.log(err);
+        }
+      );
+      
+      await postMyDonation({donationIdx: infos.donationIdx,
+        myDonationAmount: web3.utils.toWei(String(data.donation), "ether"),
+        myDonationName : infos.donationName,
+        userIdx : localStorage.getItem("idx")},
+        (response) => {
+          console.log("성공", response);
+        },
+        (err) => {
+          console.log("postMyDonation 실패", err);
+        }
+      );
 
-      const config = { headers: { "Content-Type": "application/json" } };
-      api
-        .put(
-          `api/donation/${infos.donationIdx}`,
-          web3.utils.toWei(String(data.donation), "ether"),
-          config
-        )
-        .then((res) => {
-          console.log("===성공", res.data);
-          setLoading(false);
-          navigate("/dnlist");
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      await putUserDonate({userIdx: localStorage.getItem("idx"), donateAmount : web3.utils.toWei(String(data.donation), "ether")},
+      (response) => {
+        console.log("유저 도네이트 갱신 성공", response);
+      },
+      (err) => {
+        console.log("유저 도네이트 갱신 실패", err);
+      });
+      
     } catch (err) {
       setError(err.message);
       console.log(err);
     }
   }
-  // const saveUserInfo = (ethBalance, account, chainId) => {
-  //     console.log("이동희");
-  //     const userAccount = {
-  //         account: account,
-  //         balance: ethBalance,
-  //         connectionid: chainId,
-  //     };
-  //     window.localStorage.setItem("userAccount", JSON.stringify(userAccount)); //user persisted data
-  //     const userData = JSON.parse(localStorage.getItem("userAccount"));
-  //     setUserInfo(userData);
-  // };
-  // console.log(getETHPrice()  )
-  // const [ethPrice, setEthPrice] = useState(0);
 
-  // useEffect(() => {
-  //   async function getEth() {
-  //     try {
-  //       const result = await getETHPrice();
-  //       setEthPrice(result);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   getEth();
-  // }, []);
+const [comment, setComment] = useState("")
+const handlePreventDefault = (e) => {
+  e.preventDefault()
+  api
+    .post(`/api/donation_comment/regist`, {
+      donationCommentContent: comment,
+      donationIdx: params.campaignid,
+      userIdx: localStorage.idx
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+const [valueLength, setValueLength] = useState(0);
+const checkValueLength = (e) => {
+  setValueLength(e.target.value.length);
+  setComment(e.target.value)
+};
+let params  = useParams()
 
-  // async function onSubmit(data) {
-  // console.log("hello ", web3.utils.toWei(data.donation, "ether"));
-  // try {
-  //   const accounts = await web3.eth.getAccounts();
-  //   const result = await campaignItem.methods.contribute().send({
-  //     from: accounts[0],
-  //     value: web3.utils.toWei(data.donation, "ether"),
-  //   });
-  //   console.log("result", result);
-  //   setAmountInUSD(null);
-  //   reset("", {
-  //     keepValues: false,
-  //   });
-  //   setIsSubmitted(true);
-  // } catch (err) {
-  //   setError(err.message);
-  //   console.log(err);
-  // }
-  // }
 
-  // useEffect(() => {
-  //   async function campaignInfo() {
-  //     const summary = await campaignItem.methods.getSummary().call();
-  //     setInfos(summary);
-  //     console.log("ssummary", summary);
-  //     setTargetEth(infos[11]);
-  //     setBalanceEth(infos[1]);
-  //     setProgress(balanceEth / targetEth);
-  //     let tmpDate = new Date(parseInt(infos[6])).toLocaleString();
-  //     console.log("tmp date", tmpDate);
-  //     setDate(tmpDate);
-  //   }
-  //   campaignInfo();
-  // }, [balanceEth]);
+const commentPost = () => {
+}
+
+//댓글 가져오기
 
   useEffect(() => {
     api
@@ -353,12 +325,10 @@ function DonationDetailPage() {
         <p className="p_content">{infos.donationContent}</p>
 
         <div className="eth_box">
-          {console.log("balance", balanceEth)}
           <div className="now_eth">
             {web3.utils.fromWei(infos.donationCurrentEth.toString(), "ether")}
             eth
           </div>
-          {console.log("타겟어마운드", infos.donationCurrentEth)}
           <div className="goal_eth">
             {web3.utils.fromWei(infos.donationTargetEth.toString(), "ether")}{" "}
             eth 목표
@@ -414,7 +384,7 @@ function DonationDetailPage() {
             </div>
             <div className="comment_info">
               <div className="comment_count">{valueLength}/500</div>
-              <button className="registBtn" type="submit">
+              <button onSubmit={commentPost} className="registBtn" type="submit">
                 등록
               </button>
             </div>

@@ -29,3 +29,11 @@ html {
         }
     }
 }
+
+@media (max-width: 1720px){
+    .list_container {
+        display: flex;
+        justify-content: center;
+        
+    }
+}
