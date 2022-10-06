@@ -6,6 +6,7 @@ import com.ssafy.gorda.dto.MessageResponseDto;
 import com.ssafy.gorda.dto.ResultDto;
 import com.ssafy.gorda.dto.controllerdto.request.RegistDonationRequestDto;
 import com.ssafy.gorda.dto.controllerdto.response.ReadBadgeResponseDto;
+import com.ssafy.gorda.dto.controllerdto.response.ReadDonationCommentResponseDto;
 import com.ssafy.gorda.dto.controllerdto.response.ReadDonationResponseDto;
 import com.ssafy.gorda.dto.controllerdto.response.ReadFoundationResponseDto;
 import com.ssafy.gorda.service.DonationService;
@@ -68,6 +69,18 @@ public class DonationController {
 
         return new ResultDto(new ReadDonationResponseDto(tempDonation));
     }
+
+    @GetMapping("/foundation/{foundationIdx}")
+    public ResultDto readDonationByFoundation (@PathVariable ("foundationIdx") String foundationIdx) {
+
+        List<ReadDonationResponseDto> donationList = new ArrayList<>();
+
+        donationList = donationService.findByFoundationIdx(foundationIdx).stream().map(donation -> new ReadDonationResponseDto(donation)).collect(Collectors.toList());
+
+        return new ResultDto(donationList);
+
+    }
+
 
     //전체 도네이션 정보 가져오기
     @GetMapping("/readall")
