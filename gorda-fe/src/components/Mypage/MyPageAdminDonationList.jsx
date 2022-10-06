@@ -24,7 +24,7 @@ function MyPageAdminDonationList() {
 
   return (
     <>
-      <div className="list_title">기부내역({infos.length}건)</div>
+      <div className="list_title">진행 중인 모금({infos.length}건)</div>
 
       <div className="list_box">
         {console.log("infos", infos)}
