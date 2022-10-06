@@ -67,6 +67,17 @@ public class DonationCommentController {
 
     }
 
+    @GetMapping("/donation/{donationIdx}")
+    public ResultDto readDonationCommentByDonation (@PathVariable ("donationIdx") String donationIdx) {
+
+        List<ReadDonationCommentResponseDto> donationCommentList = new ArrayList<>();
+
+        donationCommentList = donationCommentService.findByDonationIdx(donationIdx).stream().map(donationComment -> new ReadDonationCommentResponseDto(donationComment)).collect(Collectors.toList());
+
+        return new ResultDto(donationCommentList);
+
+    }
+
     //지정된 나의 댓글 삭제
 
     @DeleteMapping("/{DonationCommentIdx}")

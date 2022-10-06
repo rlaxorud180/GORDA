@@ -2,6 +2,7 @@ package com.ssafy.gorda.repository;
 
 import com.ssafy.gorda.domain.Badge;
 import com.ssafy.gorda.domain.Donation;
+import com.ssafy.gorda.domain.DonationComment;
 import com.ssafy.gorda.domain.Foundation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -59,6 +60,8 @@ public class DonationRepository {
 
         return donations.get(0);
     }
+
+
 
     //기부 삭제
 
