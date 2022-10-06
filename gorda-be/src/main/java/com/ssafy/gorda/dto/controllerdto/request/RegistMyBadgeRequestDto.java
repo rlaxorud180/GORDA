@@ -10,5 +10,6 @@ public class RegistMyBadgeRequestDto {
 
     private String badgeIdx;
     private String userIdx;
+    private int isMyBadgeEmpty;
 
 }

@@ -49,7 +49,7 @@ public class Badge {
         SHA256 sha256 = new SHA256();
 
         try {
-            this.badgeIdx = sha256.encrypt(LocalDateTime.now().toString());
+            this.badgeIdx = sha256.encrypt(LocalDateTime.now()+badgeTitle.toString());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

@@ -60,6 +60,39 @@ public class MyBadgeController {
         return new ResultDto(myBadgeList);
     }
 
+    @PutMapping("/user/{userIdx}")
+    public MessageResponseDto assembleMyBadge(@PathVariable("userIdx") String userIdx){
+
+        List<ReadMyBadgeResponseDto> myBadgeList = new ArrayList<>();
+
+        myBadgeList = myBadgeService.findByUserIdx(userIdx).stream().map(myBadge -> new ReadMyBadgeResponseDto(myBadge)).collect(Collectors.toList());
+
+        for(ReadMyBadgeResponseDto myBadge : myBadgeList) {
+            if(myBadge.getIsMyBadgeEmpty() == 1) continue;
+
+            if(badgeService.findByIdx(myBadge.getBadgeIdx()).getBadgeTitle().equals("기부 새내기")) {
+                myBadgeService.oneTimeDonate(myBadge.getMyBadgeIdx(), userIdx);
+            }
+            else if (badgeService.findByIdx(myBadge.getBadgeIdx()).getBadgeTitle().equals("기부의 달인")) {
+                myBadgeService.fiveTimeDonate(myBadge.getMyBadgeIdx(), userIdx);
+            }
+            else if (badgeService.findByIdx(myBadge.getBadgeIdx()).getBadgeTitle().equals("기부 통달자")) {
+                myBadgeService.twentyTimeDonate(myBadge.getMyBadgeIdx(), userIdx);
+            }
+            else if (badgeService.findByIdx(myBadge.getBadgeIdx()).getBadgeTitle().equals("티끌모아 태산")) {
+                myBadgeService.oneAmountDonate(myBadge.getMyBadgeIdx(), userIdx);
+            }
+            else if (badgeService.findByIdx(myBadge.getBadgeIdx()).getBadgeTitle().equals("태산모아 산맥")) {
+                myBadgeService.tenAmountDonate(myBadge.getMyBadgeIdx(), userIdx);
+            }
+            else if (badgeService.findByIdx(myBadge.getBadgeIdx()).getBadgeTitle().equals("노블레스 오블리주")) {
+                myBadgeService.hundredAmountDonate(myBadge.getMyBadgeIdx(), userIdx);
+            }
+        }
+
+        return new MessageResponseDto("내 뱃지 갱신 완료");
+    }
+
     //개인별 뱃지 획득 여부 갱신
 //    @PutMapping("/user/{userIdx}")
 //    public MessageResponseDto assembleMyBadge (@PathVariable ("userIdx") String userIdx){
