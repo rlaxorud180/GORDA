@@ -21,6 +21,7 @@ import apiInstance from "../api/Index";
 import { putDonation } from "../api/Donation";
 import { postMyDonation } from "../api/MyDonation";
 import { putUserDonate } from "../api/Users";
+import { postComment } from "../api/Comment";
 
 
 const style = {
@@ -260,7 +261,6 @@ let params  = useParams()
 
 
 const commentPost = () => {
-  console.log('gd')
 }
 
 //댓글 가져오기

@@ -33,7 +33,7 @@ function AdminForm() {
     console.log(data.foundation);
     const tmpCompanyArr = [];
     const tmpAmountArr = [];
-
+    console.log("dsasdasdas", data);
     for (let i = 0; i < inputValue.length; i++) {
       if (inputValue[i][0] === "0") {
         tmpCompanyArr.push(data.foundation[0]);

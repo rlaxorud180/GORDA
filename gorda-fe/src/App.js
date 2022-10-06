@@ -46,6 +46,7 @@ function App() {
                 element={<MyPageDonationRequest />}
               />
               <Route path="/vote" element={<Vote />} />
+              <Route path="/vote/detail" element={<InstitutionDetail />} />
               <Route
                 path="/vote/detail/:foundationIdx"
                 element={<InstitutionDetail />}
@@ -72,10 +73,13 @@ function App() {
                 element={<MyPageDonationRequest />}
               />
               <Route path="/vote" element={<Vote />} />
-              <Route path="/vote/detail" element={<InstitutionDetail />} />
 
               <Route path="/mypage/admin" element={<FoundationAdmin />} />
-
+              <Route path="/vote/detail" element={<InstitutionDetail />} />
+              <Route
+                path="/vote/detail/:foundationIdx"
+                element={<InstitutionDetail />}
+              />
               <Route path="/:campaignid" element={<Detail />} />
               <Route
                 path="/detail/:campaignid"
