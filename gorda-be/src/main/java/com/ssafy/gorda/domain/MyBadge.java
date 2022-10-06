@@ -35,17 +35,28 @@ public class MyBadge {
     @Column(name = "my_badge_date")
     private LocalDateTime myBadgeDate;
 
+    @Column(name = "is_my_badge_empty")
+    private int isMyBadgeEmpty;
+
+    @Column(name = "my_badge_name")
+    private String myBadgeName;
+
+    @Column(name = "my_badge_content")
+    private String myBadgeContent;
+
     @Builder
     public MyBadge (Badge badge,
                   User user,
-                  LocalDateTime myBadgeDate
+                  LocalDateTime myBadgeDate,
+                    String myBadgeContent,
+                    String myBadgeName
     )
     {
 
         SHA256 sha256 = new SHA256();
 
         try {
-            this.myBadgeIdx = sha256.encrypt(LocalDateTime.now().toString());
+            this.myBadgeIdx = sha256.encrypt(LocalDateTime.now().toString() + Math.random());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -53,7 +64,9 @@ public class MyBadge {
         this.badge = badge;
         this.user = user;
         this.myBadgeDate = myBadgeDate;
-
+        this.isMyBadgeEmpty = 0;
+        this.myBadgeContent = myBadgeContent;
+        this.myBadgeName = myBadgeName;
     }
 
 }
