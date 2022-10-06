@@ -11,13 +11,18 @@ import InstitutionDetail from "./pages/InstitutionDetail";
 import MyPage from "./pages/MyPage";
 import MyPageDonation from "./pages/MyPageDonation";
 import MyPageDonationRequest from "./pages/MyPageDonationRequest";
-import Detail from "./pages/Detail";
 import Vote from "./pages/Vote";
 import VoteCreation from "./pages/VoteCreation";
-import ApiTest from "./pages/ApiTest";
 import ScrollToTop from "./components/ScrollToTop";
 import { useEffect } from "react";
-import { BadgeDummy, CompanyDummy, DonationCommentDummy, DonationDummy, FoundationDummy, UserDummy } from "./dummy/Dummy";
+import {
+  BadgeDummy,
+  CompanyDummy,
+  DonationCommentDummy,
+  DonationDummy,
+  FoundationDummy,
+  UserDummy,
+} from "./dummy/Dummy";
 
 function App() {
   const userrole = localStorage.Role;
@@ -28,7 +33,7 @@ function App() {
     // DonationCommentDummy();
     BadgeDummy();
     CompanyDummy();
-  })
+  });
 
   return (
     <div className="App">
@@ -54,12 +59,10 @@ function App() {
               <Route path="/votecreation" element={<VoteCreation />} />
               <Route path="/mypage/admin" element={<FoundationAdmin />} />
               <Route path="/mypage/admin/new" element={<AdminForm />} />
-              <Route path="/:campaignid" element={<Detail />} />
               <Route
                 path="/detail/:campaignid"
                 element={<DonationDetailPage />}
               />
-              <Route path="/apitest" element={<ApiTest />} />
               {/* <Route path="/manage" element={<DonationManage />} /> */}
             </>
           ) : (
@@ -80,12 +83,10 @@ function App() {
                 path="/vote/detail/:foundationIdx"
                 element={<InstitutionDetail />}
               />
-              <Route path="/:campaignid" element={<Detail />} />
               <Route
                 path="/detail/:campaignid"
                 element={<DonationDetailPage />}
               />
-              <Route path="/apitest" element={<ApiTest />} />
             </>
           )}
         </Routes>
