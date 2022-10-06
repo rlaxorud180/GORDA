@@ -3,18 +3,23 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import web3 from "../../smart-contract/vote-contract/web3";
 import Campaign from "../../smart-contract/donate-contract/campaign";
+import CircularProgress from "@mui/material/CircularProgress";
+
 import "./MyPageAdminDonationItem.scss";
 
 function MyPageAdminDonationItem(props) {
   const [expired, setExpired] = useState(false);
   const [error, setError] = useState("");
   const [requested, setRequested] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   async function onSubmitRequest() {
     const campaign = Campaign(props.account);
 
     try {
+      setLoading(true);
       const accounts = await web3.eth.getAccounts();
 
       const result = await campaign.methods
@@ -24,6 +29,7 @@ function MyPageAdminDonationItem(props) {
         });
       console.log("완료", result);
       alert("성공적으로 요청했습니다.");
+      setLoading(false);
     } catch (err) {
       setError(err.message);
       console.log(err);
@@ -33,6 +39,7 @@ function MyPageAdminDonationItem(props) {
 
   async function onFinalize() {
     try {
+      setLoading(true);
       const accounts = await web3.eth.getAccounts();
       console.log("accounts", accounts);
       const campaign = Campaign(props.account);
@@ -41,6 +48,7 @@ function MyPageAdminDonationItem(props) {
         from: accounts[0],
       });
       console.log("result", result);
+      setLoading(false);
       navigate("/dnlist");
     } catch (err) {
       setError(err.message);
@@ -78,6 +86,16 @@ function MyPageAdminDonationItem(props) {
 
   return (
     <>
+      {loading ? (
+        <CircularProgress
+          style={{
+            position: "fixed",
+            top: "47%",
+            left: "47%",
+          }}
+          size={100}
+        />
+      ) : null}
       <div className="item_date">{props.date}</div>
       <div className="item_title">{props.title}</div>
       <div className="block">
