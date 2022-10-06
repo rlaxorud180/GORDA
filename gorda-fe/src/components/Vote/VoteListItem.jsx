@@ -17,9 +17,11 @@ function VoteListItem(props) {
   async function onClickBtn() {
     try {
       const accounts = await web3.eth.getAccounts();
-      const vote = Vote(props.voteAddress);
-      vote.options.address = props.voteAddress;
 
+      const vote = Vote(props.voteAddress);
+
+      vote.options.address = props.voteAddress;
+      console.log("asdasdasdasd", props.voteAddress);
       const result = await vote.methods.vote(props.foundationAccount).send({
         from: accounts[0],
       });
@@ -48,19 +50,16 @@ function VoteListItem(props) {
         console.log("dd", check.includes(accounts[0]));
         setCanVote(false);
       }
-      console.log("=--canvote", canVote);
+      // console.log("=--canvote", canVote);
     }
 
     checkIfVoted();
   }, [props]);
-
+  // console.log(props);
   return (
     <>
       <div className="vote_item_card">
-        <Link
-          to={`/vote/detail/${props.foundationIdx}`}
-          state={{ signUp: false }}
-        >
+        <Link to={`/vote/detail/${props.foundationIdx}`}>
           <div
             className="cardImg"
             style={{ backgroundImage: `url(${props.foundationLogo})` }}
