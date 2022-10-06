@@ -87,9 +87,8 @@ contract Campaign {
 
   }
 
-  function createRequest(string memory description) public restricted returns(uint[] memory) {
+  function createRequest(string memory description) public restricted {
       require(requests.length < 1);
-      require(block.timestamp <= Deadline);
 
       Request storage newRequest = requests.push();
       newRequest.description = description;
@@ -97,7 +96,6 @@ contract Campaign {
       newRequest.recipient = destination_;
       newRequest.complete = false;
       newRequest.approvalCount = 0;
-      return(amounts_);
   }
 
   function approveRequest(uint index) public {
@@ -140,5 +138,22 @@ contract Campaign {
 
     function getRequestsCount() public view returns (uint){
         return requests.length;
+    }
+    
+        function getRequestInfo() public view returns (string memory, uint, uint, uint, address, string memory, uint, string memory, address[] memory,string memory, string memory, uint){
+        return(
+            requests[0].description,
+            address(this).balance,
+            requests.length,
+            approversCount,
+            manager,
+            CampaignName,
+            Deadline,
+            CategoryName,
+            contributers,
+            CampaignDescription,
+            imageUrl,
+            targetToAchieve
+          );
     }
 }
