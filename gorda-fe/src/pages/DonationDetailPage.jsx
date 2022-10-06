@@ -18,6 +18,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Web3 from "web3";
 import web3 from "../smart-contract/donate-contract/web3";
 import apiInstance from "../api/Index";
+import { areOptionsEqual } from "@mui/base";
+import { deleteComment } from "../api/Comment";
 
 
 
@@ -323,8 +325,10 @@ function DonationDetailPage() {
 // comment api call
 
 const [comment, setComment] = useState("")
+const [comm, setComm] = useState([])
+
 const handlePreventDefault = (e) => {
-  e.preventDefault()
+ 
   api
     .post(`/api/donation_comment/regist`, {
       donationCommentContent: comment,
@@ -338,6 +342,22 @@ const handlePreventDefault = (e) => {
       console.log(e);
     });
 };
+console.log(id)
+
+
+useEffect( ()=> {
+    api.get(`/api/donation_comment/donation/${id.campaignid}`)
+    .then(res => {
+      setComm(res.data.data)
+    })
+    .catch((e)=> {
+      
+    })
+}, [])
+console.log(comm)
+
+
+
 const [valueLength, setValueLength] = useState(0);
 const checkValueLength = (e) => {
   setValueLength(e.target.value.length);
@@ -380,6 +400,20 @@ useEffect( ()=> {
     }
   }, [infos]);
 
+  console.log("딜리또", id);
+  const deleteMyComment = async(e) => {
+    let key = e.target.value
+    await deleteComment(
+      {donationCommentIdx: key},
+      (response) => {
+        
+        window.location.replace(`/detail/${id.campaignid}`)
+      },
+      (err) => {
+        console.log(err)
+      }
+    )
+  }
   return (
     <>
       <NavigationBar />
@@ -476,6 +510,21 @@ useEffect( ()=> {
           <div className="comment_list_section">
             <div className="comment_list_section_header">
               댓글 <span>{comment_list_count}</span>
+            </div>
+            <br />
+            <div className="comment_liiiiist">
+              {comm.map((com) => (
+              <div className="comment_boox">
+                <div className="boox_img"></div>
+                <div className="cla">
+                  <div className="mapComment">{com.donationCommentContent}</div>
+                  {console.log("컴은 뭘까", com)}
+                  <button
+                    value={com.donationCommentIdx}
+                    onClick={deleteMyComment}
+                    className="deleteBtn_1">삭제</button>                
+                </div>
+              </div>))}
             </div>
           </div>
           <hr />

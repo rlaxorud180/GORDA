@@ -6,6 +6,9 @@
     box-shadow: 0px 14px 30px 10px rgba(0, 0, 0, 0.05);
     padding: 70px 68px 57px 70px;
     margin-bottom: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .admin_title {
         font-size: 32px;
         font-weight: 700;
@@ -14,7 +17,8 @@
     }
     .admin_detail_container {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        align-items: center;
         .admin_account {
             color: #535353;
             font-size: 22px;
@@ -27,11 +31,12 @@
             color: #444;
         }
         .admin_container_detail {
+            
             .admin_total_detail {
                 display: flex;
                 justify-content: space-between;
                 gap: 80px;
-                font-size: 22px;
+                font-size: 32px;
                 color: #535353;
                 span {
                     color: #000;
