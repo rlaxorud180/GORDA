@@ -93,7 +93,6 @@ function AdminForm() {
           console.log(e);
         });
       setLoading(false);
-      alert("기부가 생성되었습니다.");
       navigate("/dnlist");
     } catch (err) {
       setError(err.message);
