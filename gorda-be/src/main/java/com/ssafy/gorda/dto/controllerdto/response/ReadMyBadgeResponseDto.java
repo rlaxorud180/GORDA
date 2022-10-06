@@ -16,6 +16,9 @@ public class ReadMyBadgeResponseDto {
     private String badgeIdx;
     private String userIdx;
     private LocalDateTime myBadgeDate;
+    private int isMyBadgeEmpty;
+    private String myBadgeName;
+    private String myBadgeContent;
 
     public ReadMyBadgeResponseDto(MyBadge myBadge) {
 
@@ -23,7 +26,9 @@ public class ReadMyBadgeResponseDto {
         this.badgeIdx = myBadge.getBadge().getBadgeIdx();
         this.userIdx = myBadge.getUser().getUserIdx();
         this.myBadgeDate = myBadge.getMyBadgeDate();
-
+        this.isMyBadgeEmpty = myBadge.getIsMyBadgeEmpty();
+        this.myBadgeContent = myBadge.getMyBadgeContent();
+        this.myBadgeName = myBadge.getMyBadgeName();
     }
 
 }

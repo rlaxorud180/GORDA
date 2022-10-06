@@ -72,7 +72,7 @@ public class User {
         SHA256 sha256 = new SHA256();
 
         try {
-            this.userIdx = sha256.encrypt(LocalDateTime.now().toString());
+            this.userIdx = sha256.encrypt(LocalDateTime.now().toString()+userAccount.substring(0, 3));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
