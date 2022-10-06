@@ -13,7 +13,6 @@ import CompanyData from "./CompanyData";
 
 export const UserDummy = async () => {
     await UserData.map((value, key) => {
-        console.log("밸류값", value);
         signIn(value,
             (response) => {
             },
@@ -35,7 +34,6 @@ export const UserDummy = async () => {
 
 export const FoundationDummy = async() => {
     await FoundationData.map((value, key) => {
-        console.log("밸류값", value);
         postFoundation(value,
             (response) => {
             },
@@ -72,7 +70,6 @@ export const FoundationDummy = async() => {
 
 export const BadgeDummy = async() => {
     await BadgeData.map((value, key) => {
-        console.log("밸류값", value);
         postBadge(value,
             (response) => {
             },
@@ -85,7 +82,6 @@ export const BadgeDummy = async() => {
 
 export const CompanyDummy = async () => {
     await CompanyData.map((value, key) => {
-        console.log("밸류값", value);
         postCompany(value,
             (response) => {
             },

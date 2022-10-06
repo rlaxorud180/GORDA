@@ -28,7 +28,6 @@ function MypageComment() {
                 <div className="comment_title">
                     내 댓글 <span>{comment.length}</span>
                 </div>
-<<<<<<< HEAD
                     {comment.map((value, index) => (
                  <Link to={`/detail/${comment[index].donationIdx}`}>
                         <MypageCommentList 
@@ -36,16 +35,7 @@ function MypageComment() {
                         donationIdx = {comment[index].donationIdx}
                     />
                 </Link>
-                    ))}   
-=======
-                
-                {comment.map((value, index) => (
-                    <MypageCommentList 
-                    index = {value}
-                    donationIdx = {comment[index].donationIdx}
-                />
-                ))}
->>>>>>> 08df72d (add: dummy data)
+                    ))}
             </div>
         </>
     );

@@ -13,3 +13,7 @@ export const getUserInfo = async (response, success, fail) => {
     .then(success)
     .catch(fail);
 };
+
+export async function putUserDonate(response, success, fail) {
+  await api.put(`api/user/donate/${response.userIdx}`, {donateAmount: response.donateAmount}).then(success).catch(fail);
+}
