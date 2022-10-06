@@ -37,7 +37,7 @@ public class Company {
         SHA256 sha256 = new SHA256();
 
         try {
-            this.companyIdx = sha256.encrypt(LocalDateTime.now().toString());
+            this.companyIdx = sha256.encrypt(LocalDateTime.now()+companyName.toString());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

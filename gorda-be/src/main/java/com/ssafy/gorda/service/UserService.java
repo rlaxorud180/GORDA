@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -63,8 +64,6 @@ public class UserService {
 
     }
 
-
-
     // 닉네임 생성 - 후에 ENUM 타입 추가
     public String makeNickname (){
         String firstName[] = {"멍청한", "섹시한", "똑똑한", "니삭스를 좋아하는", "천사같은", "사랑스러운", "영준같은"};
@@ -81,4 +80,16 @@ public class UserService {
 
     }
 
+    // 랭킹 5등까지 읽어오기
+    public List<User> findRanking(){
+
+        List<User> userList = userRepository.findRanking();
+
+        List<User> limitedUserList;
+
+        if(userList.size()<5) limitedUserList = userList.subList(0, userList.size());
+        else limitedUserList = userList.subList(0, 5);
+
+        return limitedUserList;
+    }
 }
