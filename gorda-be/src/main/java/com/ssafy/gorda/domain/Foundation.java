@@ -59,7 +59,7 @@ public class Foundation {
         SHA256 sha256 = new SHA256();
 
         try {
-            this.foundationIdx = sha256.encrypt(LocalDateTime.now().toString());
+            this.foundationIdx = sha256.encrypt(LocalDateTime.now()+foundationName.toString());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
