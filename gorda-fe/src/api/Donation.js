@@ -9,3 +9,7 @@ export const getDonationByIdx = async (response, success, fail) => {
     .then(success)
     .catch(fail);
 };
+
+export const postDonation = async(response, success, fail) => {
+  await api.post(`api/donation/regist`, response).then(success).catch(fail);
+}

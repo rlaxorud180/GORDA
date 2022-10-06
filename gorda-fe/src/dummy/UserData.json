@@ -1,0 +1,18 @@
+[
+    {
+        "userAccount": "0x8Be432DA6B3E4A65cDd6650c03774a2Fd81A6904",
+        "userAmount": 12.3428,
+        "userNickname": "string",
+        "userRole": 1,
+        "userScore": 124,
+        "userVoteCount": 4
+    },
+    {
+        "userAccount": "0xD154770649E88689F343a9Eff95b53577465E40E",
+        "userAmount": 0.4277,
+        "userNickname": "string",
+        "userRole": 0,
+        "userScore": 11,
+        "userVoteCount": 2
+    }
+]
