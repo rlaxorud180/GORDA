@@ -44,7 +44,7 @@ public class DonationCommentRepository {
 
     public List<DonationComment> findByDonationIdx(String donationIdx) {
 
-        List<DonationComment> donationCommentList = em.createQuery("SELECT d FROM DonationComment d WHERE d.donation.donationIdx = :donation_idx",DonationComment.class)
+        List<DonationComment> donationCommentList = em.createQuery("SELECT d FROM DonationComment d WHERE d.donation.donationIdx = :donation_idx order by d.donationCommentDate",DonationComment.class)
                 .setParameter("donation_idx",donationIdx).getResultList();
 
         return donationCommentList;
