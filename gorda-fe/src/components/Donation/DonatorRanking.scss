@@ -8,13 +8,16 @@
     .rank_header {
         font-size: 22px;
         font-weight: bold;
+        margin-bottom: 30px;
+    }
+    .rank_item {
+        .item_i {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
     }
 }
-
-// .rank_container:hover {
-//     // transform: scale(1.04);
-//     // transition: 0.2s;
-// }
 
 @media (max-width: 1745px) {
     .rank_container {
