@@ -45,6 +45,13 @@ public class DonationCommentService {
         return donationCommentList;
     }
 
+    public List<DonationComment> findByDonationIdx (String donationIdx){
+
+        List<DonationComment> donationCommentList = donationCommentRepository.findByDonationIdx(donationIdx);
+
+        return donationCommentList;
+    }
+
     //삭제
     @Transactional
     public void delete(DonationComment donationComment) {
