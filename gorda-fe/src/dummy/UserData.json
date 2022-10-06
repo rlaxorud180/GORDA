@@ -14,5 +14,13 @@
         "userRole": 0,
         "userScore": 11,
         "userVoteCount": 2
+    },
+    {
+      "userAccount": "0x46BC02098eb6A22cffAa8dD24F819fE5F6f58aE9",
+      "userAmount": 0,
+      "userNickname": "string",
+      "userRole": 1,
+      "userScore": 0,
+      "userVoteCount": 0
     }
 ]

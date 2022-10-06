@@ -1,7 +1,23 @@
 [
     {
+        "companyAccount": "0x0EE1D6aeF79E1FfE54913998f76faCA3A289847A",
+        "companyName": "역삼 식품"
+    },
+    {
+        "companyAccount": "0xabceD9681b43866Ba3da6Faa596DF28154334850",
+        "companyName": "싸피 문구"
+    },
+    {
         "companyAccount": "0x8Be432DA6B3E4A65cDd6650c03774a2Fd81A6904",
         "companyName": "밀알 주식회사"
+    },
+    {
+        "companyAccount": "0x4c678bB213324186f833A4f0D88cACeD0EDfd1a0",
+        "companyName": "역삼 무역"
+    },
+    {
+        "companyAccount": "0x0F9DEffdD529b8031f202e0CE62BdEA840d2c054",
+        "companyName": "싸피 방직"
     },
     {
         "companyAccount": "0xD154770649E88689F343a9Eff95b53577465E40E",
