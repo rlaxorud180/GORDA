@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import web3 from "../../smart-contract/vote-contract/web3";
 import Campaign from "../../smart-contract/donate-contract/campaign";
 import "./MyPageAdminDonationItem.scss";
@@ -7,44 +8,22 @@ import "./MyPageAdminDonationItem.scss";
 function MyPageAdminDonationItem(props) {
   const [expired, setExpired] = useState(false);
   const [error, setError] = useState("");
-  console.log("props account", props.title, props.account);
+  const [requested, setRequested] = useState(false);
+  const navigate = useNavigate();
 
-  const {
-    handleSubmit,
-    register,
-    formState: { isSubmitting, errors },
-  } = useForm({
-    mode: "onChange",
-  });
-
-  async function onSubmit(data) {
+  async function onSubmitRequest() {
     const campaign = Campaign(props.account);
 
     try {
       const accounts = await web3.eth.getAccounts();
 
-      const resulte = await campaign.methods
-        .createRequest("안녕하세요. 돈 좀 주세요")
+      const result = await campaign.methods
+        .createRequest("안녕하세요. 출금 요청합니다.")
         .send({
           from: accounts[0],
         });
-      console.log("출력밧", resulte);
-    } catch (err) {
-      setError(err.message);
-      console.log(err);
-    }
-  }
-
-  async function onApprove() {
-    try {
-      const accounts = await web3.eth.getAccounts();
-      console.log("accounts", accounts);
-      const campaign = Campaign(props.account);
-
-      const result = await campaign.methods.approveRequest(0).send({
-        from: accounts[0],
-      });
-      console.log("result", result);
+      console.log("완료", result);
+      alert("성공적으로 요청했습니다.");
     } catch (err) {
       setError(err.message);
       console.log(err);
@@ -65,6 +44,8 @@ function MyPageAdminDonationItem(props) {
       setError(err.message);
       console.log(err);
     }
+
+    navigate("/dnlist");
   }
 
   useEffect(() => {
@@ -76,20 +57,22 @@ function MyPageAdminDonationItem(props) {
       }
     }
 
-    async function hello() {
+    async function getInfoSummary() {
       try {
         const accounts = await web3.eth.getAccounts();
         console.log("accounts", accounts);
         const campaign = Campaign(props.account);
 
-        const result = await campaign.methods.getSummary().call();
-        console.log("result", result);
+        const result = await campaign.methods.getRequestsCount().call();
+        if (result >= 1) {
+          setRequested(true);
+        }
       } catch (err) {
         setError(err.message);
         console.log(err);
       }
     }
-    hello();
+    getInfoSummary();
   }, []);
 
   return (
@@ -105,23 +88,23 @@ function MyPageAdminDonationItem(props) {
         </div>
       </div>
 
-      {/* {expired ? ( */}
-      <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input
-            className="titleinput"
-            placeholder="%"
-            {...register("percent", { required: true })}
-            isDisabled={isSubmitting}
-            type="number"
-          />
-          <button type="submit">출금 요청</button>
-        </form>
-        <button type="button" onClick={onFinalize}>
-          파이널라이즈
-        </button>
-      </div>
-      {/* ) : null} */}
+      {expired && !requested ? (
+        <div>
+          <button onClick={onSubmitRequest} type="submit">
+            출금 요청
+          </button>
+          <button type="button" onClick={onFinalize}>
+            파이널라이즈
+          </button>
+        </div>
+      ) : null}
+      {requested ? (
+        <div>
+          <button type="button" onClick={onFinalize}>
+            파이널라이즈
+          </button>
+        </div>
+      ) : null}
       <hr className="dashedhr" />
     </>
   );

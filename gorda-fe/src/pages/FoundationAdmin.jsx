@@ -1,8 +1,5 @@
 import "./FoundationAdmin.scss";
 import NavigationBar from "../components/NavigationBar";
-import AdminDetail from "../components/FoundationAdmin/AdminDetail";
-import RegistDonation from "../components/FoundationAdmin/RegistDonation";
-import DonationDetail from "../components/Mypage/DonationDetail";
 import MyPageAdminDonationList from "../components/Mypage/MyPageAdminDonationList";
 
 function FoundationAdmin() {
@@ -14,11 +11,7 @@ function FoundationAdmin() {
           <div className="admin_tag">관리자</div>
           <div className="admin_name">Admin 계정</div>
         </div>
-        <DonationDetail />
         <MyPageAdminDonationList />
-
-        <AdminDetail />
-        <RegistDonation />
         <div className="btn_container">
           <a href="/vote/detail/">
             <div className="go_foundation">기관 상세페이지 이동</div>

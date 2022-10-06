@@ -23,7 +23,6 @@ import { postMyDonation } from "../api/MyDonation";
 import { putUserDonate } from "../api/Users";
 import { postComment } from "../api/Comment";
 
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -61,14 +60,9 @@ function DonationDetailPage() {
     donationEndDate: "2022-11-02T00:00:00",
   });
   const [error, setError] = useState("");
-  const [targetInUSD, setTargetInUSD] = useState();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [amountInUSD, setAmountInUSD] = useState();
-  const [targetEth, setTargetEth] = useState("");
-  const [balanceEth, setBalanceEth] = useState("");
-  const [date, setDate] = useState("");
   const id = useParams();
-  const [address, setAddress] = useState("");
   const [foundation, setFoundation] = useState([]);
   const campaignItem = Campaign(infos.donationAccount);
   campaignItem.options.address = campaignItem.options.campaignid;
@@ -99,8 +93,6 @@ function DonationDetailPage() {
   const handleTap = () => {
     setOpenTap((present) => !present);
   };
-
-
 
   const comment_list_count = 0;
 
@@ -174,16 +166,11 @@ function DonationDetailPage() {
     return provider;
   };
 
- 
-
   console.log();
   async function onSubmit(data) {
     alert("정말 기부하시겠습니까?");
 
     try {
-      console.log("데이타", data," / ", infos);
-      const myIdx = localStorage.getItem("idx");
-
       const accounts = await web3.eth.getAccounts();
       setLoading(true);
       setOpen(false);
@@ -200,20 +187,27 @@ function DonationDetailPage() {
       setIsSubmitted(true);
       console.log(isSubmitted);
 
-      await putDonation({donationIdx: infos.donationIdx, donAmount: web3.utils.toWei(String(data.donation), "ether")},
+      await putDonation(
+        {
+          donationIdx: infos.donationIdx,
+          donAmount: web3.utils.toWei(String(data.donation), "ether"),
+        },
         (response) => {
-            setComment(response.data.data);
-            console.log("도네이션 넣기 성공", response);
+          setComment(response.data.data);
+          console.log("도네이션 넣기 성공", response);
         },
         (err) => {
-            console.log(err);
+          console.log(err);
         }
       );
-      
-      await postMyDonation({donationIdx: infos.donationIdx,
-        myDonationAmount: web3.utils.toWei(String(data.donation), "ether"),
-        myDonationName : infos.donationName,
-        userIdx : localStorage.getItem("idx")},
+
+      await postMyDonation(
+        {
+          donationIdx: infos.donationIdx,
+          myDonationAmount: web3.utils.toWei(String(data.donation), "ether"),
+          myDonationName: infos.donationName,
+          userIdx: localStorage.getItem("idx"),
+        },
         (response) => {
           console.log("성공", response);
         },
@@ -222,48 +216,54 @@ function DonationDetailPage() {
         }
       );
 
-      await putUserDonate({userIdx: localStorage.getItem("idx"), donateAmount : web3.utils.toWei(String(data.donation), "ether")},
-      (response) => {
-        console.log("유저 도네이트 갱신 성공", response);
-      },
-      (err) => {
-        console.log("유저 도네이트 갱신 실패", err);
-      });
-      
+      await putUserDonate(
+        {
+          userIdx: localStorage.getItem("idx"),
+          donateAmount: web3.utils.toWei(String(data.donation), "ether"),
+        },
+        (response) => {
+          console.log("유저 도네이트 갱신 성공", response);
+        },
+        (err) => {
+          console.log("유저 도네이트 갱신 실패", err);
+        }
+      );
+
+      alert("기부자님의 따뜻한 마음이 퍼져나갑니다.");
+      setLoading(false);
     } catch (err) {
+      alert("스마트 컨트랙트 오류입니다. 기부금을 제대로 입력하셨나요?");
       setError(err.message);
       console.log(err);
     }
   }
 
-const [comment, setComment] = useState("")
-const handlePreventDefault = (e) => {
-  e.preventDefault()
-  api
-    .post(`/api/donation_comment/regist`, {
-      donationCommentContent: comment,
-      donationIdx: params.campaignid,
-      userIdx: localStorage.idx
-    })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-};
-const [valueLength, setValueLength] = useState(0);
-const checkValueLength = (e) => {
-  setValueLength(e.target.value.length);
-  setComment(e.target.value)
-};
-let params  = useParams()
+  const [comment, setComment] = useState("");
+  const handlePreventDefault = (e) => {
+    e.preventDefault();
+    api
+      .post(`/api/donation_comment/regist`, {
+        donationCommentContent: comment,
+        donationIdx: params.campaignid,
+        userIdx: localStorage.idx,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+  const [valueLength, setValueLength] = useState(0);
+  const checkValueLength = (e) => {
+    setValueLength(e.target.value.length);
+    setComment(e.target.value);
+  };
+  let params = useParams();
 
+  const commentPost = () => {};
 
-const commentPost = () => {
-}
-
-//댓글 가져오기
+  //댓글 가져오기
 
   useEffect(() => {
     api
@@ -384,7 +384,11 @@ const commentPost = () => {
             </div>
             <div className="comment_info">
               <div className="comment_count">{valueLength}/500</div>
-              <button onSubmit={commentPost} className="registBtn" type="submit">
+              <button
+                onSubmit={commentPost}
+                className="registBtn"
+                type="submit"
+              >
                 등록
               </button>
             </div>

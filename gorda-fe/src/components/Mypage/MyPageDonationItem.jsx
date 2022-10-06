@@ -21,6 +21,7 @@ function MyPageDonationItem(props) {
         from: accounts[0],
       });
       console.log("result", result);
+      alert("성공적으로 승인했습니다.");
     } catch (err) {
       setError(err.message);
       console.log(err);
@@ -28,7 +29,6 @@ function MyPageDonationItem(props) {
   }
 
   useEffect(() => {
-    const userIdx = localStorage.getItem("idx");
     api
       .get(`api/donation/${props.idx}`)
       .then((res) => {
