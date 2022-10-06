@@ -19,6 +19,10 @@ import Web3 from "web3";
 import web3 from "../smart-contract/donate-contract/web3";
 import apiInstance from "../api/Index";
 
+
+
+
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -96,10 +100,7 @@ function DonationDetailPage() {
     setOpenTap((present) => !present);
   };
 
-  const [valueLength, setValueLength] = useState(0);
-  const checkValueLength = (e) => {
-    setValueLength(e.target.value.length);
-  };
+
 
   const comment_list_count = 0;
 
@@ -173,9 +174,7 @@ function DonationDetailPage() {
     return provider;
   };
 
-  const handlePreventDefault = () => {
-    console.log("test");
-  };
+ 
 
   async function onSubmit(data) {
     alert("정말 기부하시겠습니까?");
@@ -292,6 +291,41 @@ function DonationDetailPage() {
   //   }
   //   campaignInfo();
   // }, [balanceEth]);
+// comment api call
+
+const [comment, setComment] = useState("")
+const handlePreventDefault = (e) => {
+  e.preventDefault()
+  api
+    .post(`/api/donation_comment/regist`, {
+      donationCommentContent: comment,
+      donationIdx: params.campaignid,
+      userIdx: localStorage.idx
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+const [valueLength, setValueLength] = useState(0);
+const checkValueLength = (e) => {
+  setValueLength(e.target.value.length);
+  setComment(e.target.value)
+};
+let params  = useParams()
+
+
+const commentPost = () => {
+  console.log('gd')
+}
+
+//댓글 가져오기
+useEffect( ()=> {
+  api
+    .get(``)
+})
 
   useEffect(() => {
     api
@@ -403,7 +437,7 @@ function DonationDetailPage() {
             </div>
             <div className="comment_info">
               <div className="comment_count">{valueLength}/500</div>
-              <button className="registBtn" type="submit">
+              <button onSubmit={commentPost} className="registBtn" type="submit">
                 등록
               </button>
             </div>
