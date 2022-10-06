@@ -4,6 +4,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { useState, useEffect } from "react";
 import Vote from "../../smart-contract/vote-contract/vote";
 import web3 from "../../smart-contract/vote-contract/web3";
+import { Link } from "react-router-dom";
 
 function VoteListItem(props) {
   const name = "이몽룡 재단";
@@ -32,9 +33,9 @@ function VoteListItem(props) {
 
   useEffect(() => {
     const vote = Vote(props.voteAddress);
-    console.log("djemfpem", vote.options.address);
-    console.log("asfdjialsdf", props.voteAddress);
-    console.log(" 보트", vote);
+    // console.log("djemfpem", vote.options.address);
+    // console.log("asfdjialsdf", props.voteAddress);
+    // console.log(" 보트", vote);
     async function checkIfVoted() {
       console.log("vote", vote);
       const accounts = await web3.eth.getAccounts();
@@ -56,24 +57,28 @@ function VoteListItem(props) {
   return (
     <>
       <div className="vote_item_card">
-        <a href="/vote/detail">
+        <Link
+          to={`/vote/detail/${props.foundationIdx}`}
+          state={{ signUp: false }}
+        >
           <div
             className="cardImg"
             style={{ backgroundImage: `url(${props.foundationLogo})` }}
           ></div>
-        </a>
+        </Link>
+
         <div className="card_content">
           <div className="card_header">
             <div className="list_num">{props.foundationName}</div>
-            <a href="/vote/detail">
+            {/* <a href="/vote/detail">
               <div className="name"></div>
-            </a>
+            </a> */}
           </div>
           {/* <div className="card_progress">
             <div className="card_label">{progress}%</div>
             <Box sx={{ width: "100%" }}>
-              <div className="progress_label">{vote_num} 득표</div>
-              <LinearProgress variant="determinate" value={progress} />
+            <div className="progress_label">{vote_num} 득표</div>
+            <LinearProgress variant="determinate" value={progress} />
             </Box>
           </div> */}
           <div className="card_btn">

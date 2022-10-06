@@ -36,7 +36,10 @@ function App() {
                 element={<MyPageDonationRequest />}
               />
               <Route path="/vote" element={<Vote />} />
-              <Route path="/vote/detail" element={<InstitutionDetail />} />
+              <Route
+                path="/vote/detail/:foundationIdx"
+                element={<InstitutionDetail />}
+              />
               <Route path="/votecreation" element={<VoteCreation />} />
               <Route path="/mypage/admin" element={<FoundationAdmin />} />
               <Route path="/mypage/admin/new" element={<AdminForm />} />

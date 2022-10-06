@@ -145,6 +145,7 @@ function Vote() {
                   foundationName={item.foundationName}
                   foundationAccount={item.foundationAccount}
                   foundationLogo={item.foundationLogo}
+                  foundationIdx={item.foundationIdx}
                   voteAddress={voteList[voteList.length - 1]}
                 />
               );
