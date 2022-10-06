@@ -6,13 +6,11 @@ import MypageCommentList from "./MypageCommentList";
 
 function MypageComment() {
   const [comment, setComment] = useState([]);
-  console.log(comment);
   const getCommentCnt = async () => {
     await getComment(
       { userIdx: localStorage.getItem("idx") },
       (response) => {
         setComment(response.data.data);
-        console.log(comment);
       },
       (err) => {
         console.log(err);
