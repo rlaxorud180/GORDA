@@ -60,4 +60,17 @@ public class MyBadgeController {
         return new ResultDto(myBadgeList);
     }
 
+    //개인별 뱃지 획득 여부 갱신
+//    @PutMapping("/user/{userIdx}")
+//    public MessageResponseDto assembleMyBadge (@PathVariable ("userIdx") String userIdx){
+//
+//        User tempUser = userService.findByIdx(userIdx);
+//
+//        myBadgeService.getScoreBadge(tempUser);
+//        myBadgeService.getAmountBadge(tempUser);
+//
+//        return new MessageResponseDto("뱃지 획득 갱신");
+//
+//    }
+
 }

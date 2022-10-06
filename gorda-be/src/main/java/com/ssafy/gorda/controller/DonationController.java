@@ -35,6 +35,10 @@ public class DonationController {
     @PostMapping("/regist")
     public MessageResponseDto regist(@RequestBody RegistDonationRequestDto request) {
 
+        if (donationService.findByName(request.getDonationName()) != null) {
+            return new MessageResponseDto("기부 항목 중복");
+        }
+
         Donation tempDonation = Donation.builder()
                 .foundation(foundationService.findByIdx(request.getFoundationIdx()))
                 .donationLogo(request.getDonationLogo())
