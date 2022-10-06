@@ -56,6 +56,7 @@ function DonationList() {
         <div className="test">
           <div className="page_card">
             {infos.map((item, key) => {
+              console.log("아이템", infos);
               return (
                 <Link to={`/detail/${item.donationIdx}`}>
                   <DonationListCard

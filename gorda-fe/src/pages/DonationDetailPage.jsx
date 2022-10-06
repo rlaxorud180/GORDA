@@ -177,8 +177,10 @@ function DonationDetailPage() {
     console.log("test");
   };
 
+  console.log();
   async function onSubmit(data) {
     alert("정말 기부하시겠습니까?");
+
     try {
       const myIdx = localStorage.getItem("idx");
 
@@ -196,6 +198,7 @@ function DonationDetailPage() {
         keepValues: false,
       });
       setIsSubmitted(true);
+      console.log(isSubmitted);
 
       api
         .post("api/my_donation/regist", {
@@ -207,6 +210,32 @@ function DonationDetailPage() {
         .then((res) => {
           console.log("성공");
           navigate("/dnlist");
+          api
+            .post("api/my_donation/regist", {
+              donationIdx: `${id.campaignid}`,
+              myDonationAmount: inputValue,
+              myDonationName: `${infos.donationName}`,
+              userIdx: localStorage.idx,
+            })
+            .then((res) => {
+              console.log("DB로 보내는데 성공");
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+          // api
+          // .put("api/my_donation/regist", {
+          //   donationIdx: `${id.campaignid}`,
+          //   myDonationAmount: inputValue,
+          //   myDonationName: `${infos.donationName}`,
+          //   userIdx: localStorage.idx,
+          // })
+          // .then((res) => {
+          //   console.log("DB로 보내는데 성공");
+          // })
+          // .catch((e) => {
+          //   console.log(e);
+          // });
         })
         .catch((e) => {
           console.log(e);

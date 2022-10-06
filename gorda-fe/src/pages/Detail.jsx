@@ -78,7 +78,7 @@ function Detail() {
           }}
           min="0"
         />
-
+        {console.log(minContriInUSD)}
         <button type="submit" className="createBtn">
           기부하기
         </button>

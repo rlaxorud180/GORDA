@@ -6,10 +6,6 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 function InstitutionDetail() {
-  const institution_name = "이몽룡 재단";
-  const institution_intro =
-    "‘이몽룡 재단’는 1997년에 창립하여 지금까지 1,700여 명의 회원과 함께 킹니셰프지역을 터전삼아 다양한 환경교육 및 환경현안을 해결하고 있습니다.";
-  // const institution_mainp = ''
   const proposals = 8;
   const id = useParams();
   const [infos, setinfos] = useState({
