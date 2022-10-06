@@ -235,3 +235,30 @@ https://codesandbox.io/s/j43b10?file=/src/App.js
 
 
 
+# 솔리디티 파일 실행 하기
+
+
+
+1. 각각의 donation과 vote contract는 다음과 같은 구조를 하고 있다.
+
+![image-20221007025236724](C:\Users\SSAFY\Desktop\final\S07P22A307\exec\README.assets\image-20221007025236724.png)
+
+
+
+2. 솔리디티 파일 작성후 contracts 폴더 안에 넣고 complie.js를 실행 시켜 컴파일을 해준다
+
+![image-20221007025434606](C:\Users\SSAFY\Desktop\final\S07P22A307\exec\README.assets\image-20221007025434606.png)
+
+
+
+
+
+3. 컴파일 후 node deploy.js로 디플로이를 해준다
+
+![image-20221007025524844](C:\Users\SSAFY\Desktop\final\S07P22A307\exec\README.assets\image-20221007025524844.png)
+
+
+
+4. 디플로이후 컨트렉트 주소가 나온다. 주소를 복사해서 factory.js 에 넣고 저장을 한다. 이렇게되면 컴파일된 솔리디티 파일이 자동으로 디플로이 되어 웹에서 사용 가능하다
+
+![image-20221007025655588](C:\Users\SSAFY\Desktop\final\S07P22A307\exec\README.assets\image-20221007025655588.png)
