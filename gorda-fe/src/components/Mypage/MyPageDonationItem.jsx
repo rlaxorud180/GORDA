@@ -3,6 +3,7 @@ import apiInstance from "../../api/Index";
 import "./MyPageDonationItem.scss";
 import web3 from "../../smart-contract/vote-contract/web3";
 import Campaign from "../../smart-contract/donate-contract/campaign";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function MyPageDonationItem(props) {
   const api = apiInstance();
@@ -10,9 +11,11 @@ function MyPageDonationItem(props) {
   const [myDonationIdx, setMyDonationIdx] = useState(0);
   const [myDonationTitle, setMyDonationTitle] = useState("");
   const [requested, setRequested] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   async function onApprove() {
     try {
+      setLoading(true);
       const accounts = await web3.eth.getAccounts();
       console.log("accounts", accounts);
       const campaign = Campaign(myDonationIdx);
@@ -21,10 +24,13 @@ function MyPageDonationItem(props) {
         from: accounts[0],
       });
       console.log("result", result);
+      setLoading(false);
+
       alert("성공적으로 승인했습니다.");
     } catch (err) {
       setError(err.message);
       console.log(err);
+      alert("네트워크 연결이 좋지 않습니다.");
     }
   }
 
@@ -60,6 +66,16 @@ function MyPageDonationItem(props) {
 
   return (
     <>
+      {loading ? (
+        <CircularProgress
+          style={{
+            position: "fixed",
+            top: "47%",
+            left: "47%",
+          }}
+          size={100}
+        />
+      ) : null}
       {console.log(requested)}
       <div className="item_date">{props.date}</div>
       <div className="item_title">{myDonationTitle}</div>
