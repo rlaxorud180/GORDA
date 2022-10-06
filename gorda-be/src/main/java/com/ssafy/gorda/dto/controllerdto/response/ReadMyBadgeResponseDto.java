@@ -19,6 +19,7 @@ public class ReadMyBadgeResponseDto {
     private int isMyBadgeEmpty;
     private String myBadgeName;
     private String myBadgeContent;
+    private String myBadgeLogo;
 
     public ReadMyBadgeResponseDto(MyBadge myBadge) {
 
@@ -29,6 +30,7 @@ public class ReadMyBadgeResponseDto {
         this.isMyBadgeEmpty = myBadge.getIsMyBadgeEmpty();
         this.myBadgeContent = myBadge.getMyBadgeContent();
         this.myBadgeName = myBadge.getMyBadgeName();
+        this.myBadgeLogo = myBadge.getMyBadgeLogo();
     }
 
 }
