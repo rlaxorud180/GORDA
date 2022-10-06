@@ -33,7 +33,7 @@ function AdminForm() {
     console.log(data.foundation);
     const tmpCompanyArr = [];
     const tmpAmountArr = [];
-
+    console.log("dsasdasdas", data);
     for (let i = 0; i < inputValue.length; i++) {
       if (inputValue[i][0] === "0") {
         tmpCompanyArr.push(data.foundation[0]);
@@ -86,11 +86,14 @@ function AdminForm() {
         .then((res) => {
           console.log("성공");
           setLoading(false);
+          alert("기부가 생성되었습니다.");
           navigate("/dnlist");
         })
         .catch((e) => {
           console.log(e);
         });
+      setLoading(false);
+      navigate("/dnlist");
     } catch (err) {
       setError(err.message);
       console.log(err);

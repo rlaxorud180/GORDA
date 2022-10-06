@@ -1,0 +1,32 @@
+[
+    {
+        "badgeContent": "고르다에 오신 것을 환영합니다! 세상의 변화를 만드는 활동에 함께해요. 기부 참여 1회",
+        "badgeLogo": "https://hoydia-bucket.s3.ap-northeast-2.amazonaws.com/%EC%B2%AB%20%EA%B8%B0%EB%B6%80/stamp1_1665030161442.png",
+        "badgeTitle": "기부 새내기"
+    },
+    {
+        "badgeContent": "기부에 이제 익숙해지셨군요! 기부 참여 5회",
+        "badgeLogo": "https://hoydia-bucket.s3.ap-northeast-2.amazonaws.com/5%EB%B2%88%EC%A7%B8%20%EA%B8%B0%EB%B6%80/stamp10_1665031112375.png",
+        "badgeTitle": "기부의 달인"
+    },
+    {
+        "badgeContent": "기부에 통달해 버리신 건가요?! 기부 참여 20회",
+        "badgeLogo": "https://hoydia-bucket.s3.ap-northeast-2.amazonaws.com/20%EB%B2%88%EC%A7%B8%20%EA%B8%B0%EB%B6%80/stamp7_1665031305538.png",
+        "badgeTitle": "기부 통달자"
+    },
+    {
+        "badgeContent": "작은 금액부터 천천히! 기부 누적금액 0.01Eth",
+        "badgeLogo": "https://hoydia-bucket.s3.ap-northeast-2.amazonaws.com/0.01eth%EA%B8%B0%EB%B6%80/stamp4_1665031408209.png",
+        "badgeTitle": "티끌모아 태산"
+    },
+    {
+        "badgeContent": "내 도움이 쌓일수록 세상이 밝아져요! 기부 누적금액 0.1Eth",
+        "badgeLogo": "https://hoydia-bucket.s3.ap-northeast-2.amazonaws.com/0.1eth%EA%B8%B0%EB%B6%80/stamp9_1665032262945.png",
+        "badgeTitle": "태산모아 산맥"
+    },
+    {
+        "badgeContent": "어두운 세상을 밝히는 힘, 기부! 기부 누적금액 1Eth",
+        "badgeLogo": "https://hoydia-bucket.s3.ap-northeast-2.amazonaws.com/5%EB%B2%88%EC%A7%B8%20%EA%B8%B0%EB%B6%80/stamp10_1665031112375.png",
+        "badgeTitle": "노블레스 오블리주"
+    }
+]

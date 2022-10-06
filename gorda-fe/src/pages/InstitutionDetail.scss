@@ -6,11 +6,11 @@
 
 html {
     background-color: #fff;
-    overflow-x:hidden;
+    overflow-x: hidden;
 }
-a{
+a {
     text-decoration: none;
-    color:#000;
+    color: #000;
 }
 
 .institution_header {
@@ -21,13 +21,14 @@ a{
     display: flex;
     align-items: center;
     gap: 14px;
-    background-color: #F1F1F1;
+    background-color: #f1f1f1;
     margin-bottom: 60px;
     .institution_image {
         width: 206px;
         height: 206px;
         border-radius: 50%;
-        background-color:#D9D9D9;
+        background-size: cover;
+        background-position: center;
     }
     .institution_title {
         .institution_category {
@@ -50,7 +51,7 @@ a{
             font-size: 18px;
             margin-bottom: 40px;
         }
-        .main_course{
+        .main_course {
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 5px;
@@ -59,7 +60,7 @@ a{
             font-size: 18px;
         }
     }
-    .institution_profile{
+    .institution_profile {
         display: flex;
         gap: 25px;
         font-size: 20px;
@@ -72,8 +73,8 @@ a{
                 margin-bottom: 115px;
             }
         }
-        .right_side{
-            .right{
+        .right_side {
+            .right {
                 margin-bottom: 10px;
             }
             :last-child {
@@ -85,12 +86,11 @@ a{
         font-size: 32px;
         font-weight: bold;
         margin-bottom: 41px;
-        span{
+        span {
             color: #00aeef;
         }
     }
     .proposal_fx {
-
         display: flex;
         flex-wrap: wrap;
         gap: 30px;
