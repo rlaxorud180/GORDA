@@ -2,6 +2,7 @@ package com.ssafy.gorda.service;
 
 
 import com.ssafy.gorda.domain.Badge;
+import com.ssafy.gorda.domain.Company;
 import com.ssafy.gorda.domain.User;
 import com.ssafy.gorda.repository.BadgeRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,13 @@ public class BadgeService {
         List<Badge> badgeList = badgeRepository.findAll();
 
         return badgeList;
+    }
+
+    public Badge findByTitle(String title){
+
+        Badge badge = badgeRepository.findByTitle(title);
+
+        return badge;
     }
 
     //찾기

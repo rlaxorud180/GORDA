@@ -1,6 +1,7 @@
 package com.ssafy.gorda.repository;
 
 import com.ssafy.gorda.domain.Badge;
+import com.ssafy.gorda.domain.Company;
 import com.ssafy.gorda.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -26,6 +27,17 @@ public class BadgeRepository {
     public Badge findByIdx (String Idx) {
 
         return em.find(Badge.class,Idx);
+    }
+
+    public Badge findByTitle(String title){
+
+        List<Badge> badges = em.createQuery("SELECT b FROM Badge b WHERE b.badgeTitle = :badge_title",Badge.class)
+                .setParameter("badge_title",title).getResultList();
+
+
+        if (badges.size()==0) return null;
+
+        return badges.get(0);
     }
 
     // 전체 뱃지 찾기

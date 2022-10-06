@@ -42,6 +42,15 @@ public class DonationCommentRepository {
 
     }
 
+    public List<DonationComment> findByDonationIdx(String donationIdx) {
+
+        List<DonationComment> donationCommentList = em.createQuery("SELECT d FROM DonationComment d WHERE d.donation.donationIdx = :donation_idx",DonationComment.class)
+                .setParameter("donation_idx",donationIdx).getResultList();
+
+        return donationCommentList;
+
+    }
+
     //댓글 삭제
 
     public String delete (DonationComment donationComment) {
