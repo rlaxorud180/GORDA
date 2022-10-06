@@ -1,14 +1,16 @@
 package com.ssafy.gorda.controller;
 
+import com.ssafy.gorda.domain.Badge;
+import com.ssafy.gorda.domain.MyBadge;
 import com.ssafy.gorda.domain.User;
 import com.ssafy.gorda.dto.MessageResponseDto;
 import com.ssafy.gorda.dto.ResultDto;
 import com.ssafy.gorda.dto.controllerdto.request.LoginUserRequestDto;
 import com.ssafy.gorda.dto.controllerdto.request.ModifyUserDonateLevelRequestDto;
 import com.ssafy.gorda.dto.controllerdto.response.LoginUserResponseDto;
-import com.ssafy.gorda.dto.controllerdto.response.ReadMyDonationResponseDto;
+import com.ssafy.gorda.service.BadgeService;
+import com.ssafy.gorda.service.MyBadgeService;
 import com.ssafy.gorda.service.UserService;
-import com.ssafy.gorda.util.SHA256;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,10 @@ public class UserController {
 
     private final UserService userService;
 
+    private final BadgeService badgeService;
+
+    private final MyBadgeService myBadgeService;
+
     @PostMapping("/login")
     public LoginUserResponseDto login(@RequestBody LoginUserRequestDto request) {
 
@@ -44,6 +50,20 @@ public class UserController {
                     .build();
 
             userService. regist(newUser);
+
+            List<Badge> badgeList = badgeService.findAll();
+
+            for(Badge b: badgeList){
+                System.out.println(b.toString());
+                MyBadge tempMyBadge = MyBadge.builder()
+                    .badge(b)
+                    .user(newUser)
+                        .myBadgeContent(b.getBadgeContent())
+                        .myBadgeName(b.getBadgeTitle())
+                    .build();
+
+                myBadgeService.regist(tempMyBadge);
+            }
 
             return new LoginUserResponseDto(newUser);
         }
@@ -75,5 +95,13 @@ public class UserController {
         return new MessageResponseDto("투표 횟수 증가");
     }
 
+    @GetMapping("/ranking")
+    public ResultDto readUserRanking(){
+        List<LoginUserResponseDto> userList = new ArrayList<>();
+
+        userList = userService.findRanking().stream().map(user -> new LoginUserResponseDto(user)).collect(Collectors.toList());
+
+        return new ResultDto(userList);
+    }
 
 }

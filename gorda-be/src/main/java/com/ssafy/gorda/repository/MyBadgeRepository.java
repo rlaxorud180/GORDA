@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -45,5 +46,12 @@ public class MyBadgeRepository {
 
         em.remove(myBadge);
         return "Loc : BadgeRepository - 나의 뱃지 삭제 완료";
+    }
+
+    public String modifyMyBadge(MyBadge mybadge) {
+
+        mybadge.setIsMyBadgeEmpty(1);
+        mybadge.setMyBadgeDate(LocalDateTime.now());
+        return "Loc : BadgeRepository - 내 뱃지 획득";
     }
 }

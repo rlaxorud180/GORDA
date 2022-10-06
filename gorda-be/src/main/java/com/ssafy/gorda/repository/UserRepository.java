@@ -71,6 +71,11 @@ public class UserRepository {
         return "Loc : UserRepository - 유저 삭제 완료";
     }
 
-
+    //유저 랭킹 조회
+    public List<User> findRanking() {
+        List<User> userList = em.createQuery("SELECT u FROM User u ORDER BY u.userAmount desc", User.class)
+                .getResultList();
+        return userList;
+    }
 
 }
