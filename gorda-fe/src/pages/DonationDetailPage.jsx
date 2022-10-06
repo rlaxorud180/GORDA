@@ -256,7 +256,6 @@ function DonationDetailPage() {
             })
             .catch((e) => {});
     }, []);
-    console.log(comm);
 
     const [valueLength, setValueLength] = useState(0);
     const checkValueLength = (e) => {
@@ -312,6 +311,7 @@ function DonationDetailPage() {
             }
         );
     };
+    console.log(comm);
     const [userName, setUserName] = useState("");
     const getNickName = async () => {
         await getUserInfo(
