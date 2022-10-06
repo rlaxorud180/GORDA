@@ -1,5 +1,6 @@
 package com.ssafy.gorda.repository;
 
+import com.ssafy.gorda.domain.Company;
 import com.ssafy.gorda.domain.Foundation;
 import com.ssafy.gorda.domain.MyBadge;
 import com.ssafy.gorda.domain.User;
@@ -38,6 +39,17 @@ public class FoundationRepository {
                 .setParameter("donation_idx",donationIdx).getResultList();
 
         return foundationList;
+    }
+
+    public Foundation findByName(String name){
+
+        List<Foundation> foundations = em.createQuery("SELECT f FROM Foundation f WHERE f.foundationName = :foundation_name",Foundation.class)
+                .setParameter("foundation_name",name).getResultList();
+
+
+        if (foundations.size()==0) return null;
+
+        return foundations.get(0);
     }
 
     public List<Foundation> findAll() {

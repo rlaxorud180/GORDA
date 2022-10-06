@@ -1,6 +1,7 @@
 package com.ssafy.gorda.service;
 
 
+import com.ssafy.gorda.domain.Company;
 import com.ssafy.gorda.domain.Foundation;
 import com.ssafy.gorda.domain.MyBadge;
 import com.ssafy.gorda.repository.FoundationRepository;
@@ -43,6 +44,13 @@ public class FoundationService {
 
         return foundationList;
 
+    }
+
+    public Foundation findByName(String name){
+
+        Foundation foundation = foundationRepository.findByName(name);
+
+        return foundation;
     }
 
     public List<Foundation> findAll(){
