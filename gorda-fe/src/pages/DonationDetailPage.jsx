@@ -300,7 +300,6 @@ function DonationDetailPage() {
         }
     }, [infos]);
 
-    console.log("딜리또", id);
     const deleteMyComment = async (e) => {
         let key = e.target.value;
         await deleteComment(
@@ -329,7 +328,6 @@ function DonationDetailPage() {
     useEffect(() => {
         getNickName();
     }, []);
-    console.log(userName);
 
     const clip = () => {
         navigator.clipboard.writeText(window.location.href);
@@ -429,9 +427,13 @@ function DonationDetailPage() {
                                         <div className="boox_name">{userName}</div>
                                         <div className="mapComment">{com.donationCommentContent}</div>
                                         <div className="btnbtn">
-                                            <button value={com.donationCommentIdx} onClick={deleteMyComment} className="deleteBtn_1">
-                                                삭제
-                                            </button>
+                                            {com.userIdx === localStorage.getItem("idx") ? (
+                                                <button value={com.donationCommentIdx} onClick={deleteMyComment} className="deleteBtn_1">
+                                                    삭제
+                                                </button>
+                                            ) : (
+                                                ""
+                                            )}
                                         </div>
                                     </div>
                                 </div>
