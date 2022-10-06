@@ -27,13 +27,17 @@ import {
 function App() {
   const userrole = localStorage.Role;
   useEffect(() => {
-    UserDummy();
-    FoundationDummy();
+    RegistDummy();
+  });
+
+  const RegistDummy = async () => {
+    await BadgeDummy();
+    await UserDummy();
+    await FoundationDummy();
     // DonationDummy();
     // DonationCommentDummy();
-    BadgeDummy();
-    CompanyDummy();
-  });
+    await CompanyDummy();
+  };
 
   return (
     <div className="App">
