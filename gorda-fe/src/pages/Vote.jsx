@@ -138,6 +138,7 @@ function Vote() {
         <div className="vote_list">
           {foundation &&
             foundation.map((item, key) => {
+              console.log("투표하는중~~", item);
               return (
                 <VoteListItem
                   foundationName={item.foundationName}
