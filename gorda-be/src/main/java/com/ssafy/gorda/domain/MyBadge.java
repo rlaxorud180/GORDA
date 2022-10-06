@@ -44,12 +44,16 @@ public class MyBadge {
     @Column(name = "my_badge_content")
     private String myBadgeContent;
 
+    @Column(name = "my_badge_logo")
+    private String myBadgeLogo;
+
     @Builder
     public MyBadge (Badge badge,
                   User user,
                   LocalDateTime myBadgeDate,
                     String myBadgeContent,
-                    String myBadgeName
+                    String myBadgeName,
+                    String myBadgeLogo
     )
     {
 
@@ -67,6 +71,7 @@ public class MyBadge {
         this.isMyBadgeEmpty = 0;
         this.myBadgeContent = myBadgeContent;
         this.myBadgeName = myBadgeName;
+        this.myBadgeLogo = myBadgeLogo;
     }
 
 }
