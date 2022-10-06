@@ -45,7 +45,7 @@ function Vote() {
     async function callVoteList() {
       const tmp = await factory.methods.getDeployedVotes().call();
       setVoteList(tmp);
-      console.log("voteList", voteList);
+      // console.log("voteList==================", voteList);
     }
 
     callVoteList();
@@ -55,14 +55,14 @@ function Vote() {
     api
       .get("api/foundation")
       .then((res) => {
-        console.log("투표리스트", res);
+        // console.log("투표리스트", res);
         setFoundation(res.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-
+  console.log(foundation);
   return (
     <>
       <NavigationBar />
@@ -138,14 +138,13 @@ function Vote() {
         <div className="vote_list">
           {foundation &&
             foundation.map((item, key) => {
-              console.log("투표하는중~~", item);
               return (
                 <VoteListItem
                   foundationName={item.foundationName}
                   foundationAccount={item.foundationAccount}
                   foundationLogo={item.foundationLogo}
                   foundationIdx={item.foundationIdx}
-                  voteAddress={voteList[voteList.length - 1]}
+                  voteAddress={voteList[0]}
                 />
               );
             })}
