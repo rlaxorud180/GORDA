@@ -1,0 +1,16 @@
+[
+    {
+        "foundationAccount": "0x8Be432DA6B3E4A65cDd6650c03774a2Fd81A6904",
+        "foundationAddress": "서울 구로구 구로중앙로 216-1, 해피피플빌딩 3층",
+        "foundationContent": "주요 활동과 목적 : 해피피플은 서울시 외교통상부 소관의 지정기부금단체이며 ECOSOC(유엔 경제사회이사회)로부터 특정분야 협의지위(special consultative status)를 부여받은 국제NGO단체입니다.",
+        "foundationLogo": "https://mud-kage.kakaocdn.net/dn/lBlLA/btqqfU9pa06/X2JJLXCYfnHrZ2k8kKH9kK/c160.jpg",
+        "foundationName": "사단법인 해피피플"
+    },
+    {
+        "foundationAccount": "0xD154770649E88689F343a9Eff95b53577465E40E",
+        "foundationAddress": "대구 서구 달구벌대로365길 3, 서구종합사회복지관",
+        "foundationContent": "서구종합사회복지관은 지역사회 특성에 맞는 복지모형 모델을 제시하고 복지관이 중신이 되는 지역사회복지 공동체 형성의 비전을 가지고 지역사회문제를 예방, 치료하며 지역사회 및 주민의 연대감을 조성하여 지역사회 주민의 복지 증진을 위한 종합복지센터로서의 역할을 수행하는 데 그 목적이 있습니다!",
+        "foundationLogo": "https://mud-kage.kakaocdn.net/dn/bHhlMk/btqfHPKw0Jc/nYu5yKHpmSQLkqqVfQUlzk/c160.jpg",
+        "foundationName": "대구서구종합사회복지관"
+    }
+]

@@ -16,9 +16,19 @@ import Vote from "./pages/Vote";
 import VoteCreation from "./pages/VoteCreation";
 import ApiTest from "./pages/ApiTest";
 import ScrollToTop from "./components/ScrollToTop";
+import { useEffect } from "react";
+import { BadgeDummy, CompanyDummy, DonationCommentDummy, DonationDummy, FoundationDummy, UserDummy } from "./dummy/Dummy";
 
 function App() {
   const userrole = localStorage.Role;
+  useEffect(() => {
+    UserDummy();
+    FoundationDummy();
+    // DonationDummy();
+    // DonationCommentDummy();
+    BadgeDummy();
+    CompanyDummy();
+  })
 
   return (
     <div className="App">
