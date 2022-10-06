@@ -17,3 +17,7 @@ export const getUserInfo = async (response, success, fail) => {
 export async function putUserDonate(response, success, fail) {
   await api.put(`api/user/donate/${response.userIdx}`, {donateAmount: response.donateAmount}).then(success).catch(fail);
 }
+
+export async function getUserRanking(success, fail) {
+  await api.get(`api/user/ranking`).then(success).catch(fail);
+}

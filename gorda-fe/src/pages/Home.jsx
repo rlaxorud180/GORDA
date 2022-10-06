@@ -5,7 +5,6 @@ import "./Home.scss";
 import useLogin from "../hooks/useLogin";
 function Home() {
     const login = useLogin();
-    console.log(login.onConnect);
     return (
         <>
             <HomeNav />
@@ -14,7 +13,6 @@ function Home() {
                 <div className="home_container">
                     <div className="home_paragraph">세상을 고르게 만드는 힘</div>
                     <div className="home_paragraph">"고르다"와 함께하세요</div>
-                    {console.log("이즈커넥티드 : ", login.isConnected)}
                     {!login.isConnected && (
                         <button className="login_btn" onClick={login.onConnect}>
                             계좌 연결하기
