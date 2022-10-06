@@ -86,11 +86,15 @@ function AdminForm() {
         .then((res) => {
           console.log("성공");
           setLoading(false);
+          alert("기부가 생성되었습니다.");
           navigate("/dnlist");
         })
         .catch((e) => {
           console.log(e);
         });
+      setLoading(false);
+      alert("기부가 생성되었습니다.");
+      navigate("/dnlist");
     } catch (err) {
       setError(err.message);
       console.log(err);
