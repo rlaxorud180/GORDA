@@ -32,6 +32,10 @@ public class FoundationController {
     @PostMapping("/regist")
     public MessageResponseDto regist(@RequestBody RegistFoundationRequestDto request) {
 
+        if (foundationService.findByName(request.getFoundationName()) != null) {
+            return new MessageResponseDto("기관 중복");
+        }
+
          Foundation tempFoundation = Foundation.builder()
                  .foundationAccount(request.getFoundationAccount())
                  .foundationName(request.getFoundationName())

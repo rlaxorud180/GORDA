@@ -49,6 +49,17 @@ public class DonationRepository {
 
     }
 
+    public Donation findByName(String name){
+
+        List<Donation> donations = em.createQuery("SELECT d FROM Donation d WHERE d.donationName = :donation_name",Donation.class)
+                .setParameter("donation_name",name).getResultList();
+
+
+        if (donations.size()==0) return null;
+
+        return donations.get(0);
+    }
+
     //기부 삭제
 
     public String delete (Donation donation) {

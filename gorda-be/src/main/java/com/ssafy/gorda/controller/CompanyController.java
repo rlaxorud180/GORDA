@@ -26,10 +26,17 @@ public class CompanyController {
     @PostMapping("/regist")
     public MessageResponseDto regist(@RequestBody RegistCompanyRequestDto request) {
 
+
+        if (companyService.findByName(request.getCompanyName()) != null) {
+            return new MessageResponseDto("회사 중복");
+        }
+
         Company tempCompany = Company.builder()
                 .companyAccount(request.getCompanyAccount())
                 .companyName(request.getCompanyName())
                 .build();
+
+
 
         companyService.regist(tempCompany);
 
