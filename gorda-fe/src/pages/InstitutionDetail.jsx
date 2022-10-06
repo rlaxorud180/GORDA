@@ -14,21 +14,33 @@ function InstitutionDetail() {
     foundationName: "1",
   });
   const api = apiInstance();
+  const [donainfos, setdonainfos] = useState([]);
 
-  console.log(`api/foundation/${id.foundationIdx}`);
   useEffect(() => {
+    console.log("11111111111111111");
     api
       .get(`api/foundation/${id.foundationIdx}`)
       .then((res) => {
         console.log("기관 세부 정보", res.data.data);
         setinfos(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    api
+      .get(`api/donation/foundation/${id.foundationIdx}`)
+      .then((res) => {
+        console.log("기관 기부들 세부 정보");
+        setdonainfos(res.data.data);
       })
       .catch((e) => {
         console.log(e);
       });
   }, []);
-
-  console.log(infos);
+  console.log("infos", infos);
+  console.log("dona", donainfos);
   return (
     <>
       <NavigationBar />
@@ -47,32 +59,22 @@ function InstitutionDetail() {
           <div className="main_course">주요 활동과 목적</div>
           <div className="main_p">{infos.foundationContent}</div>
         </div>
-        {/* <div className="institution_profile">
-          <div className="left_side">
-            <div className="left">사업자 등록번호</div>
-            <div className="left">기관 분류</div>
-            <div className="left">소재지 주소</div>
-            <div className="left">전화번호</div>
-          </div>
-          <div className="right_side">
-            <div className="right">123-45-67890</div>
-            <div className="right">비영리법인/비영리민간단체</div>
-            <div className="right">태경이형 집</div>
-            <div className="right">태경이형 번호</div>
-          </div>
-        </div> */}
+
         <div className="proposals">
-          제안내역 <span>{proposals}</span>
+          제안내역 <span>{donainfos.length}</span>
         </div>
         <div className="proposal_fx">
-          <ProposalsItem />
-          <ProposalsItem />
-          <ProposalsItem />
-          <ProposalsItem />
-          <ProposalsItem />
-          <ProposalsItem />
-          <ProposalsItem />
-          <ProposalsItem />
+          {donainfos &&
+            donainfos.map((item, key) => {
+              return (
+                <ProposalsItem
+                  donationName={item.donationName}
+                  donationSubject={item.donationSubject}
+                  donationLogo={item.donationLogo}
+                  donationIdx={item.donationIdx}
+                />
+              );
+            })}
         </div>
       </div>
     </>
