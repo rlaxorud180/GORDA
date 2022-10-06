@@ -60,6 +60,7 @@ public class UserController {
                     .user(newUser)
                         .myBadgeContent(b.getBadgeContent())
                         .myBadgeName(b.getBadgeTitle())
+                        .myBadgeLogo(b.getBadgeLogo())
                     .build();
 
                 myBadgeService.regist(tempMyBadge);
