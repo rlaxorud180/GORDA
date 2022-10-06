@@ -15,9 +15,7 @@ function MypageStamp() {
                     <Stamp />
                     <Stamp />
                     <Stamp />
-                </div>
-                <div className="btn_container">
-                    <button className="stamp_more">더보기</button>
+                    <Stamp />
                 </div>
             </div>
         </>
