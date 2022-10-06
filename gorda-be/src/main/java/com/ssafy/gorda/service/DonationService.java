@@ -3,6 +3,7 @@ package com.ssafy.gorda.service;
 
 import com.ssafy.gorda.domain.Badge;
 import com.ssafy.gorda.domain.Donation;
+import com.ssafy.gorda.domain.Foundation;
 import com.ssafy.gorda.repository.DonationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,13 @@ public class DonationService {
 
         return donationRepository.findByIdx(Idx);
 
+    }
+
+    public Donation findByName(String name){
+
+        Donation donation = donationRepository.findByName(name);
+
+        return donation;
     }
 
     @Transactional
