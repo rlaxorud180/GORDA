@@ -26,3 +26,29 @@
     margin-bottom: 63px;
     border: 1px dashed #999;
 }
+
+.mypage_approve_btn {
+    margin: 0px 0px 5px 20px !important;
+    width: 100px;
+    height: 35px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #00AEEF;
+    color: white;
+}
+
+.mypage_approve_btn:hover {
+    background-color: rgba(150,230,255,100);
+}
+
+.mypage_approve_btn_block {
+    margin: 0px 0px 5px 20px !important;
+    width: 100px;
+    height: 35px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(200,200,200,100);
+    color: white;
+}

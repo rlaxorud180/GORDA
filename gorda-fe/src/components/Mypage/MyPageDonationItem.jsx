@@ -66,12 +66,20 @@ function MyPageDonationItem(props) {
       <div className="block">
         <div className="item_eth">{props.eth} eth</div>
         <div className="item_donation">참여 기부</div>
+        {requested ? (
+          <button
+            type="button"
+            onClick={onApprove}
+            className="mypage_approve_btn"
+          >
+            승인
+          </button>
+        ) : (
+          <button type="button" className="mypage_approve_btn_block">
+            미완료
+          </button>
+        )}
       </div>
-      {requested ? (
-        <button type="button" onClick={onApprove}>
-          허가해주기
-        </button>
-      ) : null}
 
       <hr className="dashedhr" />
     </>

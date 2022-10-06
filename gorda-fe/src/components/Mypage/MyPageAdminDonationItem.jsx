@@ -27,6 +27,7 @@ function MyPageAdminDonationItem(props) {
     } catch (err) {
       setError(err.message);
       console.log(err);
+      alert("네트워크 연결이 좋지 않습니다.");
     }
   }
 
@@ -40,12 +41,12 @@ function MyPageAdminDonationItem(props) {
         from: accounts[0],
       });
       console.log("result", result);
+      navigate("/dnlist");
     } catch (err) {
       setError(err.message);
       console.log(err);
+      alert("네트워크 연결이 좋지 않습니다.");
     }
-
-    navigate("/dnlist");
   }
 
   useEffect(() => {
@@ -86,25 +87,30 @@ function MyPageAdminDonationItem(props) {
         <div className="item_donation">
           &nbsp; {((props.eth / props.target) * 100).toFixed(1)}%&nbsp;참여
         </div>
+        {expired && !requested ? (
+          <div>
+            <button
+              onClick={onSubmitRequest}
+              type="submit"
+              className="mypage_request_btn"
+            >
+              출금 요청
+            </button>
+          </div>
+        ) : null}
+        {requested && expired ? (
+          <div>
+            <button
+              type="button"
+              onClick={onFinalize}
+              className="mypage_finalize_btn"
+            >
+              출금
+            </button>
+          </div>
+        ) : null}
       </div>
 
-      {expired && !requested ? (
-        <div>
-          <button onClick={onSubmitRequest} type="submit">
-            출금 요청
-          </button>
-          <button type="button" onClick={onFinalize}>
-            파이널라이즈
-          </button>
-        </div>
-      ) : null}
-      {requested ? (
-        <div>
-          <button type="button" onClick={onFinalize}>
-            파이널라이즈
-          </button>
-        </div>
-      ) : null}
       <hr className="dashedhr" />
     </>
   );
