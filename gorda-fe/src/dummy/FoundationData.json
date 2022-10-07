@@ -12,5 +12,26 @@
         "foundationContent": "서구종합사회복지관은 지역사회 특성에 맞는 복지모형 모델을 제시하고 복지관이 중신이 되는 지역사회복지 공동체 형성의 비전을 가지고 지역사회문제를 예방, 치료하며 지역사회 및 주민의 연대감을 조성하여 지역사회 주민의 복지 증진을 위한 종합복지센터로서의 역할을 수행하는 데 그 목적이 있습니다!",
         "foundationLogo": "https://mud-kage.kakaocdn.net/dn/bHhlMk/btqfHPKw0Jc/nYu5yKHpmSQLkqqVfQUlzk/c160.jpg",
         "foundationName": "대구서구종합사회복지관"
+    },
+    {
+        "foundationAccount": "0xDA647b902012A05217e49e25c9356077DBA7B494",
+        "foundationAddress": "서울특별시 영등포구 여의나루로 77-1",
+        "foundationContent": "월드비전은 70년 전, 한국전쟁의 폐허 속에서 태어났습니다. 1991년 한국월드비전은 도움을 받던 나라에서 주는 나라로 역사적인 전환을 이루었습니다.",
+        "foundationLogo": "https://www.worldvision.or.kr/images/contents/worldvision/ci_04.jpg",
+        "foundationName": "월드비전"
+    },
+    {
+        "foundationAccount": "0x46BC02098eb6A22cffAa8dD24F819fE5F6f58aE9",
+        "foundationAddress": "서울특별시 강서구 공항대로59다길 109 우.07554",
+        "foundationContent": "희망친구 기아대책은 국내 외 굶주리고 소외된 이웃들의 영적, 육체적 자립을 돕고 있습니다.",
+        "foundationLogo": "https://m.kfhi.or.kr/assets/app/img/about/img_history_200308.jpg",
+        "foundationName": "기아대책"
+    },
+    {
+        "foundationAccount": "0xA3A14BCa06E4Ca15522C56c09e654DB8422A922e",
+        "foundationAddress": "서울 영등포구 버드나루로 13 굿네이버스회관",
+        "foundationContent": "1991년, 소외된 이들의 좋은 이웃으로 첫 발걸음을 내딛었습니다. 굿네이버스는 인종, 종교, 사상, 지역을 나누지 않고 빈곤, 재난, 억압으로 고통받는 이웃과 함께합니다.",
+        "foundationLogo": "https://cdn.gni.kr/assets/og0.jpg",
+        "foundationName": "굿네이버스"
     }
 ]

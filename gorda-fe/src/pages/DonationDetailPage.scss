@@ -19,7 +19,7 @@ html {
     align-items: center;
     margin-bottom: 50px;
     .header_title {
-        font-size: 32px;
+        font-size: 40px;
         font-weight: bold;
         color: white;
     }
@@ -29,6 +29,11 @@ html {
         color: #fff;
         padding-top: 7px;
         opacity: 0.6;
+    }
+    .header_link {
+        text-decoration: underline;
+        margin-top: 10px;
+        color: rgba(70,70,70,100)
     }
 }
 
