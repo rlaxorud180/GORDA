@@ -369,6 +369,13 @@ function DonationDetailPage() {
       <div className="detail_header">
         <div className="header_title">{infos.donationName}</div>
         <div className="header_foundation">by {foundation.foundationName}</div>
+        <a
+          target="_blank"
+          className="header_link"
+          href={`https://goerli.etherscan.io/address/${infos.donationAccount}`}
+        >
+          이더스캔에서 기부 현황 확인하기
+        </a>
       </div>
       <div className="detail_container">
         <div className="box_notion">
@@ -376,11 +383,10 @@ function DonationDetailPage() {
             참여하면 Gorda에서 뱃지 SoulBound를 제공!
           </div>
           <div className="notion_bottom">
-            1ETH 이상 기부하는 분들께는 Honor 뱃지를 드립니다.
+            기부하시는 분께는 모두 Honor 뱃지를 드립니다.
           </div>
         </div>
         <p className="p_content">{infos.donationContent}</p>
-
         <div className="eth_box">
           <div className="now_eth">
             {web3.utils.fromWei(infos.donationCurrentEth.toString(), "ether")}
