@@ -1,7 +1,7 @@
 [
     {
         "userAccount": "0x8Be432DA6B3E4A65cDd6650c03774a2Fd81A6904",
-        "userAmount": 12.3428,
+        "userAmount": 67700000000000000000,
         "userNickname": "string",
         "userRole": 1,
         "userScore": 124,
@@ -9,12 +9,28 @@
     },
     {
         "userAccount": "0xD154770649E88689F343a9Eff95b53577465E40E",
-        "userAmount": 0.4277,
+        "userAmount": 2700000000000000000,
         "userNickname": "string",
         "userRole": 0,
         "userScore": 11,
         "userVoteCount": 2
     },
+    {
+      "userAccount": "0xDA647b902012A05217e49e25c9356077DBA7B494",
+      "userAmount": 2700000000000000000,
+      "userNickname": "string",
+      "userRole": 1,
+      "userScore": 27,
+      "userVoteCount": 4
+  },
+  {
+      "userAccount": "0x937dC3D3dBa14B1cC87Ce89B98b9Da6aD01796aa",
+      "userAmount": 1300000000000000000,
+      "userNickname": "string",
+      "userRole": 0,
+      "userScore": 8,
+      "userVoteCount": 2
+  },
     {
       "userAccount": "0x46BC02098eb6A22cffAa8dD24F819fE5F6f58aE9",
       "userAmount": 0,
