@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #f9f9f9;
+}
+
+.vote_container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 320px;
+    .vote_header {
+        margin-top: 126px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        position: relative;
+        .vote_title {
+            font-size: 42px;
+            font-weight: bold;
+        }
+        .vote_arrow {
+            padding-top: 10px;
+            cursor: pointer;
+        }
+        .forma {
+            position: absolute;
+            top: 70px;
+        }
+    }
+    .hardcord {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 50px;
+        .hardcord_img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 1px solid #999;
+            background-image: url("https://cdn.gni.kr/assets/og0.jpg");
+            background-size: cover;
+            background-position: top center;
+            margin-bottom: 20px;
+        }
+        .hardcord_p {
+            font-size: 22px;
+            span {
+                font-size: 26px;
+                font-weight: bold;
+            }
+        }
+    }
+    .hr_box {
+        margin-top: 90px;
+        border: 1px solid #999;
+        margin-bottom: 100px;
+    }
+    .vote_title {
+        font-size: 38px;
+        font-weight: 700;
+        .title_box {
+            color: #f9f9f9;
+            background-color: #00aeef;
+        }
+        .title_color {
+            color: #00aeef;
+        }
+        .link_title {
+            font-weight: 400;
+            color: #00aeef;
+            font-size: 18px;
+            text-decoration: underline;
+        }
+    }
+    .hr_box_2 {
+        margin-top: 100px;
+        border: 1px solid #999;
+        margin-bottom: 50px;
+    }
+    .vote_list_p {
+        font-size: 38px;
+        font-weight: bold;
+        color: #444;
+        margin-bottom: 80px;
+    }
+    .vote_list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 28px;
+        margin-bottom: 120px;
+    }
+}
